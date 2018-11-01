@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Load SVG into DIV</title>
+</head>
+<body onLoad=callSVGfile()>
+<div id=mySVGdiv></div>
+<script>
+function callSVGfile()
+{
+    /*
+    var SVGFile="mySVGfile.svg"
+    var loadXML = new XMLHttpRequest;
+    loadXML.onload = callback;
+    loadXML.open("GET", SVGFile, true);
+    loadXML.send();
+    function callback()
+    {
+    //---responseText---
+    mySVGdiv.innerHTML=loadXML.responseText
+    }
+    */
+    mySVGdiv.innerHTML=loadXMLreponseText
+    console.log(BorderPoly.getAttribute("points"))
+}
+
+var loadXMLreponseText='<svg xmlns="http://www.w3.org/2000/svg" id="Rose1"  width="149.395" height="175.624">'+
+'<polygon id="BorderPoly" fill="none" pointer-events="none" stroke="red" stroke-width="4" points="74.6978,0 46.1667,9.271 28.5328,33.542 28.5328,63.542 0.000946045,72.811 5.34058e-005,102.811 28.5328,112.083 46.1657,136.353 46.1657,166.353 74.6978,175.624 103.229,166.353 103.231,136.353 120.864,112.082 149.395,102.812 149.395,72.812 120.863,63.542 120.863,33.542 103.23,9.2705" />'+
+'<g id="mainPolyG" transform=""><polygon id="mainPoly" fill="rgb(30, 144, 255)" stroke="black" stroke-width="1" points="120.863,63.542 120.863,33.542 103.23,9.2705 74.6978,0 46.1667,9.271 28.5328,33.542 28.5328,63.542 46.1657,87.812 74.6978,97.083 103.23,87.812" seed="0" /><polygon fill="rgb(255, 255, 0)" stroke="black" stroke-width="1" points="28.5328,112.083 46.1657,87.812 74.6978,97.083 74.6978,127.083 46.1657,136.353" seed="1" /><polygon fill="rgb(255, 255, 0)" stroke="black" stroke-width="1" points="74.6987,127.083 74.6978,97.083 103.23,87.812 120.864,112.082 103.231,136.353" seed="2" /><polygon fill="rgb(255, 255, 0)" stroke="black" stroke-width="1" points="120.863,112.083 103.23,87.812 120.863,63.542 149.395,72.812 149.395,102.812" seed="3" /><polygon fill="rgb(255, 255, 0)" stroke="black" stroke-width="1" points="0.000946045,72.811 28.5328,63.542 46.1657,87.812 28.5317,112.083 5.34058e-005,102.811" seed="4" /><polygon fill="rgb(237, 28, 36)" stroke="black" stroke-width="1" points="74.6978,127.083 46.1657,136.353 74.6978,145.624 103.229,136.353" seed="5" /><polygon fill="rgb(0, 255, 0)" stroke="black" stroke-width="1" points="74.6978,145.624 103.229,136.353 103.229,166.353 74.6978,175.624" seed="6" /><polygon fill="rgb(0, 255, 0)" stroke="black" stroke-width="1" points="46.1657,166.353 46.1657,136.353 74.6978,145.624 74.6978,175.624" seed="7" /></g>'+
+'</svg>'
+</script>
+</body>
+
+</html>
