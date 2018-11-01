@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title></title>
+<meta charset=utf-8 />
+</head>
+<body onmouseout=window.open('','parentWindow').focus();  onload= writePathColorSelection();sendSize()  style='border-radius:10px;border:2px solid lightblue;background-color:transparent;padding:0;margin:0;font-family:arial'>
+<div id=containerDiv>
+<table  id=topTable onmouseout=window.open('','parentWindow').focus(); style='background-color:linen;padding:3px;width:100%;'><tr><td style='width:80%;' align=center> <span id=editSpan>Add</span> Path&nbsp; <span id=rightAngleSpan><b>L</b>:<input title="right angle path" type=checkbox id=drawPathRightAngleCheck />[L]</span>&nbsp; &nbsp;<i>fade:</i><input title="auto-fade above zoom level" type="checkbox" checked id=drawPathFadeCheck />
+</td><td style='width:20%' align=right><button  onClick=parent.closeIframe("addElemPath");parent.closeDrawPath()>X</button>[X]</td></tr></table>
+<table onmouseout=window.open('','parentWindow').focus(); style=border-radius:10px;width:100%;background-color:gainsboro>
+
+
+<tr style=background-color:linen>
+<td align=center >Stroke <span id=drawPathStrokeBg>Color:</span>
+<select  title="Stroke Color" onChange=parent.showDrawPathStrokeBg() id=drawPathStrokeSelect></select>
+width:
+  <select onChange=parent.drawPathStrokeWidthSelected() id=drawPathStrokeWidthSelect>
+		<option title="none" >0</option>
+		<option >0.5</option>
+		<option >1</option>
+		<option selected>2</option>
+		<option >3</option>
+		<option >4</option>
+		<option >5</option>
+		<option >6</option>
+		<option >7</option>
+		<option >8</option>
+		<option >9</option>
+		<option >10</option>
+		<option >15</option>
+		<option >20</option>
+		<option >25</option>
+		<option >30</option>
+		</select> <br>
+Fill <span id=drawPathFillBg >Color:</span>
+<select  title="Fill Color" onChange=parent.showDrawPathFillBg() id=drawPathFillSelect></select>
+Opacity:
+  <select onChange=parent.drawPathFillOpacitySelected() id=drawPathFillOpacitySelect>
+		<option >0.1</option>
+		<option>0.2</option>
+		<option >0.3</option>
+		<option >0.4</option>
+		<option>0.5</option>
+		<option >0.6</option>
+		<option >0.7</option>
+		<option >0.8</option>
+		<option >0.9</option>
+		<option  selected >1.0</option>
+
+		</select>
+
+<br>
+Dash[D]:<input type=checkbox id=drawPathStrokeDashCheck onClick=parent.drawPathStrokeDashChecked() />
+&nbsp;Arrow[A]:<input type=checkbox id=drawPathStrokeArrowCheck onClick=parent.drawPathStrokeArrowChecked() />
+
+</td>
+</tr>
+
+<tr style=background-color:linen align=center>
+	<td>
+	<span id=drawPathTopButtons>
+		<button disabled id=drawPathPauseButton onClick=pauseDrawPathLocal()>pause[P]</button>
+		<button disabled id=drawPathUndoButton onClick=parent.undoDrawPath()>undo[U]</button>
+		<button id=drawPathEncloseButton disabled onClick=parent.encloseDrawPath()>enclose[E]</button>
+		<button id=smoothPathButton style='width:75px;' disabled onClick=parent.drawPathSmoothSelected()>smooth[S]</button>
+
+    </span>
+	</td>
+</tr>
+
+<tr style=background-color:linen align=center>
+	<td>
+	<input type=text onclick=this.value="" id=drawPathCommentValue value="Path comment goes here(optional)..."  style='width:300px;' />
+	</td>
+</tr>
+
+
+<tr style=background-color:linen align=center>
+<td>
+	<button id=drawPathCancelButton disabled title='cancel/remove this path' onClick=parent.cancelDrawPath()>cancel[C]</button>
+<button id=drawPathFinishButton disabled onClick=parent.finishDrawPath()>finish[F]</button>
+</td>
+</tr>
+
+</table>
+<div style=font-size:80%><i>(To edit this completed element, move the cursor over it and  <b>double-click</b> your left mouse button.)</i></div>
+
+</div>
+</body>
+<script>
+
+function pauseDrawPathLocal()
+{
+	if(parent.PrevKeyPath==112)
+	{
+		parent.unPauseDrawPath()
+        parent.PrevKeyPath=null
+	}
+	else
+	{
+      	parent.pauseDrawPath()
+       	parent.PrevKeyPath=112
+	}
+}
+
+
+function writePathColorSelection()
+{
+   var DrawColors=parent.clrArray
+	for(var k=0;k<DrawColors.length;k++)
+	{
+		var name=DrawColors[k][0]
+		var myColor=DrawColors[k][1]
+		var option=document.createElement("OPTION")
+		option.style.backgroundColor=myColor
+		option.value=myColor
+		option.title=name
+        if(parent.hexString.indexOf(myColor)!=-1)
+        option.style.color="white"
+
+		option.text=k
+        drawPathFillSelect.appendChild(option)
+
+		var option=document.createElement("OPTION")
+		option.style.backgroundColor=myColor
+		option.value=myColor
+		option.title=name
+        if(parent.hexString.indexOf(myColor)!=-1)
+        option.style.color="white"
+		option.text=k
+        drawPathStrokeSelect.appendChild(option)
+
+	}
+	drawPathStrokeSelect.selectedIndex=233
+	var clr=drawPathStrokeSelect.options[drawPathStrokeSelect.selectedIndex].value
+	drawPathStrokeBg.style.backgroundColor=clr
+}
+function sendSize()
+{
+	window.name = 'drawPathWindow';
+   var width=containerDiv.scrollWidth+10
+   var height=containerDiv.scrollHeight+10
+   parent.sizeFrame('addElemPath',width,height)
+   parent.startPathDraw()
+
+
+}
+</script>
+</html>
