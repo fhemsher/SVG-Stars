@@ -8,7 +8,7 @@ Place unzipped files into that site's folder.
 To run the application, in **localhost** select the index.htm file. 
 
 You may then create/save/edit SVG Star drawings.
-![](http://svg-stars.svg/About/Images/interactiveUniverse.png)
+![](http://svg-stars.org/About/Images/interactiveUniverse.png)
 
 
 To preview how this application works go to: http://svg-stars.org
