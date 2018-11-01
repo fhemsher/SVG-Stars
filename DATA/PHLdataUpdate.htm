@@ -1,0 +1,274 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+  <title>PHLdataUpdate</title>
+    <script charset="UTF-8" type="text/javascript" src="d3.v4.min.js"></script>
+</head>
+
+<body>
+<center><h3>Updating Svg-Stars.org Exoplanet Database from PHL</h3></center>
+See link: <a href="http://phl.upr.edu/projects/habitable-exoplanets-catalog/data/database">PHL's Exoplanets Catalog</a>
+<p></p>
+
+1.) Download current zipped csv file Confirmed Exoplanets:<a href="http://www.hpcf.upr.edu/~abel/phl/phl_hec_all_confirmed.csv.zip">phl_hec_all_confirmed.csv</a>
+<p></p>
+2.) Unzip and extract to <b>C:\inetpub\wwwroot\SVG-Stars\DATA</b>
+<p></p>
+3.) 10/31/2018 currently in BETA - This is a poorly constructed CSV header, plus the data has extraneous spaces. Therefore it
+must be post processed as follows:<br>
+a.) Remove all spaces<br>
+b.) Replace P. with P_ and S. with S_<br>
+c.) Remove units (AU),(SU), etc <br>
+d.) Save file as <b>confirmed.csv</b><br>
+4.) Convert to JSON: copy the textarea below as <b>confirmed.js</b> <button onClick=getConfirmedData()>Create Confirmed</button>
+<p></p>
+Take above and build <b>starPacket.js</b> (stars only) and <b>exoPacket.js</b> (exoplanets only)  and <b>starSelect</b>
+<button onClick=createPackets()>Create Packets</button>
+<center>
+    <b>Database Field Descriptions</b>
+   <p></p>
+<table border="1" bordercolor="#888" cellspacing="0" style="border-collapse:collapse;border-top-color:rgb(136,136,136);border-right-color:rgb(136,136,136);border-bottom-color:rgb(136,136,136);border-left-color:rgb(136,136,136);border-top-width:1px;border-right-width:1px;border-bottom-width:1px;border-left-width:1px"><tbody><tr><td style="text-align:center;width:60px"><b> #</b></td><td style="text-align:center;width:132px;height:15px"><b>Field Name (revised)</b></td><td style="text-align:center;width:475px;height:15px"><b>Description</b></td><td style="text-align:center;width:126px;height:15px"><b>Units</b></td></tr>
+<tr><td style="text-align:center;width:60px"> 01</td><td style="width:132px;height:15px"> P_Name</td><td style="width:475px;height:15px">Planet name.</td><td style="width:126px;height:15px"> </td></tr>
+<tr><td style="text-align:center"> 02</td><td> P_NameKepler</td><td>Planet NASA Kepler name, if applicable.</td><td> </td></tr>
+<tr><td style="text-align:center"> 03</td><td> P_NameKOI</td><td>Planet NASA Kepler Object of Interest (KOI) name, if applicable.</td><td> </td></tr>
+<tr><td style="text-align:center;width:60px"> 04</td><td style="width:132px;height:15px"> P_ZoneClass</td><td style="width:475px;height:15px">Planet habitable zone classification (hot, warm, or cold).</td><td style="width:126px;height:15px"> </td></tr>
+<tr><td style="text-align:center;width:60px"> 05</td><td style="width:132px;height:15px"> P_MassClass</td><td style="width:475px;height:15px">Planet Mass Class (mercurian, subterran, terran, superterran, neptunian, or jovian).</td><td style="width:126px;height:15px"> </td></tr>
+<tr><td style="text-align:center"> 06</td><td> P_CompositionClass</td><td>Planet Composition Class (iron, rocky-iron, rocky-water, water-gas, gas).</td><td> </td></tr>
+<tr><td style="text-align:center"> 07</td><td> P_AtmosphereClass</td><td>Planet Atmosphere Class (none, metals-rich, hydrogen-rich).</td><td> </td></tr>
+<tr><td style="text-align:center;width:60px"> 08</td><td style="width:132px;height:15px"> P_HabitableClass</td><td style="width:475px;height:15px">Planet Habitable Class (mesoplanet, thermoplanet, psychroplanet, hypopsychroplanet, hyperthermoplanet, non-habitable).</td><td style="width:126px;height:15px"> </td></tr>
+<tr><td style="text-align:center;width:60px"> 09</td><td style="width:132px;height:15px"> P_MinMass</td><td style="width:475px;height:15px">Planet minimum mass.</td><td style="width:126px;height:15px">Earth Units, EU</td></tr>
+<tr><td style="text-align:center;width:60px"> 10</td><td style="width:132px;height:15px"> P_Mass</td><td style="width:475px;height:15px">Planet mass. Most of the values were estimated from minimum mass.</td><td style="width:126px;height:15px">Earth Units, EU</td></tr>
+<tr><td style="text-align:center"> 11</td><td> P_MaxMass</td><td>Planet maximum mass.</td><td>Earth Units, EU</td></tr>
+<tr><td style="text-align:center;width:60px"> 12</td><td style="width:132px;height:15px"> P_Radius</td><td style="width:475px;height:15px">Planet radius. Most of these values were estimated for confirmed planets.</td><td style="width:126px;height:15px">Earth Units, EU</td></tr>
+<tr><td style="text-align:center;width:60px"> 13</td><td style="width:132px;height:15px"> P_Density</td><td style="width:475px;height:15px">Planet density.</td><td style="width:126px;height:15px">Earth Units, EU</td></tr>
+<tr><td style="text-align:center;width:60px"> 14</td><td style="width:132px;height:15px"> P_Gravity</td><td style="width:475px;height:15px">Planet gravity.</td><td style="width:126px;height:15px">Earth Units, EU</td></tr>
+<tr><td style="text-align:center;width:60px"> 15</td><td style="width:132px;height:15px"> P_EscVel</td><td style="width:475px;height:15px">Planet escape velocity.</td><td style="width:126px;height:15px">Earth Units, EU</td></tr>
+<tr><td style="text-align:center;width:60px"> 16</td><td style="width:132px;height:15px"> P_SFluxMin</td><td style="width:475px;height:15px">Planet minimum stellar flux.</td><td style="width:126px;height:15px">Earth Units, EU</td></tr>
+<tr><td style="text-align:center;width:60px"> 17</td><td style="width:132px;height:15px"> P_SFluxMean</td><td style="width:475px;height:15px">Planet mean stellar flux.</td><td style="width:126px;height:15px">Earth Units, EU</td></tr>
+<tr><td style="text-align:center;width:60px"> 18</td><td style="width:132px;height:15px"> P_SFluxMax</td><td style="width:475px;height:15px">Planet maximum stellar flux.</td><td style="width:126px;height:15px">Earth Units, EU</td></tr>
+<tr><td style="text-align:center;width:60px"> 19</td><td style="width:132px;height:15px"> P_TeqMin</td><td style="width:475px;height:15px">Planet minimum equilibrium temperature (at apastron).</td><td style="width:126px;height:15px">Kelvins, K</td></tr>
+<tr><td style="text-align:center;width:60px"> 20</td><td style="width:132px;height:15px"> P_TeqMean</td><td style="width:475px;height:15px">Planet mean equilibrium temperature.</td><td style="width:126px;height:15px">Kelvins, K</td></tr>
+<tr><td style="text-align:center;width:60px"> 21</td><td style="width:132px;height:15px"> P_TeqMax</td><td style="width:475px;height:15px">Planet maximum equilibrium temperature (at periastron).</td><td style="width:126px;height:15px">Kelvins, K</td></tr>
+<tr><td style="text-align:center;width:60px"> 22</td><td style="width:132px;height:15px"> P_TsMin</td><td style="width:475px;height:15px">Planet minimum surface temperature (at apastron).</td><td style="width:126px;height:15px">Kelvins, K</td></tr>
+<tr><td style="text-align:center;width:60px"> 23</td><td> P_TsMean</td><td>Planet mean surface temperature.</td><td>Kelvins, K</td></tr>
+<tr><td style="text-align:center;width:60px"> 24</td><td> P_TsMax</td><td>Planet maximum surface temperature (at periastron).</td><td>Kelvins, K</td></tr>
+<tr><td style="text-align:center;width:60px"> 25</td><td> P_Surf Press</td><td>Planet surface pressure.</td><td>Earth Units, EU</td></tr>
+<tr><td style="text-align:center;width:60px"> 26</td><td> P_Mag</td><td>Planet magnitude as seen from a Moon-Earth distance (Moon = -12.7).</td><td><br /></td></tr>
+<tr><td style="text-align:center;width:60px"> 27</td><td> P_ApparSize</td><td>Planet apparent size as seen from a Moon-Earth distance (Moon = 0.5°).</td><td>degrees</td></tr>
+<tr><td style="text-align:center;width:60px"> 28</td><td> P_Period</td><td>Planet period.</td><td>days</td></tr>
+<tr><td style="text-align:center;width:60px"> 29</td><td> P_SemMajorAxis</td><td>Planet semi major axis.</td><td>Astr. Units, AU</td></tr>
+<tr><td style="text-align:center;width:60px"> 30</td><td> P_Eccentricity</td><td>Planet eccentricity (assumed 0 when not available).</td><td><br /></td></tr>
+<tr><td style="text-align:center;width:60px"> 31</td><td> P_MeanDistance</td><td>Planet mean distance from the star.</td><td>Astr. Units, AU</td></tr>
+<tr><td style="text-align:center;width:60px"> 32</td><td> P_Inclination</td><td>Planet inclination (assumed 60° when not available, and 90° for Kepler data).</td><td>degrees</td></tr>
+<tr><td style="text-align:center;width:60px"> 33</td><td> P_Omega</td><td>Planet omega.</td><td>degrees</td></tr>
+<tr><td style="text-align:center;width:60px"> 34</td><td> S_Name</td><td>Star name.</td><td><br /></td></tr>
+<tr><td style="text-align:center"> 35</td><td> S_NameHD</td><td>Star name from the Henry Draper Star Catalog.</td><td> </td></tr>
+<tr><td style="text-align:center"> 36</td><td> S_NameHIP</td><td>Star name from the Hipparchus Star Catalog.</td><td> </td></tr>
+<tr><td style="text-align:center"> 37</td><td> S_Constellation</td><td>Star constellation name (abbreviated).</td><td> </td></tr>
+<tr><td style="text-align:center;width:60px"> 38</td><td> S_Type</td><td>Star type.</td><td><br /></td></tr>
+<tr><td style="text-align:center;width:60px"> 39</td><td> S_Mass</td><td>Star mass.</td><td>Solar Units, SU</td></tr>
+<tr><td style="text-align:center;width:60px"> 40</td><td> S_Radius</td><td>Star radius.</td><td>Solar Units, SU</td></tr>
+<tr><td style="text-align:center;width:60px"> 41</td><td> S_Teff</td><td>Star effective temperature.</td><td>Solar Units, SU</td></tr>
+<tr><td style="text-align:center;width:60px"> 42</td><td> S_Luminosity</td><td>Star luminosity.</td><td>Solar Units, SU</td></tr>
+<tr><td style="text-align:center;width:60px"> 43</td><td> S_FeH</td><td>Star iron to hydrogen ratio [Fe/H].</td><td><br /></td></tr>
+<tr><td style="text-align:center;width:60px"> 44</td><td> S_Age</td><td>Star age.</td><td>Billion Years, Gyrs</td></tr>
+<tr><td style="text-align:center;width:60px"> 45</td><td> S_ApparMag</td><td>Star apparent visual magnitude from Earth.</td><td><br /></td></tr>
+<tr><td style="text-align:center;width:60px"> 46</td><td> S_Distance</td><td>Star distance from Earth.</td><td>parsec, pc</td></tr>
+<tr><td style="text-align:center;width:60px"> 47</td><td> S_RA</td><td>Star right ascension.</td><td>Note: hours</td></tr>
+<tr><td style="text-align:center;width:60px"> 48</td><td> S_DEC</td><td>Star declination.</td><td>degrees</td></tr>
+<tr><td style="text-align:center;width:60px"> 49</td><td>** S_MagFromPlanet</td><td>Star apparent visual magnitude from planet (Sun = -25 from Earth).</td><td><br /></td></tr>
+<tr><td style="text-align:center;width:60px"> 50</td><td style="width:132px;height:15px">** S_SizeFromPlanet</td><td style="width:475px;height:15px">Star apparent size from planet (Sun = 0.5° from Earth).</td><td style="width:126px;height:15px">degrees</td></tr>
+<tr><td style="text-align:center"> 51</td><td>** S_NumPlanets</td><td>Star number of planets.</td><td> </td></tr>
+<tr><td style="text-align:center"> 52</td><td>** S_NumPlanetsHZ</td><td>Star number of planets in the habitable zone.</td><td> </td></tr>
+<tr><td style="text-align:center"> 53</td><td> S_HabZoneMin</td><td>Star inner edge of habitable zone.</td><td>Astr. Units, AU</td></tr>
+<tr><td style="text-align:center"> 54</td><td> S_HabZoneMax</td><td>Star outer edge of habitable zone.</td><td>Astr. Units, AU</td></tr>
+<tr><td style="text-align:center"> 55</td><td> P_HZD</td><td>Planet Habitable Zone Distance (HZD).</td><td><br /></td></tr>
+<tr><td style="text-align:center"> 56</td><td> P_HZC</td><td>Planet Habitable Zone Composition (HZD).</td><td><br /></td></tr>
+<tr><td style="text-align:center"> 57</td><td> P_HZA</td><td>Planet Habitable Zone Atmosphere (HZD).</td><td><br /></td></tr>
+<tr><td style="text-align:center"> 58</td><td> P_HZI</td><td>Planet Habitable Zone Index (HZI).</td><td> </td></tr>
+<tr><td style="text-align:center"> 59</td><td> P_SPH</td><td>Planet Standard Primary Habitability (SPH).</td><td><br /></td></tr>
+<tr><td style="text-align:center"> 60</td><td> P_IntESI</td><td>Planet Interior Earth Similarity Index (iESI).</td><td><br /></td></tr>
+<tr><td style="text-align:center"> 61</td><td> P_SurfESI</td><td>Planet Surface Earth Similarity Index (sESI).</td><td><br /></td></tr>
+<tr><td style="text-align:center"> 62</td><td> P_ESI</td><td>Planet Earth Similarity Index (ESI).</td><td></td></tr>
+<tr><td style="text-align:center"> 63</td><td> S_HabCat</td><td>Star is in the HabCat database.</td><td>FLAG = 0 or 1</td></tr>
+<tr><td style="text-align:center"> 64</td><td> P_Habitable</td><td>Planet is potentially habitable.</td><td>FLAG = 0 or 1 </td></tr>
+<tr><td style="text-align:center"> 65</td><td> P_HabMoon</td><td>Planet is candidate for potential habitable exomoons.</td><td>FLAG = 0 or 1</td></tr>
+<tr><td style="text-align:center"> 66</td><td> P_Confirmed</td><td>Planet is confirmed (relevant to the Kepler data).</td><td>FLAG = 0 or 1</td></tr>
+<tr><td style="text-align:center"> 67</td><td>** P_DiscMethod</td><td>Planet discovery method (rv = radial velocity, tran = transiting, ima = imaging, micro = micro lensing, pul = pulsar timing, ast = astrometry).</td><td> </td></tr>
+<tr><td style="text-align:center"> 68</td><td>** P_DiscYear</td><td>Planet discovery year.</td><td> </td></tr>
+</tbody></table>
+** update required at site(10/31/2018)
+   <p></p>
+   Save below into <b>confirmed.js</b> JSON
+   <textarea id="confirmedValue" style=width:100%;height:600px; ></textarea>
+   Save below into <b>starPacket.js</b>
+   <textarea id="hostPacketValue" style=width:100%;height:600px; ></textarea>
+   Save below into <b>exoPacket.js</b>
+   <textarea id="exoPacketValue" style=width:100%;height:600px; ></textarea>
+   Save below into <b>Host Star Select</b>
+   <textarea id="starSelectValue" style=width:100%;height:600px; ></textarea>
+  </center>
+</body>
+<script>
+function getConfirmedData()
+{
+   d3.csv("confirmed.csv",function(data)
+   {
+
+
+      confirmedValue.value=JSON.stringify(data)
+
+
+
+   })
+
+}
+var HostPacket=[]
+var ExoPacket=[]
+
+function createPackets()
+{
+        HostPacket=[]
+        ExoPacket=[]
+
+   d3.json("confirmed.js",function(data)
+   {
+
+       var hostStng=","
+
+   for(k=0;k<data.length;k++)
+     {
+
+         var exo=data[k]
+        ExoPacket.push(
+        {
+            S_Name:exo.S_Name,
+            P_Name:exo.P_Name,
+            P_NameKepler:exo.P_NameKepler,
+            P_NameKOI:exo.P_NameKOI,
+            P_ZoneClass:exo.P_ZoneClass,
+            P_MassClass:exo.P_MassClass,
+            P_CompositionClass:exo.P_CompositionClass,
+            P_AtmosphereClass:exo.P_AtmosphereClass,
+            P_HabitableClass:exo.P_HabitableClass,
+            P_MinMass:exo.P_MinMass,
+            P_Mass:exo.P_Mass,
+            P_MaxMass:exo.P_MaxMass,
+            P_Radius:exo.P_Radius,
+            P_Density:exo.P_Density,
+            P_Gravity:exo.P_Gravity,
+            P_EscVel:exo.P_EscVel,
+            P_SFluxMin:exo.P_SFluxMin,
+            P_SFluxMean:exo.P_SFluxMean,
+            P_SFluxMax:exo.P_SFluxMax,
+            P_TeqMin:exo.P_TeqMin,
+            P_TeqMean:exo.P_TeqMean,
+            P_TeqMax:exo.P_TeqMax,
+            P_TsMin:exo.P_TsMin,
+            P_TsMean:exo.P_TsMean,
+            P_TsMax:exo.P_TsMax,
+            P_SurfPress:exo.P_SurfPress,
+            P_Mag:exo.P_Mag,
+            P_ApparSize:exo.P_ApparSize,
+            P_Period:exo.P_Period,
+            P_SemMajorAxis:exo.P_SemMajorAxis,
+            P_Eccentricity:exo.P_Eccentricity,
+            P_Eccentricity:exo.P_Eccentricity,
+            P_Inclination:exo.P_Inclination,
+            P_MeanDistance:exo.P_MeanDistance,
+            P_Omega:exo.P_Omega,
+            P_HZD:exo.P_HZD,
+            P_HZC:exo.P_HZC,
+            P_HZA:exo.P_HZA,
+            P_HZI:exo.P_HZI,
+            P_SPH:exo.P_SPH,
+            P_IntESI:exo.P_IntESI,
+            P_SurfESI:exo.P_SurfESI,
+            P_ESI:exo.P_ESI,
+            S_HabCat:exo.S_HabCat,
+            P_Habitable:exo.P_Habitable,
+            P_HabMoon:exo.P_HabMoon,
+            P_Confirmed:exo.P_Confirmed,
+            P_DiscMethod:exo.P_DiscMethod,
+            P_DiscYear:exo.P_DiscYear
+
+        })
+
+
+            var host=exo.S_Name
+            var tst=","+host+","
+            if(hostStng.indexOf(tst)==-1)
+            {
+                //"S_Name":"11 Com","S_NameHD":"HD 107383","S_NameHIP":"HIP 60202","S_Constellation":"Com","S_Type":"G8 III","S_Mass(SU)":"2.70","S_Radius(SU)":"19.00","S_Teff(K)":"4742.0","S_Luminosity(SU)":"163.773362","S_[Fe/H]":"-0.350","S_Age(Gyrs)":"","S_ApparMag":"4.7","S_Distance(pc)":"110.60","S_RA(hrs)":"12.3453","S_DEC(deg)":"17.7928","S_MagfromPlanet":"-31.8","S_SizefromPlanet(deg)":"8.0740","S_No_Planets":"1","S_No_PlanetsHZ":"0","S_HabZoneMin(AU)":"10.140","S_HabZoneMax(AU)":"24.781" , "S_HabCat":"0",
+                hostStng+=host+","
+               HostPacket.push(
+               {
+                 S_Name:exo.S_Name,
+                 S_NameHD:exo.S_NameHD,
+                 S_NameHIP:exo.S_NameHIP,
+                 S_Constellation:exo.S_Constellation,
+                 S_Type:exo.S_Type,
+                 S_Mass:exo.S_Mass,
+                 S_Radius:exo.S_Radius,
+                 S_Teff:exo.S_Teff,
+                 S_Luminosity:exo.S_Luminosity,
+                 S_FeH:exo.S_FeH,
+                 S_Age:exo.S_Age,
+                 S_ApparMag:exo.S_ApparMag,
+                 S_Distance:exo.S_Distance,
+                 S_RA:exo.S_RA,
+                 S_DEC:exo.S_DEC,
+                 S_MagFromPlanet:exo.S_MagFromPlanet,
+                 S_SizeFromPlanet:exo.S_SizeFromPlanet,
+                 S_NumPlanets:exo.S_NumPlanets,
+                 S_NumPlanetsHZ:exo.S_NumPlanetsHZ,
+                 S_HabZoneMin:exo.S_HabZoneMin,
+                 S_HabZoneMax:exo. S_HabZoneMax,
+                 S_HabCat:exo.S_HabCat,
+                 P_DiscYear:exo.P_DiscYear
+               })
+
+            }
+
+     }
+    console.log(ExoPacket.length)
+    console.log(HostPacket.length)
+    hostPacketValue.value=JSON.stringify(HostPacket)
+    exoPacketValue.value=JSON.stringify(ExoPacket)
+    buildStarSelect()
+   })
+
+
+
+
+}
+
+function buildStarSelect()
+{
+    var starSelect="<select  title='Exoplanets host star' id=hostStarSelect onChange=parent.hostStarSelected()><option>Select Star Name</option>"
+    var starSelectArray=[]
+    var prevHost=","
+
+    for(var k=0;k<HostPacket.length;k++)
+    {
+        var host=HostPacket[k].S_Name
+        var tst=","+host+","
+        if(prevHost.indexOf(tst)==-1)
+        {
+            var planets=HostPacket[k].S_NumPlanets
+            var discYr=+HostPacket[k].P_DiscYear
+            starSelectArray.push("<option value='"+host+"'>"+host+"("+planets+") "+discYr+"</option>")
+        }
+    }
+
+
+    starSelectArray.sort()
+    var select=starSelectArray.toString().replace(/,/g,"")
+
+    starSelectValue.value=starSelect+select+"</select>"
+}
+
+</script>
+</html>

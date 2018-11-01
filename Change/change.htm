@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Update Your Star Map</title>
+<meta charset=utf-8 />
+</head>
+<body onload=sendSize() style='padding:20px;background-color:transparent;font-family:verdana'>
+
+
+<table style='width:300px;background-color:#004953;'>
+<tr>
+<td>
+<table style='width:100%;background-color:#004953;'>
+<tr style='color:white;font-weight:bold;'><td style='width:90%;background-color:#004953;' align=center>Change Star Map</td><td align=right> <button onClick=parent.closeIframe("change")  style='color:white;font-weight:bold;background-color:#004953;'>X</button></td></tr>
+<tr id=boundryBG >
+<td colspan=2 align=center><input type=button title="Click to save current star view as default" style='width:200px' onClick=parent.changeMyDefaultView() id=changeMyDefaultViewButton value="Set Star Default View" /><span style='color:white' id=saveDefaultViewSpan></span></td>
+</tr>
+
+</table>
+</td>
+
+</tr>
+
+<tr style='background-color:white'>
+<td  align=center>Wikied Star:<input disabled  type=text id=placeNameValue style='font-size:100%;background-color:linen;width:300px' /></td>
+</tr>
+<tr style='background-color:white'>
+<td  align=center>4ME Name:<input   type=text id=name4MEValue style='font-size:100%;background-color:white;width:200px' /></td>
+</tr>
+<tr style='background-color:white'>
+<td  align=center>Description:<textarea  id=placeDescriptionValue style='font-family:verdana;font-size:100%;background-color:linen;width:300px;height:40px;' ></textarea></td>
+</tr>
+
+<tr  style='background-color:white'>
+<td  align=center>
+<select style='width:200px'  id=clearPlaceSelect onChange=clearPlaceSelected() >
+<option>Clear Elements...</option>
+</select>
+</td>
+</tr>
+
+<tr style='background-color:white;'><td align=center>Visitors Only: <input type=checkbox onClick=visitOnlyChecked() id=visitOnlyCheck><input type=hidden id=hiddenVisitOnlyValue></td></tr>
+
+<tr style='background-color:white'>
+<td  align=center>Remove:<span  style='background-color:red'><input title="Remove this star map" type=checkbox id=removeMyPlaceCheck  /></span> <button id=updateMyPlaceButton onClick=parent.updateMyPlace() >Update Star Map</button>
+</td>
+</tr>
+</table>
+</body>
+<script>
+
+function sendSize()
+{
+   var width=document.body.scrollWidth
+   var height=document.body.scrollHeight+30
+
+		parent.sizeFrame('change',width,height)
+  parent.getMyPlace()
+ parent.writeClearSelect()
+
+    for(var k = 0; k<parent.XMLloginArray.length; k++)
+        {
+            var logMe = parent.XMLloginArray[k]
+
+            var logID = logMe.getAttribute("id")
+            if( logID==parent.ID)
+            {
+
+                if(logMe.nodeName=="owner")
+                {
+                    var visitOnly = logMe.getAttribute("visitOnly")
+                    if(visitOnly)
+                    {
+                       visitOnlyCheck.checked=true
+                       parent.hiddenPlaceVisitOnlyValue.value="true"
+                     hiddenVisitOnlyValue.value="true"
+                    }
+                    else
+                    {
+                      visitOnlyCheck.checked=false
+                       parent.hiddenPlaceVisitOnlyValue.value=""
+                     hiddenVisitOnlyValue.value=""
+
+                    }
+                   break
+
+                }
+            }
+
+        }
+     
+}
+
+function visitOnlyChecked()
+{
+
+    if(visitOnlyCheck.checked==true)
+     hiddenVisitOnlyValue.value="true"
+     else
+     hiddenVisitOnlyValue.value=""
+}
+
+function clearPlaceSelected()
+{
+  var index=clearPlaceSelect.selectedIndex
+  if(index!=0)
+  clearPlaceSelect.style.backgroundColor="orange"
+  else
+   clearPlaceSelect.style.backgroundColor=""
+}
+</script>
+</html>
