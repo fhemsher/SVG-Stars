@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Iframe Title</title>
+<meta charset=utf-8 />
+</head>
+<body onload=sendSize() style='font-family:verdana'>
+<div id=containerDiv >
+ <center>
+<table style='width:97%;background-color:#004953;'>
+<tr>
+<td>
+<table style='width:100%;background-color:#004953;'>
+<tr style='color:white;font-weight:bold;'><td style='width:98%;background-color:#004953;' align=center>Visit Star Map Communities</td><td align=left> <button onClick=parent.visitMobileCommunityClose("visitMobileCommunity")  style='color:white;font-weight:bold;background-color:#004953;'>X</button></td></tr>
+</table>
+</td>
+</tr>
+<tr style='background-color:white'>
+<td  align=center style=padding:10px;>
+<table style='font-size:80%;' id=communityTable>
+<tr align=center>
+ <td>Name</td>
+ <td>Description</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</center>
+</div>
+</body>
+<script>
+function sendSize()
+{
+     parent.writeMobileCommunities()
+   var width=containerDiv.scrollWidth
+   var height=containerDiv.scrollHeight+30
+   parent.sizeMobileFrame(height)
+}
+</script>
+</html>

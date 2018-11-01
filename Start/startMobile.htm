@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <title>Emerald Map...Stars: Create online zoomable astronomy star maps </title>
+        <script charset="UTF-8" type="text/javascript" src="../js01_start/d3.v3.js"></script>
+
+    <script charset="UTF-8" type="text/javascript" src="../JoinCommunity/joinCommunity.js"></script>
+
+
+    <script charset="UTF-8" type="text/javascript" src="../js00_utility/bowser.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="../js00_utility/safeXml.js"></script>
+	<script charset="UTF-8" type="text/javascript" src="../js04_stars/stars.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="../js04_stars/myConstellationStars.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="../Constellation/constellation.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="../Constellation/majorStars.js"></script>
+	<script charset="UTF-8" type="text/javascript" src="../js04_stars/rotateZoomStar.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="../js06_projection/d3.geo.projection.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="../js06_projection/redraw.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="../js00_utility/showComment.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="../AddElem/loadAddedElems.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="../Symbol/createRegisteredSymbol.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="../Symbol/plantSymbol.js"></script>
+    <link rel="stylesheet" href="../Constellation/celestialStyle.css">
+</head>
+
+
+<body onload=initMapMobile() style=margin:0px;padding:0px;font-family:verdana oncontextmenu="return false">
+<div id=starMobileContainerDiv   style="display:none;overflow:hidden;position:absolute;top:0px;width:100%;height:100%;left:-10px;"><div  style=width:100%;height:100%; id="starMobileDiv"></div></div>
+<center><img id='loginBgImg' src="../Images/celestial.png" style='width:97%;height:97%' /></center>
+	<div  id=placeNameDiv style='cursor:default;visibility:visible;text-align:center;width:100%;position:absolute;top:25%;left:0px;color:white;font-size:200%;font-family:Verdana'><b><span id=myPlaceNameSpan>Emerald Map Stars</span></b></div>
+   	<div  id=commentDiv style='box-shadow: 4px 4px 4px #888888;-webkit-box-shadow:4px 5px 6px #888888;z-index:20;padding:2px;position:absolute;top:0px;left:0px;visibility:hidden;background-color:linen;border: solid 1px black;border-radius:5px;'></div>
+ <div id=zoomPresetDiv style='position:absolute;top:10%;left:70%;cursor:default;visibility:hidden;border-radius:4px;background-color:yellow;padding:5px;border:solid black 1px;font-weight:bold;text-align:center;font-weight:bold;font-size:120%'>&nbsp;&nbsp;<span title="Constellation View" onmouseover=this.style.backgroundColor='white' onmouseout=this.style.backgroundColor=''  onclick='zoomConView()'>[-]</span>&nbsp;&nbsp;<span title="Default View"  onmouseover=this.style.backgroundColor='green' onmouseout=this.style.backgroundColor='' onclick='zoomDefaultView()'>[*]</span>&nbsp;&nbsp;<span title="Primary Star Zone" onmouseover=this.style.backgroundColor='#9966CC' onmouseout=this.style.backgroundColor='' onclick='zoomPrimaryStarZoneView()'>[+]</span>&nbsp;&nbsp;<span title="Primary Star Corona" onmouseover=this.style.backgroundColor='gold' onmouseout=this.style.backgroundColor='' onclick='zoomPrimaryStarCoronaView()'>[++]</span>&nbsp;&nbsp;<span title="Primary Star Surface" onmouseover=this.style.backgroundColor='orangered' onmouseout=this.style.backgroundColor='' onclick='zoomPrimaryStarSurfaceView()'>[+++]</span>&nbsp;&nbsp;</div>
+<div id=symbolLegendMobileFrameDiv  style='visibility:hidden;position:absolute;top:5%;left:1%;overflow-y:auto;width:50px;'><iframe id=symbolLegendMobileFrame style='border-width:0px; width:100%' src ="../SymbolLegend/symbolLegendMobile.htm" scrolling='no' frameborder='0' ></iframe></div>
+	<script charset="UTF-8" type="text/javascript" src="../SymbolLegend/symbolLegendMobile.js"></script>
+<div id=visitMobileCommunityDiv  style='visibility:hidden;padding:0px;position:absolute;top:20%;left:20%;height:1px;width:60%'>
+ <center>
+<table style='width:100%;background-color:#004953;'>
+<tr>
+<td>
+<table style='width:100%;background-color:#004953;'>
+<tr style='color:white;font-weight:bold;'><td style='width:98%;background-color:#004953;' align=center>Visit Star Map Communities</td><td align=left> <button onClick=loginButtonClicked() style='color:white;font-weight:bold;background-color:#004953;'>X</button></td></tr>
+</table>
+</td>
+</tr>
+<tr style='background-color:white'>
+<td  align=center style=padding:10px;>
+<table style='font-size:80%;' id=communityTable>
+<tr align=center>
+ <td>Name</td>
+ <td>Description</td>
+ <td>Owner</td>
+ <td>Started</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</center>
+</div>
+ 	<script charset="UTF-8" type="text/javascript" src="../Login/loginMobile.js"></script>
+<button  title='visit stars' id=loginButton style='width:150px;visibility:hidden;position:absolute;top:2px;left:80%;background-color:gainsboro;border:2px solid black;padding:5px;font-size:120%;' onClick=loginButtonClicked()>Visit Stars</button>
+
+</body>
+<script>
+
+function loginButtonClicked()
+{
+    if(loginButton.innerHTML=="Visit Stars")
+    {
+        visitMobileCommunityDiv.style.visibility="visible"
+        visitMobileCommunityDiv.style.zIndex="20"
+        loginButton.innerHTML="Close Visit"
+
+        myPlaceNameSpan.innerHTML="Visit A  Star"
+    }
+    else
+    {
+        myPlaceNameSpan.innerHTML=PlaceNAME
+        loginButton.innerHTML="Visit Stars"
+        visitMobileCommunityDiv.style.visibility="hidden"
+
+         visitMobileCommunityDiv.style.zIndex=""
+    }
+}
+
+</script>
+<script charset="UTF-8" type="text/javascript" src="../js01_start/initMapMobile.js"></script>
+
+</html>

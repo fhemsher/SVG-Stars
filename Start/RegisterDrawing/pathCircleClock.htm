@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Tick Path</title>
+</head>
+<body onload=initArc()>
+<center>
+<svg width=400 height=400>
+<circle cx=200 cy=200 r=180 fill=red stroke="none" />
+<path id=clock fill="none" stroke="black" stroke-width=5 />
+</svg>
+<br>
+<button onClick=tick()>tick</button> : <input type="text" style='width:30px;' id=tickValue value=60 />
+</center>
+<script>
+//---onload---
+function initArc()
+{
+    var r=180
+    var cx=200
+    var cy=200
+    var d=
+    [
+    "M",cx,cy,
+    "m",-r,0,
+    "a",r,r,
+    0,1,0,2*r, 0,
+    "a",r,r,
+    0,1,0,-2*r, 0
+    ]
+
+    clock.setAttribute("d",d.join(" "))
+
+}
+
+var tickCnt=59
+function tick()
+{
+    tickValue.value=tickCnt--
+    var length=clock.getTotalLength()
+    var strokeDash=(length/60)*tickCnt
+    clock.setAttribute("stroke-dasharray",strokeDash+" "+length)
+}
+</script>
+</body>
+</html>

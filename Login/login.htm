@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Visit A Star</title>
+<meta charset=utf-8 />
+</head>
+<body onload=sendSize() style='padding:20px;background-color:transparent;font-family:verdana'>
+
+
+<table style='width:300px;background-color:#004953;'>
+<tr>
+<td>
+<table style='width:100%;background-color:#004953;'>
+<tr style='color:white;font-weight:bold;;background-color:#004953;'><td style='width:90%' align=center><sup>*</sup>Your Star Maps</td><td><button onClick=parent.closeIframe("login")>X</button></td></tr>
+<tr  style='color:white;font-weight:bold;'><td colspan=2 align=center style='width:100%;background-color:#004953;' align=center>
+<div id=loginSelectDiv style="visibility:hidden;height:1px;overflow:hidden"><select title="My Star Maps" style='width:97%' id=loginPlacesSelect onChange=loginPlacesSelected()></select></div>
+</td></tr>
+
+</table>
+</td>
+
+</tr>
+
+<tr style='background-color:white'>
+<td  align=center>
+Star Map ID: <input value=""  type=text id=loginPlaceIdValue style='font-size:120%;width:100px;background-color:linen;' /></td>
+</tr>
+<tr style='background-color:white'>
+<td  align=center>Your Email:<input value=""  type=text id=loginEmailValue style='font-size:100%;background-color:linen;width:300px' /></td>
+</tr>
+
+<tr style='background-color:white'>
+<td  align=center><button onClick=parent.loginToPlace()>Go To This Star Map</button>
+<span style='color:red' id=sentLoginSpan></span>
+</td>
+</tr>
+<tr style='background-color:white'>
+<td  align=center><sup>*</sup> You must have been previously invited, or joined the star map.
+
+</td>
+</tr>
+</table>
+
+</body>
+<script>
+function sendSize()
+{
+	var width=document.body.scrollWidth+30
+   var height=document.body.scrollHeight
+ 	parent.sizeFrame('login',width,height)
+	getMyCommunities()
+}
+//---create a selection for this individual's communities(owned+joined)
+var PlacesLoaded=false
+function getMyCommunities()
+{
+	if(parent.oEMAIL || parent.uEMAIL)
+	{
+		for(var j=0;j<parent.XMLActiveLoginArray.length;j++)
+		{
+			var logSelect=parent.XMLActiveLoginArray[j]
+			var node=logSelect.nodeName
+
+			var option=document.createElement("OPTION")
+			var text=(j+1)+") "+parent.xml2txt(logSelect.getAttribute("name"))
+
+			option.text=text
+			option.value=logSelect.getAttribute("id")
+			loginPlacesSelect.appendChild(option)
+			if(PlacesLoaded==false&&logSelect.getAttribute("id")==parent.ID)
+			{
+				loginPlacesSelect.selectedIndex=j
+				loginPlaceIdValue.value=parent.ID
+				if(node=="owner")
+					loginEmailValue.value=parent.oEMAIL
+				else if(node=="user")
+					loginEmailValue.value=parent.uEMAIL
+
+			}
+		}
+        if(parent.XMLActiveLoginArray.length>0)
+        {
+           loginSelectDiv.style.visibility="visible"
+				loginSelectDiv.style.overflow=""
+				loginSelectDiv.style.height=""
+        }
+          if(parent.oEMAIL)
+          loginEmailValue.value=parent.oEMAIL
+          else if(parent.uEMAIL)
+          loginEmailValue.value=parent.uEMAIL
+          else
+          loginEmailValue.value=""
+
+		PlacesLoaded=true
+	}
+}
+
+function loginPlacesSelected()
+{
+	var index=loginPlacesSelect.selectedIndex
+	var myId=loginPlacesSelect.options[index].value
+	 loginPlaceIdValue.value=myId
+	 parent.ID=myId
+
+	 parent.FOLDER=parent.XMLActiveLoginArray[index].getAttribute("folder")
+	 parent.oNAME=parent.XMLActiveLoginArray[index].getAttribute("ownerName")
+	 if(parent.XMLActiveLoginArray[index].nodeName=="owner")
+	 {
+	    parent.oEMAIL=parent.XMLActiveLoginArray[index].getAttribute("email")
+	    parent.uEMAIL=null
+	 }
+	 else if(parent.XMLActiveLoginArray[index].nodeName=="user")
+	 {
+	   parent.uEMAIL=parent.XMLActiveLoginArray[index].getAttribute("email")
+	   parent.SendOwnerEmail=parent.XMLActiveLoginArray[index].getAttribute("emailOwner")
+       parent.oEMAIL=null 
+	 }
+}
+</script>
+</html>
