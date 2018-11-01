@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Draw &amp; Publish SVG Drawings for Stars and Exoplanets</title>
+  <style type="text/css">
+.hab-psychroplanet {
+    fill: url(#psychroplanet);
+}
+.hab-non-habitable {
+    fill: url(#non-habitable);
+}
+.hab-mesoplanet {
+    fill: url(#mesoplanet);
+}
+.hab-hypopsychroplanet {
+    fill: url(#hypopsychroplanet);
+}
+.hab-unknown {
+    fill: url(#unknown);
+}
+.hab-thermoplanet {
+    fill: url(#thermoplanet);
+}
+.hab-hypothermoplanet {
+    fill: url(#hypothermoplanet);
+}
+  </style>
+</head>
+<body onload=sendSize() style='background:white;font-size:90%;font-family:verdana'>
+
+<div style=visibility:hidden;overflow:hidden;width:100%;height:1px>
+<svg>
+<defs id=habDefs>
+<radialGradient id="mesoplanet" gradientUnits="objectBoundingBox"
+fx="30%" fy="30%">
+<stop offset="0%"   style="stop-color:#FFFFFF"/>
+<stop offset="40%"  style="stop-color:#0000AA"/>
+<stop offset="100%" style="stop-color:#000077"/>
+</radialGradient>
+<radialGradient id="psychroplanet" gradientUnits="objectBoundingBox"
+fx="30%" fy="30%">
+<stop offset="0%"   style="stop-color:#FFFFFF"/>
+<stop offset="40%"  style="stop-color:#37A1E7"/>
+<stop offset="100%" style="stop-color:#378BC7"/>
+</radialGradient>
+<radialGradient id="non-habitable" gradientUnits="objectBoundingBox"
+fx="30%" fy="30%">
+<stop offset="0%"   style="stop-color:#FFFFFF"/>
+<stop offset="40%"  style="stop-color:#242729"/>
+<stop offset="100%" style="stop-color:#24282A"/>
+</radialGradient>
+<radialGradient id="hypopsychroplanet" gradientUnits="objectBoundingBox"
+fx="30%" fy="30%">
+<stop offset="0%"   style="stop-color:#FFFFFF"/>
+<stop offset="40%"  style="stop-color:#AC49E3"/>
+<stop offset="100%" style="stop-color:#9D42D0"/>
+</radialGradient>
+<radialGradient id="unknown" gradientUnits="objectBoundingBox"
+fx="30%" fy="30%">
+<stop offset="0%"   style="stop-color:#FFFFFF"/>
+<stop offset="40%"  style="stop-color:#959595"/>
+<stop offset="100%" style="stop-color:#7C7C7C"/>
+</radialGradient>
+<radialGradient id="thermoplanet" gradientUnits="objectBoundingBox"
+fx="30%" fy="30%">
+<stop offset="0%"   style="stop-color:#FFFFFF"/>
+<stop offset="40%"  style="stop-color:#CA0A14"/>
+<stop offset="100%" style="stop-color:#A2030C"/>
+</radialGradient>
+<radialGradient id="hypothermoplanet" gradientUnits="objectBoundingBox"
+fx="30%" fy="30%">
+<stop offset="0%"   style="stop-color:#FFFFFF"/>
+<stop offset="40%"  style="stop-color:#F08F27"/>
+<stop offset="100%" style="stop-color:#DB8226"/>
+</radialGradient>
+</defs></svg>
+
+
+</div>
+ <CENTER>
+<div  id=containerDiv style='border-radius:10px;padding:2px;width:960px;cursor:default;position:relative'>
+
+<table style='width:100%'>
+<tr ><td style='width:95%' valign=center align=center>
+ <b>Draw &amp; Publish SVG Drawings for Stars and Exoplanets</b><br>
+
+<img src=Images/chromeLogo.png width="30" height="28" align=center/> To best view this application, the Google Chrome browser is preferred.
+
+</td><td align=right></td></tr>
+</table>
+<h3>The Interactive Universe</h3>
+Zoom into, rotate, and draw on this scaled model of the Universe.
+ <img src=Images/interactiveUniverse.png width="772" height="383" />
+<center><h3>Choose a Host Star with its Exoplanets.<br>Then draw your specific features related to that star and its exoplanets </h3></center>
+<table>
+<tr><td align=center colspan=2>
+<b>A typical star and its exopanets</b><br>
+The star, exoplanets, their orbits, and habitable zone shown as scaled within the interactive universe
+
+
+</td></tr>
+
+<tr>
+
+<td>
+
+<img src=Images/typicalStar.png width="503" height="554" />
+
+
+</td>
+<td>
+<TABLE cellpadding=5 border=3 style=border-collapse:collapse><TR>
+
+ <TD COLSPAN=2 ALIGN=CENTER><b>EXOPLANET SYMBOLS</b></TD>
+ </TR>
+ <TR valign=top>
+ <TD align=center>
+
+
+
+ <table border=1 style=border-collapse:collapse>
+ <tr><td colspan=2><b>Habitable Class</b></td></tr>
+ <tr>
+<td>Non-Habitable </td>
+<td style=width:30px;height:30px;><svg width=30 height=30  overflow="visible"><circle transform="translate(15 15)" stroke="none" r="15" class="hab-non-habitable" ></svg></td>
+ </tr>
+ <tr>
+<td>Mesoplanet </td>
+<td style=width:30px;height:30px;><svg width=30 height=30  overflow="visible"><circle transform="translate(15 15)" stroke="none" r="15" class="hab-mesoplanet" ></svg></td>
+ </tr>
+
+ <tr>
+<td>Psychroplanet </td>
+<td style=width:30px;height:30px;><svg width=30 height=30  overflow="visible"><circle transform="translate(15 15)" stroke="none" r="15" class="hab-psychroplanet" ></svg></td>
+ </tr>
+
+
+ <tr>
+<td>Hypopsychroplanet </td>
+<td style=width:30px;height:30px;><svg width=30 height=30  overflow="visible"><circle transform="translate(15 15)" stroke="none" r="15" class="hab-hypopsychroplanet" ></svg></td>
+ </tr>
+
+ <tr>
+<td>Thermoplanet </td>
+<td style=width:30px;height:30px;><svg width=30 height=30  overflow="visible"><circle transform="translate(15 15)" stroke="none" r="15" class="hab-thermoplanet" ></svg></td>
+ </tr>
+
+ <tr>
+<td>Hypothermoplanet </td>
+<td style=width:30px;height:30px;><svg width=30 height=30  overflow="visible"><circle transform="translate(15 15)" stroke="none" r="15" class="hab-hypothermoplanet" ></svg></td>
+ </tr>
+
+ <tr>
+<td>Unknown </td>
+<td style=width:30px;height:30px;><svg width=30 height=30  overflow="visible"><circle transform="translate(15 15)" stroke="none" r="15" class="hab-unknown" ></svg></td>
+ </tr>
+ </table>
+ </TD>
+ <TD>
+<table border=1 style=border-collapse:collapse>
+<tr><td colspan=2><b>Atmosphere Class</b></td></tr>
+ <tr>
+<td>Hydrogen-Rich</td>
+<td style=width:30px;height:30px;><svg width=30 height=30  overflow="visible"><circle transform="translate(15 15)" fill=none stroke-width=7 stroke="lime" r="12"  ></svg></td>
+ </tr>
+ <tr>
+<td>Metals-Rich</td>
+<td style=width:30px;height:30px;><svg width=30 height=30  overflow="visible"><circle transform="translate(15 15)" fill=none  stroke-width=7  stroke="red" r="12"  ></svg></td>
+ </tr>
+
+ <tr>
+<td>None</td>
+<td style=width:30px;height:30px;><svg width=30 height=30  overflow="visible"><circle transform="translate(15 15)" fill=none  stroke-width=7  stroke="grey" r="12"  ></svg></td>
+ </tr>
+
+
+ <tr>
+<td>Unknown </td>
+<td style=width:30px;height:30px;><svg width=30 height=30  overflow="visible"><circle transform="translate(15 15)"  r="12"  fill=none  stroke-width=7  stroke="gainsboro" ></svg></td>
+ </tr>
+
+ </table>
+
+
+
+
+ </TD>
+ </TR>
+</TABLE>
+
+</td>
+
+</tr>
+
+<tr>
+<td align=center colspan=2>
+ <b>Annotate the Host Star &amp; it's Exoplanets with SVG Elements</b><br>
+ You can draw anywhere in the zoomable  universe from the star's constellation through to the surface of the star<p></p>
+<img src=Images/annotateDrawing.png width="514" height="272" />
+
+
+</td>
+
+
+</tr>
+<tr>
+<td colspan=2>
+ Your drawings are stored in the Library. You may edit or remove your drawings at any time. Each drawing can also be published into a web page.
+ All visitors to SVG-Stars.org can view, plus publish, your drawings.
+</td>
+
+
+</tr>
+
+</table>
+<p></p>
+
+<i>This site last updated <span style=color:blue>10/29/2018</span></i> &nbsp; &nbsp; &nbsp; Contact: fhemsher@gmail.com
+</div>
+
+
+ </CENTER>
+
+</body>
+<script>
+function sendSize()
+{
+   var width=containerDiv.scrollWidth+30
+  var height=containerDiv.scrollHeight+30
+   parent.sizeFrame('about',width,height)
+}
+
+</script>
+</html>
