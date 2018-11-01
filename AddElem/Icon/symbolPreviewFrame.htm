@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title></title>
+<meta charset=utf-8 />
+</head>
+
+<body onload=previewSymbols() style='background-color:white;font-family:arial;border-width:2px;border-style:solid;border-color:black;font-size:16px;'>
+<center><b>Icon Preview</b></center>
+	<button title='close icon preview' id=hideSymbolPreviewButton onClick=parent.hideSymbolPreview() style="position:absolute;top:0px;left:190px;background-color:transparent;border-width:0;width:30px;height:30px;font-size:25px;font-family:wingdings;color:red">x</button>
+<div id=symbolPreviewSpan style='position:absolute;top:35px;left:0px;width:210px;height:320px;overflow-x:hidden;overflow-y:auto'>
+</div>
+
+
+
+</body>
+<script>
+
+
+function previewSymbols()
+{
+			var previewTable="<table style='font-size:16px'>"
+
+				//---sort alph on title---
+		var titleArray=new Array()
+		for(i=0;i<symbolSelectArray.length;i++)
+		{
+			arraySplit=symbolSelectArray[i].split(",")
+			titleArray[titleArray.length]=arraySplit[2]+"@"+i
+		}
+		titleArray.sort()
+		var holdArray=new Array()
+		for(i=0;i<titleArray.length;i++)
+		{
+			title=titleArray[i]
+			titleSplit=title.split("@")
+			ssLoc=titleSplit[1]
+			holdArray[i]=symbolSelectArray[ssLoc]
+		}
+		symbolSelectArray=holdArray
+		for(i=0;i<symbolSelectArray.length;i++)
+		{
+
+			arraySplit=symbolSelectArray[i].split(",")
+            family=arraySplit[0]
+			symb=arraySplit[1]
+			title=arraySplit[2]
+			symb=String.fromCharCode(symb);
+			previewTable+="<tr title='click to select this icon'  id=symbolRow"+i+" onClick=parent.loadPreview("+i+") onmouseover=this.style.backgroundColor='gainsboro' onmouseout=this.style.backgroundColor='rgb(255,249,255)'><td style='cursor:pointer'>"+title+"</td><td style='cursor:pointer;font-size:50px;font-family:"+family+"'>"+symb+"</td></tr>"
+
+		}
+		previewTable+="</table>"
+		symbolPreviewSpan.innerHTML=previewTable
+}
+
+var symbolSelectArray=new Array()
+
+symbolSelectArray[17]="webdings,108,Star1"
+symbolSelectArray[23]="wingdings,84,Snowflake"
+symbolSelectArray[24]="wingdings,85,Cross"
+symbolSelectArray[25]="wingdings,116,Diamond"
+
+
+
+symbolSelectArray[181]="wingdings,88,Iron Cross"
+symbolSelectArray[182]="wingdings,92,OM"
+symbolSelectArray[183]="wingdings,90,Star-Crescent"
+symbolSelectArray[184]="wingdings,91,Yin Yang"
+symbolSelectArray[185]="wingdings,94,Aries"
+symbolSelectArray[186]="wingdings,95,Taurus"
+symbolSelectArray[187]="wingdings,96,Gemini"
+symbolSelectArray[188]="wingdings,97,Cancer"
+symbolSelectArray[189]="wingdings,98,Leo"
+symbolSelectArray[190]="wingdings,99,Virgo"
+symbolSelectArray[191]="wingdings,100,Libra"
+symbolSelectArray[192]="wingdings,101,Scorpio"
+symbolSelectArray[193]="wingdings,102,Sagittarius"
+symbolSelectArray[194]="wingdings,103,Capricorn"
+symbolSelectArray[195]="wingdings,104,Aquarius"
+symbolSelectArray[196]="wingdings,105,Pices"
+symbolSelectArray[197]="wingdings,87,Celtic Cross"
+symbolSelectArray[198]="wingdings,122,Knot"
+
+symbolSelectArray[199]="wingdings,124,Flower2"
+symbolSelectArray[200]="wingdings,118,Diamonds 4"
+symbolSelectArray[201]="wingdings,169,Star3"
+symbolSelectArray[202]="wingdings,170,Star4"
+symbolSelectArray[203]="wingdings,171,Star5"
+symbolSelectArray[204]="wingdings,172,Star6"
+symbolSelectArray[205]="wingdings,174,Starburst"
+symbolSelectArray[206]="wingdings,175,Star7"
+
+
+symbolSelectArray[217]="webdings,152,Star8"
+
+
+symbolSelectArray[235]="wingdings,150,Symbol a1"
+symbolSelectArray[236]="wingdings,151,Symbol a2"
+symbolSelectArray[237]="wingdings,152,Symbol a3"
+symbolSelectArray[238]="wingdings,153,Symbol a4"
+symbolSelectArray[239]="wingdings,154,Symbol b1"
+symbolSelectArray[240]="wingdings,155,Symbol b2"
+symbolSelectArray[241]="wingdings,156,Symbol b3"
+symbolSelectArray[242]="wingdings,157,Symbol b4"
+symbolSelectArray[243]="wingdings,205,Symbol c1"
+symbolSelectArray[244]="wingdings,206,Symbol c2"
+symbolSelectArray[245]="wingdings,207,Symbol c3"
+symbolSelectArray[246]="wingdings,208,Symbol c4"
+symbolSelectArray[247]="wingdings,209,Symbol c5"
+symbolSelectArray[248]="wingdings,210,Symbol c6"
+symbolSelectArray[249]="wingdings,211,Symbol c7"
+symbolSelectArray[250]="wingdings,212,Symbol c8"
+
+
+symbolSelectArray[259]="wingdings,106,Symbol d"
+symbolSelectArray[260]="wingdings,107,Symbol e"
+symbolSelectArray[261]="wingdings,89,Star9"
+symbolSelectArray[262]="webdings,152,Star10"
+
+
+
+
+</script>
+
+</html>
