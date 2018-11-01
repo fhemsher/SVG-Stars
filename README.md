@@ -13,5 +13,5 @@ You may then create/save/edit SVG Star drawings.
 
 To preview how this application works go to: http://svg-stars.org
 
-NOTE:To store your svg images for the Component and Schematic libraries, the Windows IIS must have 
+NOTE:To store your svg drawings for the DRAWINGLIBRARY, the Windows IIS must have 
 ASP files activated (See Wiki for a description how to do this).
