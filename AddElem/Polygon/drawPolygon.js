@@ -269,7 +269,8 @@ function finishDrawPolygon()
 
                 finishedElem.setAttribute("class", "addElem")
                 finishedElem.style.cursor = "default"
-
+                    if(cw.drawPolygonShadowCheck.checked==true)
+                    finishedElem.setAttribute("filter", "url(#drop-shadow)")
                 finishedElem.setAttribute("ondblclick", "editPolygonDraw("+id+")")
 
                 if(cw.drawPolygonCommentValue.value!="Polygonangle comment here(optional)..." && cw.drawPolygonCommentValue.value!="")
@@ -561,17 +562,20 @@ function finishEditPolygon()
             finishedElem.setAttribute("stroke-dasharray", ActiveElem.attr("stroke-dasharray"))
             else
                 finishedElem.removeAttribute("stroke-dasharray")
+                
+              if(cw.drawPolygonShadowCheck.checked==true)
+                    finishedElem.setAttribute("filter", "url(#drop-shadow)")
 
 
             //---update array--
             var t3 = d3.transform(finishedElem.getAttribute("transform"))
             var transX = t3.translate[0]
             var transY = t3.translate[1]
-            //var rotateAngle=t3.rotate
+            var rotateAngle=t3.rotate
             var rotate = ""
-            if(RotateAngle!=0)
-            rotate = "rotate("+RotateAngle+")"
-            finishedElem.setAttribute("rotateAngle", RotateAngle)
+            if(rotateAngle!=0)
+            rotate = "rotate("+rotateAngle+")"
+            finishedElem.setAttribute("rotateAngle", rotateAngle)
             var ll = ActiveLL
 
             finishedElem.setAttribute("transform", StarPoint(ll)+rotate)
@@ -589,7 +593,7 @@ function finishEditPolygon()
                 if(myId==DrawPolygonEditId)
                 {
                     AddElemCoordsArray[k][0] = ll
-                    AddElemCoordsArray[k][3] = RotateAngle
+                    AddElemCoordsArray[k][3] = rotateAngle
                     AddElemCoordsArray[k][4] = finishedElem.getAttribute("fade")
                   //AddElemCoordsArray.push([ll, ActiveScale, id, rotateAngle, fade])
                     break
@@ -609,7 +613,7 @@ function finishEditPolygon()
             finishedElem.removeAttribute("onmouseover")
             finishedElem.removeAttribute("onmouseout")
         }
-        finishedElem.setAttribute("transform", StarPoint(ActiveLL)+"scale("+(StarView.k/StarScale)/ActiveScale+")rotate("+RotateAngle+")")
+        finishedElem.setAttribute("transform", StarPoint(ActiveLL)+"scale("+(StarView.k/StarScale)/ActiveScale+")rotate("+rotateAngle+")")
 
 
         domActiveElemG.removeChild(document.getElementById("activeElem"))
@@ -624,10 +628,10 @@ function finishEditPolygon()
             finishedElem.setAttribute("id", DrawPolygonEditId)
              UpdateThisPolygon = finishedElem
              console.log(UpdateThisPolygon)
-            updatePolygon()
+
             domAddElemG.insertBefore(finishedElem, EditThisPolygon)
             domAddElemG.removeChild(EditThisPolygon)
-
+             updatePolygon()
          EditPolygon = false
        closeDrawPolygon()
     }
