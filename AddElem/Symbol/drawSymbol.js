@@ -179,6 +179,8 @@ function plantSymbol(event)
             activeElem.style.cursor = "default"
 
         }
+        if(cw.drawSymbolShadowCheck.checked==true)
+            activeElem.setAttribute("filter", "url(#drop-shadow)")
 
         var t3 = d3.transform(activeElem.getAttribute("transform"))
         var transX = t3.translate[0]
@@ -201,6 +203,27 @@ function symbolNativeScaleSelected()
             activeElem.childNodes.item(k).setAttribute("transform", "scale("+nativeScale+")")
     }
 }
+
+function drawSymbolShadowChecked()
+{
+
+    var cw = addElemSymbolCw
+    if(cw.drawSymbolShadowCheck.checked==true)
+    {
+        if(activeElem)
+            activeElem.setAttribute("filter", "url(#drop-shadow)")
+
+    }
+    else
+    {
+        if(activeElem)
+            activeElem.removeAttribute("filter")
+
+    }
+
+}
+
+
 function finishDrawSymbol()
 {
 
@@ -254,6 +277,10 @@ function finishDrawSymbol()
                 finishedElem.setAttribute("class", "addElem")
 
                 finishedElem.setAttribute("createdBy", oEMAIL)
+
+            if(cw.drawSymbolShadowCheck.checked==true)
+                finishedElem.setAttribute("filter", "url(#drop-shadow)")
+
 
                 ActiveElem = null
                 activeElem = null
@@ -407,6 +434,13 @@ function setEditSymbol()
         else
             cw.drawSymbolFadeCheck.checked = false
 
+         if(EditSymbolObj.getAttribute("filter"))
+           cw.drawSymbolShadowCheck.checked=true
+          else
+           cw.drawSymbolShadowCheck.checked=false
+
+
+
             ActiveScale = parseFloat(EditSymbolObj.getAttribute("myScale"))
             var ll0 = parseFloat(EditSymbolObj.getAttribute("ll0"))
             var ll1 = parseFloat(EditSymbolObj.getAttribute("ll1"))
@@ -451,7 +485,14 @@ function finishEditSymbol()
             finishedElem.setAttribute("fade", "true")
             else
                 finishedElem.removeAttribute("fade")
-                
+
+        if(cw.drawSymbolShadowCheck.checked==true)
+            finishedElem.setAttribute("filter", "url(#drop-shadow")
+            else
+             finishedElem.removeAttribute("filter")
+
+
+
                 finishedElem.setAttribute("myZoom", PrevZoomInteger)
 
                 for(var k = 0; k<AddElemCoordsArray.length; k++)
