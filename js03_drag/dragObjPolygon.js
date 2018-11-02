@@ -66,11 +66,7 @@ function dragPolygon(evt)
         objTransListPolygon.appendItem(objTransformRequestObjPolygon)
         objTransListPolygon.consolidate()
 
-        var matrix = objDragTargetPolygon.transform.baseVal.consolidate().matrix;
-
-        var transX = matrix.e
-        var transY = matrix.f
-        DrawX.attr("transform", "translate("+transX+" "+transY+")")
+           DrawX.attr("transform", ActiveElem.attr("transform"))
 
     }
 }
