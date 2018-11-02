@@ -15,7 +15,7 @@ function closeDrawIcon()
         DrawIcon=false
         EditIcon=false
         ActiveIconId=null
-            StopStarZoom=false  
+            StopStarZoom=false
         cw.containerDiv.style.background = "linen"
         cw.iconDrawSpan.innerHTML = "Select & Plant Icons"
         //cw.editIconSpan.innerHTML = "Select icon button, choose color/size, then click on drawing to plant it."
@@ -102,6 +102,8 @@ function plantIcon(event)
                 ActiveElem.attr("x", -(bb.x+.5*bb.width))
                 ActiveElem.attr("y", -(bb.y+.5*bb.height))
 
+                       if(cw.drawIconShadowCheck.checked==true)
+                            ActiveElem.attr("filter", "url(#drop-shadow)")
 
 
                  if(LatLngPntSet==false)
@@ -201,7 +203,24 @@ function drawIconFontSizeSelected()
     }
 
 }
+function drawIconShadowChecked()
+{
 
+    var cw = addElemIconCw
+    if(cw.drawIconShadowCheck.checked==true)
+    {
+        if(ActiveElem)
+            ActiveElem.attr("filter", "url(#drop-shadow)")
+
+    }
+    else
+    {
+        if(ActiveElem)
+            ActiveElem.attr("filter",null)
+
+    }
+
+}
 
 
 var IconType="dingbat"
@@ -255,6 +274,8 @@ function finishDrawIcon()
                 finishedElem.setAttribute("class", "addElem")
                 finishedElem.setAttribute("iconType", IconType)
                 finishedElem.setAttribute("unicode", Unicode)
+               if(cw.drawIconShadowCheck.checked==true)
+                finishedElem.setAttribute("filter", "url(#drop-shadow)")
 
 
 
@@ -424,7 +445,10 @@ function setEditIcon()
                    icon.setAttribute("fill",fill)
                 }
 
-
+          if(EditIconObj.getAttribute("filter"))
+           cw.drawIconShadowCheck.checked=true
+          else
+           cw.drawIconShadowCheck.checked=false
                     setIconButton()
 
 
@@ -509,6 +533,11 @@ function finishEditIcon()
 
         finishedElem.setAttribute("myScale", ActiveScale)
         finishedElem.setAttribute("myZoom", PrevZoomInteger)
+
+        if(cw.drawIconShadowCheck.checked==true)
+            finishedElem.setAttribute("filter", "url(#drop-shadow")
+            else
+             finishedElem.removeAttribute("filter")
 
         if(cw.drawIconFadeCheck.checked==true)
             finishedElem.setAttribute("fade", "true")
