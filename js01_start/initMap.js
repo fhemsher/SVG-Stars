@@ -491,13 +491,13 @@ feMerge.append("feMergeNode")
         .attr("shape-rendering","geometricPrecision")
          .attr("id", "exoplanetG")
 
+    AddPathG = StarG.append("g");
+    AddPathG.attr("id", "domAddPathG")
 
     AddElemG = StarG.append("g");
     AddElemG.attr("id", "domAddElemG")
     AddElemG.attr("text-rendering", "geometricPrecision")
 
-    AddPathG = StarG.append("g");
-    AddPathG.attr("id", "domAddPathG")
 
        PlanetG = StarG.append("g");
    PlanetG.attr("id", "domPlanetG")
