@@ -157,7 +157,7 @@ function starRedraw()
                      if(myZoom<(zoomInteger-50)||myZoom>(zoomInteger+50)  )
                         path.setAttribute("display","none")
                      else
-                      path.removeAttribute("display")
+                        path.removeAttribute("display")
                 }
              if(zoomInteger<400)
                  setTimeout('CoronaBG.style("display","none")',333)
@@ -386,6 +386,31 @@ function starRedraw()
             }
 
         }
+
+//---remove display on +- 50 ZoomInteger----
+             var zoomInteger = Math.floor((200000*Math.log(StarView.k)/Math.log(200000))/1000)
+                for(var k = 0; k<domAddElemG.childNodes.length; k++)
+                {
+                     var elem=domAddElemG.childNodes.item(k)
+                     var myZoom=+elem.getAttribute("myZoom")
+                     if(myZoom<(zoomInteger-50)||myZoom>(zoomInteger+50)  )
+                        elem.setAttribute("display","none")
+                     else
+                      elem.removeAttribute("display")
+                }
+                for(var k = 0; k<domAddPathG.childNodes.length; k++)
+                {
+                    var path=domAddPathG.childNodes.item(k)
+                    var myZoom=+path.getAttribute("myZoom")
+                     if(myZoom<(zoomInteger-50)||myZoom>(zoomInteger+50)  )
+                        path.setAttribute("display","none")
+                     else
+                        path.removeAttribute("display")
+                }
+             if(zoomInteger<400)
+                 CoronaBG.style("display","none")
+
+
         if(AddElemCoordsArray.length>0)
         {
             d3.select("#domAddElemG").selectAll(".addElem")
