@@ -2,81 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <title>Draw &amp; Publish SVG Drawings for Stars and Exoplanets</title>
-  <style type="text/css">
-.hab-psychroplanet {
-    fill: url(#psychroplanet);
-}
-.hab-non-habitable {
-    fill: url(#non-habitable);
-}
-.hab-mesoplanet {
-    fill: url(#mesoplanet);
-}
-.hab-hypopsychroplanet {
-    fill: url(#hypopsychroplanet);
-}
-.hab-unknown {
-    fill: url(#unknown);
-}
-.hab-thermoplanet {
-    fill: url(#thermoplanet);
-}
-.hab-hypothermoplanet {
-    fill: url(#hypothermoplanet);
-}
-  </style>
+
 </head>
-<body onload=sendSize() style='background:white;font-size:90%;font-family:verdana'>
-
-<div style=visibility:hidden;overflow:hidden;width:100%;height:1px>
-<svg>
-<defs id=habDefs>
-<radialGradient id="mesoplanet" gradientUnits="objectBoundingBox"
-fx="30%" fy="30%">
-<stop offset="0%"   style="stop-color:#FFFFFF"/>
-<stop offset="40%"  style="stop-color:#0000AA"/>
-<stop offset="100%" style="stop-color:#000077"/>
-</radialGradient>
-<radialGradient id="psychroplanet" gradientUnits="objectBoundingBox"
-fx="30%" fy="30%">
-<stop offset="0%"   style="stop-color:#FFFFFF"/>
-<stop offset="40%"  style="stop-color:#37A1E7"/>
-<stop offset="100%" style="stop-color:#378BC7"/>
-</radialGradient>
-<radialGradient id="non-habitable" gradientUnits="objectBoundingBox"
-fx="30%" fy="30%">
-<stop offset="0%"   style="stop-color:#FFFFFF"/>
-<stop offset="40%"  style="stop-color:#242729"/>
-<stop offset="100%" style="stop-color:#24282A"/>
-</radialGradient>
-<radialGradient id="hypopsychroplanet" gradientUnits="objectBoundingBox"
-fx="30%" fy="30%">
-<stop offset="0%"   style="stop-color:#FFFFFF"/>
-<stop offset="40%"  style="stop-color:#AC49E3"/>
-<stop offset="100%" style="stop-color:#9D42D0"/>
-</radialGradient>
-<radialGradient id="unknown" gradientUnits="objectBoundingBox"
-fx="30%" fy="30%">
-<stop offset="0%"   style="stop-color:#FFFFFF"/>
-<stop offset="40%"  style="stop-color:#959595"/>
-<stop offset="100%" style="stop-color:#7C7C7C"/>
-</radialGradient>
-<radialGradient id="thermoplanet" gradientUnits="objectBoundingBox"
-fx="30%" fy="30%">
-<stop offset="0%"   style="stop-color:#FFFFFF"/>
-<stop offset="40%"  style="stop-color:#CA0A14"/>
-<stop offset="100%" style="stop-color:#A2030C"/>
-</radialGradient>
-<radialGradient id="hypothermoplanet" gradientUnits="objectBoundingBox"
-fx="30%" fy="30%">
-<stop offset="0%"   style="stop-color:#FFFFFF"/>
-<stop offset="40%"  style="stop-color:#F08F27"/>
-<stop offset="100%" style="stop-color:#DB8226"/>
-</radialGradient>
-</defs></svg>
+<body onload=writeEM();sendSize() style='background:white;font-size:90%;font-family:verdana'>
 
 
-</div>
  <CENTER>
 <div  id=containerDiv style='border-radius:10px;padding:2px;width:960px;cursor:default;position:relative'>
 
@@ -122,37 +52,37 @@ The star, exoplanets, their orbits, and habitable zone shown as scaled within th
  <tr><td colspan=2><b>Habitable Class</b></td></tr>
  <tr>
 <td>Non-Habitable </td>
-<td style=width:30px;height:30px;><svg width=30 height=30  overflow="visible"><circle transform="translate(15 15)" stroke="none" r="15" class="hab-non-habitable" ></svg></td>
+<td style=width:30px;height:30px;><img width=30 height=30  src=../Images/non-habitable.svg /></td>
  </tr>
  <tr>
 <td>Mesoplanet </td>
-<td style=width:30px;height:30px;><svg width=30 height=30  overflow="visible"><circle transform="translate(15 15)" stroke="none" r="15" class="hab-mesoplanet" ></svg></td>
+<td style=width:30px;height:30px;><img width=30 height=30  src=../Images/Mesoplanet.svg /></td>
  </tr>
 
  <tr>
 <td>Psychroplanet </td>
-<td style=width:30px;height:30px;><svg width=30 height=30  overflow="visible"><circle transform="translate(15 15)" stroke="none" r="15" class="hab-psychroplanet" ></svg></td>
+<td style=width:30px;height:30px;><img width=30 height=30  src=../Images/Psychroplanet.svg /></td>
  </tr>
 
 
  <tr>
 <td>Hypopsychroplanet </td>
-<td style=width:30px;height:30px;><svg width=30 height=30  overflow="visible"><circle transform="translate(15 15)" stroke="none" r="15" class="hab-hypopsychroplanet" ></svg></td>
+<td style=width:30px;height:30px;><img width=30 height=30  src=../Images/Hypopsychroplanet.svg /></td>
  </tr>
 
  <tr>
 <td>Thermoplanet </td>
-<td style=width:30px;height:30px;><svg width=30 height=30  overflow="visible"><circle transform="translate(15 15)" stroke="none" r="15" class="hab-thermoplanet" ></svg></td>
+<td style=width:30px;height:30px;><img width=30 height=30  src=../Images/Thermoplanet.svg /></td>
  </tr>
 
  <tr>
 <td>Hypothermoplanet </td>
-<td style=width:30px;height:30px;><svg width=30 height=30  overflow="visible"><circle transform="translate(15 15)" stroke="none" r="15" class="hab-hypothermoplanet" ></svg></td>
+<td style=width:30px;height:30px;><img width=30 height=30  src=../Images/Hypothermoplanet.svg /></td>
  </tr>
 
  <tr>
 <td>Unknown </td>
-<td style=width:30px;height:30px;><svg width=30 height=30  overflow="visible"><circle transform="translate(15 15)" stroke="none" r="15" class="hab-unknown" ></svg></td>
+<td style=width:30px;height:30px;><img width=30 height=30  src=../Images/unknown.svg /></td>
  </tr>
  </table>
  </TD>
@@ -214,8 +144,10 @@ The star, exoplanets, their orbits, and habitable zone shown as scaled within th
 
 </table>
 <p></p>
+<hr>
+<div style='width:100%;text-align:center' >Download SVG-Stars .zip file <a href="https://github.com/fhemsher/SVG-Stars"  target="_blank">SVG-Stars.org Files</a></div>
+<div id=emDiv style='width:100%;text-align:center' ></div><p></p>
 
-<i>This site last updated <span style=color:blue>10/29/2018</span></i> &nbsp; &nbsp; &nbsp; Contact: fhemsher@gmail.com
 </div>
 
 
@@ -229,6 +161,17 @@ function sendSize()
   var height=containerDiv.scrollHeight+30
    parent.sizeFrame('about',width,height)
 }
+function writeEM()
+{
+   var em="Contact: "
+    em+="fhem"
+    em+="sher"
+    em+="@"
+    em+="gm"
+    em+="ail."
+    em+="com"
+   emDiv.innerHTML=em +" &nbsp;&nbsp;<span style=color:maroon>Last Update: 11/03/2018</span>"
 
+}
 </script>
 </html>
