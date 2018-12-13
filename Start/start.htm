@@ -17,6 +17,8 @@
     <script charset="UTF-8" type="text/javascript" src="../js00_utility/showHideHelp.js"></script>
     <script charset="UTF-8" type="text/javascript" src="../js00_utility/showComment.js"></script>
     <script charset="UTF-8" type="text/javascript" src="../js00_utility/print.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="../js00_utility/sortSelect.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="../js00_utility/planetSize.js"></script>
     <script charset="UTF-8" type="text/javascript" src="../js01_start/d3.v3.js"></script>
     <script charset="UTF-8" type="text/javascript" src="../js01_start/jquery2.js"></script>
 	<script charset="UTF-8" type="text/javascript" src="../js02_location/transformAdd.js"></script>
@@ -27,9 +29,21 @@
     <script charset="UTF-8" type="text/javascript" src="../Change/saveDrawingView.js"></script>
     <script charset="UTF-8" type="text/javascript" src="../Login/login.js"></script>
     <script charset="UTF-8" type="text/javascript" src="../Publish/publish.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="../js00_utility/helperFuncts.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="../js00_utility/select.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="../js01_start/initMap.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="../js01_start/sunPosition.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="../js02_location/cursorLoc.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="../js02_location/placeBounds.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="../js04_stars/stars.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="../js04_stars/animatePlanet.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="../js04_stars/distance.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="../Constellation/constellation.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="RegisterDrawing/registerDrawing.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="../AddElem/loadAddedElems.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="../Exoplanet/exoplanet.js"></script>
  <link rel="stylesheet" href="../Constellation/celestialStyle.css" />
  <link rel="stylesheet" href="../js04_stars/habitable.css" />
-
 
  </head>
 <body onload=printCookies();initMap()  onkeydown=rotateZoomMyStar()  style=background:#F0F8FF;margin:0px;padding:0px;font-family:verdana oncontextmenu="return false">
@@ -40,10 +54,10 @@
 <div id=starContainerDiv style="display:none;overflow:hidden;position:absolute;top:0px;width:100%;height:100%;left:-10px;"><div  style=width:100%;height:100%; id="starDiv"></div></div>
 
     <div id=topNavDiv  style='text-align:center;position:absolute;top:0px;left:0px;padding:5px;width:100%'>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<nobr><button onmouseover=this.style.borderColor="lime" onmouseout=this.style.borderColor='' title="Begin a new star drawing" id=openBeginButton onClick='openBegin()' style='background-color:gainsboro;font-weight:bold;font-family:Verdana;color:#004953;'>Begin</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<nobr><button onmouseover=this.style.borderColor="lime" onmouseout=this.style.borderColor='' title="Begin a new star drawing" id=openBeginButton onClick='openBegin()' style='background-color:gainsboro;font-weight:bold;font-family:Verdana;color:#004953;'>Begin</button>
     <button title='List your drawings' disabled onmouseover=this.style.borderColor="lime" onmouseout=this.style.borderColor=''  title="Visit your stars" id=openOwnerDrawingsButton style='background-color:gainsboro;opacity:.3;font-weight:bold;font-family:Verdana;color:#004953;' onClick=openIframe("OwnerDrawings","ownerDrawings",0)>My Stars</button>
     <button onmouseover=this.style.borderColor="lime" onmouseout=this.style.borderColor=''  id=openVisitButton title="View existing star drawings" style='visibility:visible;background-color:gainsboro;font-weight:bold;font-family:Verdana;color:#004953;' onClick=visitDrawingLibrary("VisitDrawingLibrary","visitDrawingLibrary",false)>Library</button>
-    &nbsp;  &nbsp;  &nbsp; <span id=ownerSelectSpan>
+      &nbsp; <span id=ownerSelectSpan>
             <button onmouseover=this.style.borderColor="lime" onmouseout=this.style.borderColor=''  id=openAddImageButton  style=opacity:.3;background-color:linen onClick=openAddImageDraw()>Images</button>
             <button onmouseover=this.style.borderColor="lime" onmouseout=this.style.borderColor=''  id=openAddIconButton style=opacity:.3;background-color:linen onClick=openAddIconDraw()>Icons</button>
             <button onmouseover=this.style.borderColor="lime" onmouseout=this.style.borderColor=''  id=openAddPathButton  style=opacity:.3;background-color:linen onClick=openAddPathDraw()>Paths</button>
@@ -53,8 +67,8 @@
             <button onmouseover=this.style.borderColor="lime" onmouseout=this.style.borderColor=''  id=openAddPolygonButton  style=opacity:.3;background-color:linen onClick=openAddPolygonDraw()>Polygons</button>
             <button onmouseover=this.style.borderColor="lime" onmouseout=this.style.borderColor=''  id=openAddTextButton  style=opacity:.3;background-color:linen onClick=openAddTextDraw()>Text</button>
             <button onmouseover=this.style.borderColor="lime" onmouseout=this.style.borderColor=''  id=openAddSymbolButton  style=opacity:.3;background-color:#538BBA;color:white onClick=openAddSymbolDraw()>Symbols</button>
-            &nbsp;  &nbsp;  <button onmouseover=this.style.borderColor="lime" onmouseout=this.style.borderColor=''  id=openReferrerButton title="Publish this star drawing in a website" style='opacity:.3;' onClick=publishCurrentDrawing()>publish</button> <img onClick=openPublishHelp() title="Help: Publish star drawing" src="../Images/help.png" width=20 height=20 />
-   </span>
+           &nbsp;  <button onmouseover=this.style.borderColor="lime" onmouseout=this.style.borderColor=''  id=openReferrerButton title="Publish this star drawing in a website" style='opacity:.3;' onClick=publishCurrentDrawing()>publish</button> <img onClick=openPublishHelp() title="Help: Publish star drawing" src="../Images/help.png" width=20 height=20 />
+        </span>
      </nobr>
     </div>
 
@@ -82,19 +96,6 @@
 </div>
 
 <!--IFRAMES-->
-<div id=constellationFrameDiv  style='visibility:hidden;padding:10px;position:absolute;overflow:hidden;height:1px;width:1px'><iframe id=constellationFrame style='border-width:0px;height:1px;overflow:hidden;' scrolling='no' frameborder='0' ></iframe></div>
-	<script charset="UTF-8" type="text/javascript" src="../js00_utility/helperFuncts.js"></script>
-	<script charset="UTF-8" type="text/javascript" src="../js00_utility/select.js"></script>
-    <script charset="UTF-8" type="text/javascript" src="../js01_start/initMap.js"></script>
-    <script charset="UTF-8" type="text/javascript" src="../js01_start/sunPosition.js"></script>
-    <script charset="UTF-8" type="text/javascript" src="../js02_location/cursorLoc.js"></script>
-    <script charset="UTF-8" type="text/javascript" src="../js02_location/placeBounds.js"></script>
-    <script charset="UTF-8" type="text/javascript" src="../js04_stars/stars.js"></script>
-    <script charset="UTF-8" type="text/javascript" src="../js04_stars/distance.js"></script>
-    <script charset="UTF-8" type="text/javascript" src="../Constellation/constellation.js"></script>
-    <script charset="UTF-8" type="text/javascript" src="RegisterDrawing/registerDrawing.js"></script>
-	<script charset="UTF-8" type="text/javascript" src="../AddElem/loadAddedElems.js"></script>
-    <script charset="UTF-8" type="text/javascript" src="../Exoplanet/exoplanet.js"></script>
 <div id=beginFrameDiv  style='visibility:hidden;padding:10px;position:absolute;top:0px;overflow:hidden;height:1px;width:1px'><iframe id=beginFrame style='border-width:0px;height:1px;overflow:hidden;' scrolling='no' frameborder='0' ></iframe></div>
     <script charset="UTF-8" type="text/javascript" src="../Begin/showStar.js"></script>
     <script charset="UTF-8" type="text/javascript" src="../Begin/previewHostStar.js"></script>
@@ -146,7 +147,7 @@
     <table style='width:100%;background-color:#004953;'>
     <tr style='color:white;font-weight:bold;'><td style='width:90%;background-color:#004953;' align=center>Publish This Star Drawing</td><td align=right> <button onClick=closePublishStarDrawing()  style='color:white;font-weight:bold;background-color:#004953;'>X</button></td></tr>
     </table> <p></p>
-  Copy the following as your web page or iframe source:
+  Copy (Ctrl-C) the following as your web page or iframe source:
  <textarea id=publishValue style=width:100%;height:140px;></textarea>
 
 </div>
@@ -160,11 +161,12 @@
     <table style=color:black;width:100%;background:violet;border-radius:8px;>
     <tr>
         <td align=left><div id=raDecDiv style='font-size:80%;padding:2px;'><span style="border-radius:3px;padding:2px;"><input type="checkbox"  title="Check to set your R.A./Dec. point"  id=setRaDecCheck onClick=setRaDecChecked()  /></span> R.A.:<input placeholder="Insert R.A. value" id=raValue type="text" style='width:120px'/>&deg;   Dec.:<input placeholder="Insert DEC. value" id=decValue type="text" style='width:120px'/>&deg;  <button disabled id=setRaDecButton onClick=setRaDecButtonClicked()  title="Show your R.A./Dec. point" >Set</button> <img align=top onclick=openRaDecHelp() title="Set R.A./DEC. for a circle, ellipse, icon, or symbol" src="../Images/help.png" align=center width=20 height=20 alt="" /></div></td>
-        <td align=center style=width:30%>
+     <td align=center>
 
              <div id=saveDrawingButtonDiv style=visibility:hidden ><button onmouseover=this.style.borderColor="lime" onmouseout=this.style.borderColor=''  id=saveDrawingButton title="Save this view of your drawing" style='background-color:gainsboro;font-weight:bold;font-family:Verdana;color:#004953;' onClick=saveDrawingView()>Save View</button> <img onclick=openSaveDrawingViewHelp() align=top title="Save this drawing view" src="../Images/help.png" align=center width=20 height=20 alt="" /><span  id=saveDefaultViewSpan></span></div>
 
         </td>
+
 
     <td align=right id=measureTd  ><input title="Measure the distance between a clicked point and the cursor" type="checkbox" id=measureDistanceCheck onClick=measureDistanceChecked() />:Measure Distances <img align=top onclick=openMeasureHelp() title="Measure distance and location" src="../Images/help.png" align=center width=20 height=20 alt="" /></td></tr>
     </table>
@@ -179,9 +181,8 @@
     <table style='width:100%;background-color:#004953;'>
     <tr style='color:white;font-weight:bold;'><td style='width:90%;background-color:#004953;' align=center>Begin Your Star Drawing</td><td align=right> <button onClick=closeBeginHelp()  style='color:white;font-weight:bold;background-color:#004953;'>X</button></td></tr>
     </table> <p></p>
-    <i>Exoplanet(s) Host Star </i> - (Required) The drop-down menu lists stars that currently have confirmed exoplanets.  These host stars and exoplanets data are contained in <br><a href="http://phl.upr.edu/projects/habitable-exoplanets-catalog/data/database" target=_blank>PHL's Exoplanets Catalog</a>.
-
-     <p></p><button>Adjust Universe</button> - Select this to automatically zoom into the center of constellation that contains the host star. Then zoom/rotate the universe
+    <i>Exoplanet(s) Host Star </i> - The drop-down menu lists stars that currently have confirmed exoplanets.  These host stars and exoplanets data are contained in <br><a href="http://phl.upr.edu/projects/habitable-exoplanets-catalog/data/database" target=_blank>PHL's Exoplanets Catalog</a>.
+     <p></p><button style=border:0px; >Adjust Universe</button> - This  automatically zooms into the center of constellation that contains the host star. Then zoom/rotate the universe
      so the host star is centered at the <span style=color:red>cross hairs</span>, and it's 'BOX'  fills your screen.
 
 
@@ -242,11 +243,13 @@
     You may then add svg elements at the surface of your star.
 
 </div>
+
+
 <div title="Click to close" onClick=closePreviewHostHelp() id=previewHostHelpDiv style='cursor:default;border-radius:8px;padding:10px;border:3px solid #004953;background:white;display:none;position:absolute;top:60px;left:50px;width:400px;height:1px;overflow:auto' >
     <table style='width:100%;background-color:#004953;'>
     <tr style='color:white;font-weight:bold;'><td style='width:90%;background-color:#004953;' align=center>Adjusting the Universe</td><td align=right> <button onClick=closePreviewHostHelp()  style='color:white;font-weight:bold;background-color:#004953;'>X</button></td></tr>
     </table> <p></p>
-    After the Host Star is selected, click the <button>Adjust Universe</button>. This will display
+    After the Host Star is selected,  the <button style=border:0px; >Adjusting Universe...</button> is active. This will display
     the selected star enclosed within its BOX, and positioned within its constellation. A dashed line connects the earth to the selected star:
     <center><img src="../Images/hostCon.png" alt="" /></center>
 <p></p>Then zoom/rotate the universe
@@ -265,7 +268,22 @@
     This stores the drawing's view that is displayed for this drawing. It is also the view shown when the drawing is published.<p></p>
     After your add elements to your drawing, you can send the current view to the library.
     You may do this at any time you want to change the view.
-    </div>
+    <p></p><center>
+  <div  style='width:300px;background-color:white;border-radius:4px;border:1px solid black' valign=bottom align=center>Resize Planets
+        <button   style='height:25px;width:25px;padding:0px'><img width=20 height=20 src="../Images/minusRound.png" /></button>
+        <select title="size toggle value"  >
+        <option>.5</option>
+        <option>1</option>
+        <option>2</option>
+        <option selected>5</option>
+        <option>10</option>
+        </select>
+        <button   style='height:25px;width:25px;padding:0px'><img width=20 height=20 src="../Images/plusRound.png" /></button>
+        &nbsp;<input  disabled type=text style='width:40px;' value=0 />
+    </div></center>
+         Planet sizes can also be adjusted to be included in your saved view.
+
+ </div>
 <div title="Click to close" onClick=closePublishHelp() id=publishHelpDiv style='cursor:default;border-radius:8px;padding:10px;border:3px solid #004953;background:white;display:none;position:absolute;top:60px;left:50px;width:400px;height:1px;overflow:hidden' >
     <table style='width:100%;background-color:#004953;'>
     <tr style='color:white;font-weight:bold;'><td style='width:90%;background-color:#004953;' align=center>Publish A Drawing</td><td align=right> <button onClick=closePublishHelp()  style='color:white;font-weight:bold;background-color:#004953;'>X</button></td></tr>
@@ -388,57 +406,65 @@ Select the <button>publish</button> to see the source for this star drawing's we
 </table>
 
 </div>
+     <div id=planetButtonDiv  style='position:absolute;top:40px;left:20px;'> <button  style=visibility:visible;font-size:120%;background:white;font-weight:bold  id=planetOpenButton title="View/Draw planets" onClick=openPlanet()>Planets</button></div>
 
 <div id=svgStarsDiv style=position:absolute;top:0px;left:20px;><b><span style=font-family:timesnewroman;font-size:130%;color:red>SVG </span><span style=font-size:120%;color:blue><i>Stars</i></span></b> <img onClick=openAbout() title="About SVG-Stars" src="../Images/help.png" width=20 height=20 /></div>
-<div style=visibility:hidden;overflow:hidden;width:1px;height:1px>
-<svg>
-<defs id=habDefs>
-<radialGradient id="mesoplanet" gradientUnits="objectBoundingBox"
-fx="30%" fy="30%">
-<stop offset="0%"   style="stop-color:#FFFFFF"/>
-<stop offset="40%"  style="stop-color:#0000AA"/>
-<stop offset="100%" style="stop-color:#000077"/>
-</radialGradient>
-<radialGradient id="psychroplanet" gradientUnits="objectBoundingBox"
-fx="30%" fy="30%">
-<stop offset="0%"   style="stop-color:#FFFFFF"/>
-<stop offset="40%"  style="stop-color:#37A1E7"/>
-<stop offset="100%" style="stop-color:#378BC7"/>
-</radialGradient>
-<radialGradient id="non-habitable" gradientUnits="objectBoundingBox"
-fx="30%" fy="30%">
-<stop offset="0%"   style="stop-color:#FFFFFF"/>
-<stop offset="40%"  style="stop-color:#242729"/>
-<stop offset="100%" style="stop-color:#24282A"/>
-</radialGradient>
-<radialGradient id="hypopsychroplanet" gradientUnits="objectBoundingBox"
-fx="30%" fy="30%">
-<stop offset="0%"   style="stop-color:#FFFFFF"/>
-<stop offset="40%"  style="stop-color:#AC49E3"/>
-<stop offset="100%" style="stop-color:#9D42D0"/>
-</radialGradient>
-<radialGradient id="unknown" gradientUnits="objectBoundingBox"
-fx="30%" fy="30%">
-<stop offset="0%"   style="stop-color:#FFFFFF"/>
-<stop offset="40%"  style="stop-color:#959595"/>
-<stop offset="100%" style="stop-color:#7C7C7C"/>
-</radialGradient>
-<radialGradient id="thermoplanet" gradientUnits="objectBoundingBox"
-fx="30%" fy="30%">
-<stop offset="0%"   style="stop-color:#FFFFFF"/>
-<stop offset="40%"  style="stop-color:#CA0A14"/>
-<stop offset="100%" style="stop-color:#A2030C"/>
-</radialGradient>
-<radialGradient id="hypothermoplanet" gradientUnits="objectBoundingBox"
-fx="30%" fy="30%">
-<stop offset="0%"   style="stop-color:#FFFFFF"/>
-<stop offset="40%"  style="stop-color:#F08F27"/>
-<stop offset="100%" style="stop-color:#DB8226"/>
-</radialGradient>
-</defs></svg>
+<div id=planetsFrameDiv  style='visibility:hidden;padding:0px;position:absolute;top:0px;left:0px;overflow:hidden;height:1px;width:1px'><iframe id=planetsFrame style='border-width:0px'   width=0 height=0 scrolling='no' frameborder='0' ></iframe></div>
+    <script charset="UTF-8" type="text/javascript" src="../zPLANETS/planets.js"></script>
 
+ <div id=customSortDiv style='height:1px;overflow:auto;background:white;border-radius:8px;padding:10px;border:1px solid;black;position:absolute;top:30px;left:30px;visibility:hidden'>
+    <table style=width:100%;background:#004953;color:white;font-weight:bold><tr><td style=width:90% align=center>Custom Sort </td><td align=right><button onmouseover=this.style.background='red'  onmouseout=this.style.background=''  onclick=closeCustomSortDiv()>X</button></td></tr></table>
+<table id=sortStarTable  style=background:gold;width:100%;border-collapse:collapse border=1 >
+<tr style=font-weight:bold ><td   colspan=2 align=center>Host Star Sort</td></tr>
+<tr><td>Henry Draper Catalog</td><td id=S_NameHD ><input onclick=sortStarOn("S_NameHD") type="radio" name=sortRadio /></td></tr>
+<tr><td>Hipparchus Catalog</td><td id=S_NameHIP ><input onclick=sortStarOn("S_NameHIP") type="radio" name=sortRadio /></td></tr>
+<tr><td>Mass (SU)</td><td id=S_Mass ><input onclick=sortStarOn("S_Mass") type="radio" name=sortRadio /></td></tr>
+<tr><td>Radius (SU)</td><td id=S_Radius ><input onclick=sortStarOn("S_Radius") type="radio" name=sortRadio /></td></tr>
+<tr><td>Effective temperature (SU)</td><td id=S_Teff ><input onclick=sortStarOn("S_Teff") type="radio" name=sortRadio /></td></tr>
+<tr><td>Luminosity (SU)</td><td id=S_Luminosity ><input onclick=sortStarOn("S_Luminosity") type="radio" name=sortRadio /></td></tr>
+<tr><td>Iron to hydrogen ratio [Fe/H]</td><td id=S_FeH ><input onclick=sortStarOn("S_FeH") type="radio" name=sortRadio /></td></tr>
+<tr><td>Age (Gyrs)</td><td id=S_Age ><input onclick=sortStarOn("S_Age") type="radio" name=sortRadio /></td></tr>
+<tr><td>Visual magnitude from Earth</td><td id=S_ApparMag ><input onclick=sortStarOn("S_ApparMag") type="radio" name=sortRadio /></td></tr>
+<tr><td>Distance from Earth (ly)</td><td id=S_Distance ><input onclick=sortStarOn("S_Distance") type="radio" name=sortRadio /></td></tr>
+<tr><td>Right ascension (deg.)</td><td id=S_RA ><input onclick=sortStarOn("S_RA") type="radio" name=sortRadio /></td></tr>
+<tr><td>Declination (deg.)</td><td id=S_DEC ><input onclick=sortStarOn("S_DEC") type="radio" name=sortRadio /></td></tr>
+<tr><td>Magnitude from planet</td><td id=S_MagfromPlanet ><input onclick=sortStarOn("S_MagfromPlanet") type="radio" name=sortRadio /></td></tr>
+<tr><td>Apparent size from planet (deg.)</td><td id=S_SizefromPlanet ><input onclick=sortStarOn("S_SizefromPlanet") type="radio" name=sortRadio /></td></tr>
+<tr><td>Number of planets</td><td id=S_No_Planets ><input onclick=sortStarOn("S_No_Planets") type="radio" name=sortRadio /></td></tr>
+<tr><td>Planets in the habitable zone</td><td id=S_No_PlanetsHZ ><input onclick=sortStarOn("S_No_PlanetsHZ") type="radio" name=sortRadio /></td></tr>
+<tr><td>Inner edge of habitable zone.  (AU)</td><td id=S_HabZoneMin ><input onclick=sortStarOn("S_HabZoneMin") type="radio" name=sortRadio /></td></tr>
+<tr><td>Outer edge of habitable zone  (AU)</td><td id=S_HabZoneMax ><input onclick=sortStarOn("S_HabZoneMax") type="radio" name=sortRadio /></td></tr>
+</table>
+<table id=exoplanetTable style=background:honeydew;width:100%;border-collapse:collapse border=1 >
+     <tr style=font-weight:bold align=center><td colspan=2><b>Exoplanet Sort</b></td></tr>
+<tr><td>Object of Interest (KOI)</td><td id=P_NameKOI ><input onclick=sortPlanetOn("P_NameKOI") type="radio" name=sortRadio /></td></tr>
+<tr><td>Minimum mass (EU)</td><td id=P_MinMass ><input onclick=sortPlanetOn("P_MinMass") type="radio" name=sortRadio /></td></tr>
+<tr><td>Mass (EU)</td><td id=P_Mass ><input onclick=sortPlanetOn("P_Mass") type="radio" name=sortRadio /></td></tr>
+<tr><td>Maximum mass (EU)</td><td id=P_MaxMass ><input onclick=sortPlanetOn("P_MaxMass") type="radio" name=sortRadio /></td></tr>
+<tr><td>Radius (EU)</td><td id=P_Radius ><input onclick=sortPlanetOn("P_Radius") type="radio" name=sortRadio /></td></tr>
+<tr><td>Density (EU)</td><td id=P_Density ><input onclick=sortPlanetOn("P_Density") type="radio" name=sortRadio /></td></tr>
+<tr><td>Gravity (EU)</td><td id=P_Gravity ><input onclick=sortPlanetOn("P_Gravity") type="radio" name=sortRadio /></td></tr>
+<tr><td>Escape velocity (EU)</td><td id=P_EscVel ><input onclick=sortPlanetOn("P_EscVel") type="radio" name=sortRadio /></td></tr>
+<tr><td>Minimum stellar flux (EU)</td><td id=P_SFluxMin ><input onclick=sortPlanetOn("P_SFluxMin") type="radio" name=sortRadio /></td></tr>
+<tr><td>Mean stellar flux (EU)</td><td id=P_SFluxMean ><input onclick=sortPlanetOn("P_SFluxMean") type="radio" name=sortRadio /></td></tr>
+<tr><td>Maximum stellar flux (EU)</td><td id=P_SFluxMax><input onclick=sortPlanetOn("P_SFluxMax") type="radio" name=sortRadio /></td></tr>
+<tr><td>Minimum equilibrium temperature (K)</td><td id=P_TeqMin ><input onclick=sortPlanetOn("P_TeqMin") type="radio" name=sortRadio /></td></tr>
+<tr><td>Mean equilibrium temperature (K)</td><td id=P_TeqMean ><input onclick=sortPlanetOn("P_TeqMean") type="radio" name=sortRadio /></td></tr>
+<tr><td>Maximum equilibrium temperature (K)</td><td id=P_TeqMax ><input onclick=sortPlanetOn("P_TeqMax") type="radio" name=sortRadio /></td></tr>
+<tr><td>Minimum surface temperature (K)</td><td id=P_TsMin ><input onclick=sortPlanetOn("P_TsMin") type="radio" name=sortRadio /></td></tr>
+<tr><td>Mean surface temperature (K)</td><td id=P_TsMean ><input onclick=sortPlanetOn("P_TsMean") type="radio" name=sortRadio /></td></tr>
+<tr><td>Maximum surface temperature (K)</td><td id=P_TsMax ><input onclick=sortPlanetOn("P_TsMax") type="radio" name=sortRadio /></td></tr>
+<tr><td>Surface pressure (EU)</td><td id=P_SurfPress ><input onclick=sortPlanetOn("P_SurfPress") type="radio" name=sortRadio /></td></tr>
+<tr><td>Magnitude</td><td id=P_Mag ><input onclick=sortPlanetOn("P_Mag") type="radio" name=sortRadio /></td></tr>
+<tr><td>Apparent size (deg.)</td><td id=P_ApparSize ><input onclick=sortPlanetOn("P_ApparSize") type="radio" name=sortRadio /></td></tr>
+<tr><td>Period days</td><td id=P_Period ><input onclick=sortPlanetOn("P_Period") type="radio" name=sortRadio /></td></tr>
+<tr><td>Semi major axis  (AU)</td><td id=P_SemMajorAxis ><input onclick=sortPlanetOn("P_SemMajorAxis") type="radio" name=sortRadio /></td></tr>
+<tr><td>Eccentricity</td><td id=P_Eccentricity ><input onclick=sortPlanetOn("P_Eccentricity") type="radio" name=sortRadio /></td></tr>
+<tr><td>Mean distance from the star (AU)</td><td id=P_MeanDistance ><input onclick=sortPlanetOn("P_MeanDistance") type="radio" name=sortRadio /></td></tr>
+<tr><td>Inclination (deg.)</td><td id=P_Inclination ><input onclick=sortPlanetOn("P_Inclination") type="radio" name=sortRadio /></td></tr>
+<tr><td>Omega (deg.)</td><td id=P_Omega ><input onclick=sortPlanetOn("P_Omega") type="radio" name=sortRadio /></td></tr>
+</table>
 </div>
-
 </body>
 <script>
 //<textarea name="" id="myValue" style='width:550px;height:250px;position:absolute;top:50px;left:800px;'></textarea>

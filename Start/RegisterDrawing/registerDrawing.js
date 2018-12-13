@@ -79,7 +79,7 @@ function sendDrawingRegistration()
                     setCookie(FOLDER+"_SVGStars_DrawingDescription"+cookieSetDate,DrawingDescription,180)
 
 
-
+                   PrevZoomInteger=0
                     loginToDrawing()
                     RegisterOK = true
 
