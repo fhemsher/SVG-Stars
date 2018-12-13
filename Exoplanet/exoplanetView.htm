@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+  <title>Exoplanet View</title>
+</head>
+
+<body  style='background-color:white;font-family:arial;'>
+    <div id=containerDiv style='position:absolute;top:0px;left:0px'>
+<table style='width:100%'><tr><td style='width:85%' align=center><b>Exoplanet(s) For this Star</b></td><td align=left><button onmouseover=this.style.backgroundColor="red"  onmouseout=this.style.backgroundColor=""  onclick=parent.closeExoplanetView()>X</button></td></tr></table>
+<table id=exoViewTable style='background-color:gainsboro;font-size:80%'></table>
+</div>
+</body>
+ <script>
+function sendSize()
+{
+   var width=containerDiv.scrollWidth+30
+   var height=containerDiv.scrollHeight+30
+   parent.sizeFrame('exoplanetView',width,height)
+}
+</script>
+
+</html>

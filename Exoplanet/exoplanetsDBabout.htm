@@ -1,0 +1,380 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+  <title>Exoplanet DB Ref</title>
+</head>
+
+<body style='font-family:arial;'>
+<center><h2>Exoplanet Data</h2></center>
+<TABLE style='width:100%' >
+ <TR valign=top ><TD style='width:50%' >
+<table  style='background-color:gainsboro' cellspacing="3" cellpadding="1">
+
+    <tr style='background-color:white' id="pl_hostname">
+      <td>Host Star Name</td>
+      <td>
+        Stellar name most commonly used in the literature.</td>
+    </tr>
+
+        <tr style='background-color:white' id="hd_name">
+      <td>HD Name</td>
+      <td>
+        Name of the star as given by the Henry Draper Catalog.</td>
+  </tr>
+    <tr style='background-color:white' id="hip_name">
+      <td>HIP Name</td>
+      <td>
+        Name of the star as given by the Hipparcos Catalog.</td>
+    </tr>
+
+
+      <tr style='background-color:white' id="pl_letter">
+      <td>Planet Letter</td>
+      <td>
+        Letter assigned to the planetary component of a planetary system.</td>
+    </tr>
+      <tr style='background-color:white' id="pl_discmethod">
+     <td>Discovery Method</td>
+     <td>
+       Method by which the planet was first identified.</td>
+    </tr>
+    <tr style='background-color:white' id="pl_pnum">
+      <td>Number of Planets in System</td>
+      <td>
+        Number of planets in the planetary system.</td>
+    </tr>
+      <tr style='background-color:white' id="pl_orbper">
+      <td>Orbital Period (days)</td>
+      <td>
+        Time the planet takes to make a complete
+        orbit around the host star or system.</td>
+    </tr>
+     <tr style='background-color:white' id="pl_orbsmax">
+      <td>Orbit Semi-Major Axis (AU)</td>
+      <td>
+The longest diameter of an elliptic orbit,
+or for directly imaged planets, the projected
+separation in the plane of the sky.</td>
+    </tr>
+     <tr style='background-color:white' id="pl_orbeccen">
+       <td>Eccentricity</td>
+       <td>
+         Amount by which the orbit of the planet
+         deviates from a perfect circle.</td>
+     </tr>
+       <tr style='background-color:white' id="pl_orbincl">
+         <td>Inclination (deg)</td>
+         <td>
+Angular distance of the orbital
+plane from the line of sight.</td>
+
+       </tr>
+
+        <tr style='background-color:white' id="pl_bmassj">
+         <td>Planet Mass or M*sin(i) [Jupiter mass]</td>
+         <td>
+Best planet  mass measurement in units of masses of Jupiter.
+Either Mass, M*sin(i)/sin(i), or M*sin(i). See provenance
+for source of the measurement.</td>
+       </tr>
+
+         <tr style='background-color:white' id="pl_bmassprov">
+         <td>Planet Mass or M*sin(i) Provenance</td>
+         <td>
+Provenance of the measurement of the best mass.
+Options are: Mass, Msin(i)/sin(i), and Msini.</td>
+       </tr>
+
+
+     <tr style='background-color:white' id="pl_radj">
+      <td>Planet Radius (Jupiter radii)</td>
+      <td>
+        Length of a line segment from the center of the planet
+        to its surface, measured in units of radius of Jupiter.<br /></td>
+    </tr>
+      <tr style='background-color:white' id="pl_dens">
+      <td>Planet Density (g/cm**3)</td>
+      <td>
+        Amount of mass per unit of volume of the planet.</td>
+
+    </tr>
+
+      <tr style='background-color:white' id="pl_ttvflag">
+        <td>TTV Flag</td>
+        <td>
+          Flag indicating if the planet orbit exhibits
+          transit timing variations from another planet
+          in the system (1=yes, 0=no).
+      </tr>
+     <tr style='background-color:white' id="pl_kepflag">
+      <td>Kepler Field Flag</td>
+      <td>
+        Flag indicating if the planetary system
+        signature is present in data taken with
+        the Kepler mission (1=yes, 0=no).<br /></td>
+    </tr>
+
+      <tr style='background-color:white' id="pl_k2flag">
+        <td>K2 Mission Flag</td>
+        <td> Flag indicating if the planetary system
+        signature is present in data taken with
+        the K2 Mission (1=yes, 0=no).<br /></td>
+      </tr>
+      <tr style='background-color:white' id="pl_nnotes">
+      <td>Number of Notes</td>
+      <td>
+Number of Notes associated with the planet.
+View all notes in the Confirmed Planet Overview page.</td>
+    </tr>
+
+
+   <tr style='background-color:white' id="ra_str">
+    <td>RA (sexagesimal)</td>
+    <td>
+      Right Ascension of the planetary system in sexagesimal format. </td>
+  </tr>
+  <tr style='background-color:white' id="dec_str">
+    <td>Dec (sexagesimal) </td>
+    <td>
+      Declination of the planetary system in sexagesimal notation.</td>
+ </tr>
+     <tr style='background-color:white' id="ra">
+      <td>RA (decimal degrees)</td>
+      <td>
+        Right Ascension of the planetary system in decimal degrees.</td>
+    </tr>
+    <tr style='background-color:white' id="dec">
+      <td>Dec (decimal degrees)</td>
+      <td>
+        Declination of the planetary system in decimal degrees.</td>
+    </tr>
+  <tr style='background-color:white' id="st_dist">
+      <td>Distance (pc)</td>
+      <td>
+        Distance to the planetary system in units of parsecs.</td>
+
+    </tr>
+   <tr style='background-color:white' id="st_optmag">
+      <td>Optical Magnitude [mag]</td>
+      <td>
+Brightness of the host star as measured using
+the V (Johnson) or the Kepler-band in units of
+magnitudes.</td>
+    </tr>
+
+
+
+       <tr style='background-color:white' id="st_optband">
+      <td>Optical Magnitude Band</td>
+      <td>
+Band corresponding to the Optical Magnitude.
+Options are: V (Johnson) or Kepler-band.</td>
+    </tr>
+
+      <tr style='background-color:white' id="st_teff">
+      <td>Effective  Temperature (K)</td>
+      <td>
+        Temperature of the star as modeled by a
+        black body emitting the same total amount
+        of electromagnetic radiation.<br /></td>
+    </tr>
+   <tr style='background-color:white' id="st_mass">
+      <td>Stellar Mass (solar mass)</td>
+      <td>
+        Amount of matter contained in the star,
+        measured in units of masses of the Sun.</td>
+    </tr>
+    <tr style='background-color:white' id="st_rad">
+      <td>Stellar Radius (solar radii)</td>
+      <td>
+        Length of a line segment from the center of the star
+        to its surface, measured in units of radius of the Sun. <br /></td>
+    </tr>
+
+         <tr style='background-color:white' id="rowupdate">
+       <td>Date of Last Update</td>
+       <td>
+Date of last update of the planet parameters.</td>
+    </tr>
+    </table>
+</TD>
+<TD style='width:50%' >
+
+<table style='background-color:gainsboro' cellspacing="3" cellpadding="1">
+
+     <tr style='background-color:white'>
+      <td>RA (hours)</td>
+      <td>
+Right Ascension of the planetary system in decimal hours.</td>
+    </tr>
+     <tr style='background-color:white' id="st_glon">
+      <td>Galactic Longitude (deg)</td>
+      <td>
+Galactic longitude of the planetary
+system in units of decimal degrees.</td>
+    </tr>
+    <tr style='background-color:white' id="st_glat">
+      <td>Galactic Latitude (deg)</td>
+      <td>
+Galactic latitude of the planetary
+system in units of decimal degrees.</td>
+    </tr>
+    <tr style='background-color:white' id="st_elon">
+      <td>Ecliptic Longitude (deg)</td>
+      <td>
+Ecliptic longitude of the planetary
+system in units of decimal degrees.</td>
+    </tr>
+    <tr style='background-color:white' id="st_elat">
+      <td>Ecliptic Latitude (deg)</td>
+      <td>
+Ecliptic latitude of the planetary
+system in units of decimal degrees.</td>
+    </tr>
+     <tr style='background-color:white' id="st_plx">
+      <td> Parallax (mas)</td>
+      <td>
+Difference in the angular position of a star
+as measured at two opposite positions within
+the Earth's orbit.</td>
+    </tr>
+      <tr style='background-color:white' id="st_pmra">
+      <td> RA Proper Motion (mas/yr)</td>
+      <td>
+Angular change in right ascension over time as
+seen from the center of mass of the Solar System. </td>
+    </tr>
+     <tr style='background-color:white' id="st_pmdec">
+      <td>Dec Proper Motion (mas/yr)</td>
+      <td>
+Angular change in declination over time as seen
+from the center of mass of the Solar System.</td>
+    </tr>
+    <tr style='background-color:white' id="st_pm">
+      <td>Total Proper Motion  (mas/yr)</td>
+      <td>
+Angular change in position over time as seen
+from the center of mass of the Solar System.</td>
+    </tr>
+
+    <tr style='background-color:white' id="st_radv">
+      <td> Radial Velocity (km/sec)</td>
+      <td>
+Velocity of the star in the
+direction of the line of sight.</td>
+    </tr>
+
+     <tr style='background-color:white' id="st_st_spstr">
+      <td> Spectral Type </td>
+      <td>
+Classification of the star based
+on their spectral characteristics
+following the Morgan-Keenan system.</td>
+    </tr>
+      <tr style='background-color:white' id="st_logg">
+      <td>Stellar Surface Gravity</td>
+      <td>
+Gravitational acceleration experienced at the stellar surface.</td>
+   </tr>
+
+   <tr style='background-color:white' id="st_lum">
+      <td>Stellar Luminosity [log(solar)]</td>
+      <td>
+Amount of energy emitted by a star per unit
+time, measured in units of solar luminosities.</td>
+    </tr>
+      <tr style='background-color:white' id="st_dens">
+      <td>Stellar Density [g/cm**3]</td>
+      <td>
+Amount of mass per unit of volume of the star.</td>
+    </tr>
+       <tr style='background-color:white' id="st_metfe">
+      <td>Stellar Metallicity (dex)</td>
+      <td>
+Measurement of the metal content
+of the photosphere of the star as
+compared to the hydrogen content.</td>
+    </tr>
+     <tr style='background-color:white' id="st_metratio">
+      <td>Metallicity Ratio</td>
+      <td>
+Ratio for the Metallicity Value
+([Fe/H] denotes iron abundance,
+[M/H] refers to a general metal content)</td>
+    </tr>
+
+  <tr style='background-color:white' id="st_age">
+      <td>Stellar Age [Gyr]</td>
+      <td>
+The age of the host star.</td>
+    </tr>
+
+    <tr style='background-color:white' id="st_vsini">
+      <td>Rotational Velocity v*sin(i) [km/s]</td>
+      <td>
+Rotational velocity at the equator
+of the star multiplied by the sine
+of the inclination.</td>
+    </tr>
+
+    <tr style='background-color:white' id="st_acts">
+      <td> Stellar Activity Index (S-Index)</td>
+      <td>
+Chromospheric activity as measured by the
+S-index (ratio of the emission of the H
+and K Ca lines to that in nearby continuum).</td>
+    </tr>
+    <tr style='background-color:white' id="st_actr">
+      <td> Stellar Activity Log (R'HK) </td>
+      <td>
+Chromospheric activity as measured by
+the log(R' HK) index, with is based
+on the S-index, but excludes the
+photospheric component in the Ca lines.</td>
+    </tr>
+     <tr style='background-color:white' id="st_actlx">
+      <td> x-ray Activity (Lx)&quot;</td>
+      <td>
+Stellar activity as measured by
+the total luminosity in X-rays.</td>
+    </tr>
+
+     <tr style='background-color:white' id="swasp_id">
+       <td>SWASP Identifier</td>
+       <td>
+Name of the star as given by the SuperWASP
+(Wide Angle Search for Planets) project.</td>
+     </tr>
+     <tr style='background-color:white' id="st_nts">
+      <td>Number of Time Series</td>
+      <td>
+Number of literature time series available
+for this star in the NASA Exoplanet Archive</td>
+    </tr>
+    <tr style='background-color:white' id="st_nplc">
+      <td>Number of Planet Transit Light Curves</td>
+      <td>
+Number of literature transit light curves available
+for this star in the NASA Exoplanet Archive.</td>
+    </tr>
+    <tr style='background-color:white' id="st_nglc">
+      <td>Number of General Light Curves</td>
+      <td>
+Number of Hipparcos light curves available
+for this star in the NASA Exoplanet Archive.</td>
+    </tr>
+    <tr style='background-color:white' id="st_nrvc">
+      <td>Number of Radial Velocity Time Series</td>
+      <td>
+Number of literature radial velocity curves available
+for this star in the NASA Exoplanet Archive.</td>
+    </tr>
+
+
+    </table>
+  </TD></TR></TABLE>
+</body>
+
+</html>
