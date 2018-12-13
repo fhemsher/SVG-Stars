@@ -7,7 +7,6 @@ function openBegin()
  zoomPresetDiv.style.visibility = "hidden"
      measureDiv.style.visibility="hidden"
 saveDrawingButtonDiv.style.visibility="hidden"
-
     celestialContainerDiv.style.width="60%"
     celestialContainerDiv.style.height="60%"
     celestialContainerDiv.style.left="35%"
@@ -38,6 +37,7 @@ saveDrawingButtonDiv.style.visibility="hidden"
 
 
      topNavDiv.style.display="none"
+      planetOpenButton.style.visibility="hidden"
 
 
 }
@@ -70,7 +70,7 @@ function closeBegin()
     BeginStar=false
     loadStars=true
 
-
+     planetOpenButton.style.visibility="visible"
 
 
     //stopCursorLoc()
@@ -309,7 +309,7 @@ if(Mobile==false)
   
     if(Mobile==false)
     topNavDiv.style.display="none"
-
+    planetOpenButton.style.visibility="hidden"
 }
 
 //---fired from iframe onload----
@@ -349,7 +349,7 @@ else if(document.getElementById("myDrawingNameSpan"))
 
  if(Mobile==false)
  {
-
+    planetOpenButton.style.visibility="visible"
  openAddIconButton.style.borderStyle=""
  openAddSymbolButton.style.borderStyle=""
  openAddCircleButton.style.borderStyle=""
@@ -388,6 +388,8 @@ function closeAllFrames()
 	{
      closeCurrentHelp()
     topNavDiv.style.display="block"
+    planetOpenButton.style.visibility="visible"
+
 	 openAddIconButton.style.borderStyle=""
 	 openAddSymbolButton.style.borderStyle=""
 	 openAddCircleButton.style.borderStyle=""

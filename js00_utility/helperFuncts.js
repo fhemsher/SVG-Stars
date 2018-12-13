@@ -78,3 +78,49 @@ function svg2Stng(svgElem)
  console.log(new XMLSerializer().serializeToString(svgElem))
 }
 
+//---except arc paths---
+function screenPath(path)
+{
+    var sCTM = path.getCTM()
+    var svgRoot = path.ownerSVGElement
+
+    var segList = path.pathSegList
+    var segs = segList.numberOfItems
+    //---change segObj values
+    for(var k = 0; k<segs; k++)
+    {
+        var segObj = segList.getItem(k)
+
+        if(segObj.x && segObj.y)
+        {
+            var mySVGPoint = svgRoot.createSVGPoint();
+            mySVGPoint.x = segObj.x
+            mySVGPoint.y = segObj.y
+            mySVGPointTrans = mySVGPoint.matrixTransform(sCTM)
+            segObj.x = mySVGPointTrans.x
+            segObj.y = mySVGPointTrans.y
+        }
+
+        if(segObj.x1 && segObj.y1)
+        {
+            var mySVGPoint1 = svgRoot.createSVGPoint();
+            mySVGPoint1.x = segObj.x1
+            mySVGPoint1.y = segObj.y1
+            mySVGPointTrans1 = mySVGPoint1.matrixTransform(sCTM)
+            segObj.x1 = mySVGPointTrans1.x
+            segObj.y1 = mySVGPointTrans1.y
+        }
+        if(segObj.x2 && segObj.y2)
+        {
+            var mySVGPoint2 = svgRoot.createSVGPoint();
+            mySVGPoint2.x = segObj.x2
+            mySVGPoint2.y = segObj.y2
+            mySVGPointTrans2 = mySVGPoint2.matrixTransform(sCTM)
+            segObj.x2 = mySVGPointTrans2.x
+            segObj.y2 = mySVGPointTrans2.y
+        }
+    }
+    //---force removal of transform--
+    path.setAttribute("transform", "")
+    path.removeAttribute("transform")
+}

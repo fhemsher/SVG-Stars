@@ -52,14 +52,17 @@ function printCookies(){
 
 }
 
-function deleteAllCookies() {
+function deleteAllStarCookies() {
     var cookies = document.cookie.split(";");
 
     for (var i = 0; i < cookies.length; i++) {
     	var cookie = cookies[i];
-    	var eqPos = cookie.indexOf("=");
-    	var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-    	document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        if(cookie.indexOf("_SVGStars_")!=-1)
+        {
+        	var eqPos = cookie.indexOf("=");
+        	var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        	document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        }
     }
 }
 
@@ -102,7 +105,7 @@ function mostRecentCookie(){
 	pCOOKIES = document.cookie.split('; ');
 	for(bb = 0; bb < pCOOKIES.length; bb++)
 	{
-	    if(pCOOKIES[bb].indexOf("Mobile")==-1)
+	    if(pCOOKIES[bb].indexOf("Mobile")==-1&&pCOOKIES[bb].indexOf("_SVGStars_")!=-1)
         {
     		NmeVal  = new Array();
     		NmeVal  = pCOOKIES[bb].split('=');
@@ -120,7 +123,7 @@ function mostRecentCookie(){
 /*--at next setcookies: remove the 3 cookies with the date equal setDate---
 
 */
-function removeFolderCookies()
+function removeStarFolderCookies()
 {
 
 

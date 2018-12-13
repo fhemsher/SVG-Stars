@@ -165,6 +165,8 @@ function initCelestialMap()
     celestialRedraw()
 
 }
+
+
 //==================Star Map=============================
 
 var StarSVG
@@ -437,6 +439,88 @@ feMerge.append("feMergeNode")
     .attr("width", "1")
     .attr("preserveAspectRatio", "none")
     .attr("xlink:href", "../About/Images/graticuleRework.svg")
+
+    var defs= StarSVG.append("defs")
+    .attr("id","habDefs")
+    var mesoplanetPatt = defs.append("pattern")
+    .attr("id", "mesoplanet")
+    .attr("height", "100%")
+    .attr("width", "100%")
+    .attr("patternContentUnits", "objectBoundingBox")
+    .append("image")
+    .attr("height", "1")
+    .attr("width", "1")
+    .attr("preserveAspectRatio", "none")
+    .attr("xlink:href", "../Images/mesoplanet.svg")
+
+    var psychroplanetPatt = defs.append("pattern")
+    .attr("id", "psychroplanet")
+    .attr("height", "100%")
+    .attr("width", "100%")
+    .attr("patternContentUnits", "objectBoundingBox")
+    .append("image")
+    .attr("height", "1")
+    .attr("width", "1")
+    .attr("preserveAspectRatio", "none")
+    .attr("xlink:href", "../Images/psychroplanet.svg")
+
+    var nonhabitablePatt = defs.append("pattern")
+    .attr("id", "non-habitable")
+    .attr("height", "100%")
+    .attr("width", "100%")
+    .attr("patternContentUnits", "objectBoundingBox")
+    .append("image")
+    .attr("height", "1")
+    .attr("width", "1")
+    .attr("preserveAspectRatio", "none")
+    .attr("xlink:href", "../Images/non-habitable.svg")
+
+    var hypopsychroplanetPatt = defs.append("pattern")
+    .attr("id", "hypopsychroplanet")
+    .attr("height", "100%")
+    .attr("width", "100%")
+    .attr("patternContentUnits", "objectBoundingBox")
+    .append("image")
+    .attr("height", "1")
+    .attr("width", "1")
+    .attr("preserveAspectRatio", "none")
+    .attr("xlink:href", "../Images/hypopsychroplanet.svg")
+
+    var unknownPatt = defs.append("pattern")
+    .attr("id", "unknown")
+    .attr("height", "100%")
+    .attr("width", "100%")
+    .attr("patternContentUnits", "objectBoundingBox")
+    .append("image")
+    .attr("height", "1")
+    .attr("width", "1")
+    .attr("preserveAspectRatio", "none")
+    .attr("xlink:href", "../Images/unknown.svg")
+
+    var thermoplanetPatt = defs.append("pattern")
+    .attr("id", "thermoplanet")
+    .attr("height", "100%")
+    .attr("width", "100%")
+    .attr("patternContentUnits", "objectBoundingBox")
+    .append("image")
+    .attr("height", "1")
+    .attr("width", "1")
+    .attr("preserveAspectRatio", "none")
+    .attr("xlink:href", "../Images/thermoplanet.svg")
+
+    var hypothermoplanetPatt = defs.append("pattern")
+    .attr("id", "hypothermoplanet")
+    .attr("height", "100%")
+    .attr("width", "100%")
+    .attr("patternContentUnits", "objectBoundingBox")
+    .append("image")
+    .attr("height", "1")
+    .attr("width", "1")
+    .attr("preserveAspectRatio", "none")
+    .attr("xlink:href", "../Images/hypothermoplanet.svg")
+
+
+
     CoronaBG=StarG.append("rect")
     .attr("id","coronaBG")
     .attr("x","-40")
@@ -595,7 +679,8 @@ feMerge.append("feMergeNode")
     .attr("pointer-events", "none")
     .attr("marker-end", "url(#distanceArrow)")
     .style("display", "none")
-      ImgDragArrow=StarSVG.append("image")
+
+    ImgDragArrow=StarSVG.append("image")
     .attr("id","imgDragArrow")
     .attr("href","../Images/ImgDragArrow.png")
     .attr("class","dragTargetObj")
@@ -664,6 +749,7 @@ function initMap()
    // getAddedStarData()
    getExoXml()
  
+  
 
         var lastLoginMS = mostRecentCookie()
 
@@ -698,7 +784,7 @@ function initMap()
                     loginToDrawing()
                      openOwnerDrawingsButton.disabled=false
                     openOwnerDrawingsButton.style.opacity=1
-                        removeFolderCookies()  
+                        removeStarFolderCookies()
                     break;
                 }
 

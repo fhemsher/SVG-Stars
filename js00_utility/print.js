@@ -1,19 +1,23 @@
+
 function beforePrint()
 {
-    blackboard.style.display="none"
-   measureDiv.style.visibility="hidden"
-   topNavDiv.style.visibility="hidden"
 
+    document.body.style.background="white"
+    commentDiv.style.visibility="hidden"
+    blackboard.style.display="none"
+    topNavDiv.style.display="none"
+    measureDiv.style.display="none"
+    zoomLevelDiv.style.visibility="hidden"
+    navTable.style.visibility="hidden"
     if(PrevZoomInteger>180)
     {
         PrimaryStarZone.attr("fill","none")
-        .attr("stroke","#9966CC")
-        .attr("stroke-width","8")
+
     }
     if(PrevZoomInteger>300)
     {
         PrimaryStarCorona.attr("fill","none")
-        .attr("stroke","gold")
+        .attr("stroke","black")
         .attr("stroke-width","3")
     }
 
@@ -21,16 +25,28 @@ function beforePrint()
 
 function afterPrint()
 {
-    blackboard.style.display="block"
 
+    document.body.style.background="#F0F8FF"
+    blackboard.style.display=""
+    measureDiv.style.display=""
+    navTable.style.visibility="visible"
+    topNavDiv.style.display=""
+    zoomLevelDiv.style.visibility="visible"
+
+
+    if(PrevZoomInteger>180)
+    {
         PrimaryStarZone.attr("fill","#9966CC")
         .attr("stroke","none")
-
-        PrimaryStarCorona.attr("fill","gold")
+        .attr("stroke-width",null)
+    }
+    if(PrevZoomInteger>300)
+    {
+        PrimaryStarCorona.attr("fill","white")
         .attr("stroke","none")
+        .attr("stroke-width",null)
+    }
 
-         measureDiv.style.visibility="hidden"
-   topNavDiv.style.visibility="hidden" 
 }
 //---Chrome Browser---
  if (window.matchMedia)
