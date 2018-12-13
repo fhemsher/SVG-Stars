@@ -53,7 +53,10 @@ function resetPath()
 
         if(document.getElementById("dragCircleG"))
     {
-        DragCircleG.attr("transform", null)
+                           if(domDrawX.parentNode==dragCircleG)
+                        planetViewG.insertBefore(domDrawX, dragDot)
+
+     DragCircleG.attr("transform", null)
         domActiveElemG.removeChild(document.getElementById("dragCircleG"))
         DragCircleG = null
     }
@@ -147,7 +150,14 @@ function closeDrawPath()
     if(document.getElementById("drawPathSmooth"))
         domActiveElemG.removeChild(document.getElementById("drawPathSmooth"))
         if(document.getElementById("dragCircleG"))
-        domActiveElemG.removeChild(document.getElementById("dragCircleG"))
+        {
+                            if(domDrawX.parentNode==dragCircleG)
+                        planetViewG.insertBefore(domDrawX, dragDot)
+
+            domActiveElemG.removeChild(document.getElementById("dragCircleG")) 
+
+        }
+
         if(document.getElementById("activeElem"))
         if(ActiveElemG.select("#activeElem"))
         domActiveElemG.removeChild(document.getElementById("activeElem"))
@@ -651,6 +661,8 @@ function finishDrawPath()
     finishedElem.style.cursor = "default"
 
     domAddPathG.appendChild(finishedElem)
+    console.log(domAddPathG)
+
     //---update d Celestial map with this path---
 
     domActiveElemG.removeAttribute("transform")

@@ -58,6 +58,8 @@ function resetPathEdit()
 
     if(document.getElementById("dragCircleG"))
     {
+                    if(domDrawX.parentNode==dragCircleG)
+                        starG.insertBefore(domDrawX, dragDot)
         domActiveElemG.removeChild(document.getElementById("dragCircleG"))
         DragCircleG = null
     }
@@ -148,7 +150,8 @@ function closeDrawPathEdit()
         domActiveElemG.removeChild(document.getElementById("drawPathSmooth"))
         if(document.getElementById("dragCircleG"))
     {
-        starG.insertBefore(domDrawX, dragDot)
+                    if(domDrawX.parentNode==dragCircleG)
+                        starG.insertBefore(domDrawX, dragDot)
         domActiveElemG.removeChild(document.getElementById("dragCircleG"))
 
     }
@@ -526,6 +529,8 @@ function finishDrawPathEdit()
     DrawPathEdit = false
     var elemObj = document.getElementById(DrawPathEditId)
     var finishedElem = activeElem.cloneNode(true)
+   
+
     if(DrawPathType=="basis")
     {
 

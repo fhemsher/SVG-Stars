@@ -8,8 +8,6 @@ function closeDrawCircle()
 
         var cw = addElemCircleCw
 
-
-
         if(EditCircle==true && CircleDeleted==false)
         {
             var elemObjEdit = document.getElementById(DrawCircleEditId)
@@ -97,7 +95,6 @@ function startCircleDraw()
             }
 
     }
-
 
 }
 
@@ -224,27 +221,25 @@ function finishDrawCircle()
 
                 finishedElem.setAttribute("class", "addElem")
 
+                finishedElem.setAttribute("createdBy", oEMAIL)
 
-                    finishedElem.setAttribute("createdBy", oEMAIL)
+                ActiveElem = null
+                activeElem = null
+                if(LatLngPntSet==true)
+            {
+                setRaDecCheck.checked = false
+                setRaDecChecked() //---turn off---
+            }
 
-                    ActiveElem = null
-                    activeElem = null
-                    if(LatLngPntSet==true)
-                {
-                    setRaDecCheck.checked = false
-                    setRaDecChecked() //---turn off---
-                }
+            // d3SVG.style("cursor", "default")
+            starSVG.setAttribute('onclick', "placeDrawCircle()") //---click to add more icons for this session---
+            DrawX.style("display", "none")
+            DragDot.style("visibility", "hidden")
+            starG.appendChild(dragDot)
+            cw.drawCircleFinishButton.disabled = true
+            cw.drawCircleCancelButton.disabled = true
 
-                // d3SVG.style("cursor", "default")
-                starSVG.setAttribute('onclick', "placeDrawCircle()") //---click to add more icons for this session---
-                DrawX.style("display", "none")
-                DragDot.style("visibility", "hidden")
-                starG.appendChild(dragDot)
-                cw.drawCircleFinishButton.disabled = true
-                cw.drawCircleCancelButton.disabled = true
-
-                commentDiv.style.visibility = "hidden"
-
+            commentDiv.style.visibility = "hidden"
 
             finishedElem.setAttribute("transform", StarPoint(ActiveLL)+"scale("+(StarView.k/StarScale)/ActiveScale+")")
 
@@ -254,7 +249,8 @@ function finishDrawCircle()
 }
 
 function cancelDrawCircle()
-{var cw = addElemCircleCw
+{
+    var cw = addElemCircleCw
     if(EditCircle==true)
         cancelEditCircle()
         else if(document.getElementById("activeElem"))
@@ -317,7 +313,6 @@ function editCircleDraw(elemObjEdit)
 
             DrawCircleEditId = elemObjEdit.getAttribute("id")//---used in cancel edit--
 
-
             ActiveElem = null
             activeElem = null
 
@@ -354,7 +349,6 @@ function setEditCircle()
     EditCircleObj.removeAttribute("onmouseover")
     EditCircleObj.removeAttribute("onmouseout")
     EditCircleObj.removeAttribute("ondblclick")
-
 
     commentDiv.style.visibility = "hidden"
 
@@ -453,7 +447,7 @@ function finishEditCircle()
         var radius = parseFloat(finishedElem.getAttribute("r"))
 
         finishedElem.setAttribute("r", radius)
-          var ll = ActiveLL
+        var ll = ActiveLL
         finishedElem.setAttribute("myScale", ActiveScale)
         finishedElem.setAttribute("ll0", ll[0])
         finishedElem.setAttribute("ll1", ll[1])
@@ -495,15 +489,13 @@ function finishEditCircle()
         finishedElem.style.cursor = "default"
         finishedElem.setAttribute("transform", StarPoint(ActiveLL)+"scale("+(StarView.k/StarScale)/ActiveScale+")")
 
+        finishedElem.setAttribute("ondblclick", "editCircleDraw("+DrawCircleEditId+")")
+        finishedElem.setAttribute("id", DrawCircleEditId)
+        domAddElemG.insertBefore(finishedElem, EditThisCircle)
+        domAddElemG.removeChild(EditThisCircle)
 
-            finishedElem.setAttribute("ondblclick", "editCircleDraw("+DrawCircleEditId+")")
-            finishedElem.setAttribute("id", DrawCircleEditId)
-            domAddElemG.insertBefore(finishedElem, EditThisCircle)
-            domAddElemG.removeChild(EditThisCircle)
-
-            UpdateThisCircle = finishedElem
-            updateCircle(DrawCircleEditId)
-
+        UpdateThisCircle = finishedElem
+        updateCircle(DrawCircleEditId)
 
         closeDrawCircle()
     }
@@ -586,10 +578,8 @@ function removeCurrentDrawCircle()
 
     var cw = addElemCircleCw
 
-
-
-        deleteDrawCircle(DrawCircleEditId)
-        closeDrawCircle()
+    deleteDrawCircle(DrawCircleEditId)
+    closeDrawCircle()
 
 }
 

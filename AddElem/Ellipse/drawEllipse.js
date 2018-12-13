@@ -10,7 +10,6 @@ function closeDrawEllipse()
         cw.adjustedRotateEllipseValue.value = 0
         var elemTimelinded = false
 
-
         if(EditEllipse==true && EllipseDeleted==false&&elemTimelinded==false)
         {
             var elemObjEdit = document.getElementById(DrawEllipseEditId)
@@ -46,7 +45,6 @@ function closeDrawEllipse()
         DragDot.attr("cx", null)
         DragDot.attr("transform", null)
         DragDot.style("visibility", "hidden")
-
 
         cw.drawEllipseFinishButton.disabled = true
         cw.drawEllipseCancelButton.disabled = true
@@ -237,24 +235,23 @@ function finishDrawEllipse()
                 if(oEMAIL)
                 finishedElem.setAttribute("createdBy", oEMAIL)
 
+                ActiveElem = null
+                activeElem = null
+                if(LatLngPntSet==true)
+            {
+                setRaDecCheck.checked = false
+                setRaDecChecked() //---turn off---
+            }
 
-                    ActiveElem = null
-                    activeElem = null
-                    if(LatLngPntSet==true)
-                {
-                    setRaDecCheck.checked = false
-                    setRaDecChecked() //---turn off---
-                }
+            // d3SVG.style("cursor", "default")
+            starSVG.setAttribute('onclick', "placeDrawEllipse()") //---click to add more icons for this session---
+            DrawX.style("display", "none")
+            DragDot.style("visibility", "hidden")
+            starG.appendChild(dragDot)
+            cw.drawEllipseFinishButton.disabled = true
+            cw.drawEllipseCancelButton.disabled = true
 
-                // d3SVG.style("cursor", "default")
-                starSVG.setAttribute('onclick', "placeDrawEllipse()") //---click to add more icons for this session---
-                DrawX.style("display", "none")
-                DragDot.style("visibility", "hidden")
-                starG.appendChild(dragDot)
-                cw.drawEllipseFinishButton.disabled = true
-                cw.drawEllipseCancelButton.disabled = true
-
-                commentDiv.style.visibility = "hidden"
+            commentDiv.style.visibility = "hidden"
 
             finishedElem.setAttribute("transform", StarPoint(ActiveLL)+"scale("+(StarView.k/StarScale)/ActiveScale+")rotate("+RotateAngle+")")
 
@@ -264,7 +261,8 @@ function finishDrawEllipse()
 }
 
 function cancelDrawEllipse()
-{var cw = addElemEllipseCw
+{
+    var cw = addElemEllipseCw
     if(EditEllipse==true)
         cancelEditEllipse()
         else if(document.getElementById("activeElem"))
@@ -329,7 +327,6 @@ function editEllipseDraw(elemObjEdit)
 
             DrawEllipseEditId = elemObjEdit.getAttribute("id")//---used in cancel edit--
 
-
             ActiveElem = null
 
             EditEllipse = true
@@ -365,7 +362,6 @@ function setEditEllipse()
     EditEllipseObj.removeAttribute("onmouseover")
     EditEllipseObj.removeAttribute("onmouseout")
     EditEllipseObj.removeAttribute("ondblclick")
-
 
     commentDiv.style.visibility = "hidden"
 
@@ -515,7 +511,6 @@ function finishEditEllipse()
                 finishedElem.style.cursor = "default"
                 finishedElem.setAttribute("transform", StarPoint(ActiveLL)+"scale("+(StarView.k/StarScale)/ActiveScale+")rotate("+RotateAngle+")")
 
-
                 finishedElem.setAttribute("onmousedown", "emailElemCreator("+DrawEllipseEditId+")")
                 finishedElem.setAttribute("ondblclick", "editEllipseDraw("+DrawEllipseEditId+")")
                 finishedElem.setAttribute("id", DrawEllipseEditId)
@@ -524,8 +519,7 @@ function finishEditEllipse()
                 UpdateThisEllipse = finishedElem
                 updateEllipse(DrawEllipseEditId)
 
-
-            closeDrawEllipse()
+                closeDrawEllipse()
     }
 
 }
@@ -606,9 +600,7 @@ function removeCurrentDrawEllipse()
 
     var cw = addElemEllipseCw
 
-
-    
-        closeDrawEllipse()
+    closeDrawEllipse()
 
 }
 

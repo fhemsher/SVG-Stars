@@ -260,6 +260,13 @@ function finishDrawImage()
                 var fade = finishedElem.getAttribute("fade")
 
              AddElemCoordsArray.push([ll, ActiveScale, id, RotateAngle, fade])
+            if(cw.drawImageCommentValue.value!="Image comment here(optional)..." && cw.drawImageCommentValue.value!="")
+            {
+                finishedElem.setAttribute("comment", txt2xml(cw.drawImageCommentValue.value))
+                finishedElem.setAttribute("onmouseover", "showSymbolComment(evt)")
+                finishedElem.setAttribute("onmouseout", "hideSymbolComment(evt)")
+
+            }
 
                 finishedElem.setAttribute("class", "addElem")
                 finishedElem.setAttribute("createdBy", oEMAIL)
@@ -483,7 +490,7 @@ function finishEditImage()
                                 if(addId==DrawImageEditId)
                                 {
                                         var fade = finishedElem.getAttribute("fade")
-                                        AddElemCoordsArray[k] =[ll, ActiveScale, DrawImageEditId, '', fade]
+                                        AddElemCoordsArray[k] =[ll, ActiveScale, DrawImageEditId, RotateAngle, fade]
 
                                         break
                                 }
