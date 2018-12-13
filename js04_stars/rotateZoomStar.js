@@ -499,6 +499,8 @@ function zoomPrimaryStarSurfaceView()
         if(PlanetsLoaded==false)
         {
            PlanetScale=StarView.k/StarScale
+           StartScale=null
+           setTimeout("StopStarZoom=true",800) 
            setTimeout(locatePlanets,1800)
         }
    }

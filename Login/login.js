@@ -14,7 +14,7 @@ function loginClearAll()
     addElemPolygonLoad = false
     addElemPgonLoad = false
     DefaultViewChanged=false
-
+    PlantedRadius=null
 
 
     PrimaryStarZone.attr("d", null)
@@ -42,7 +42,7 @@ function loginClearAll()
     }
       PlanetsLoaded=false
      PlanetCoordsArray=[]
-
+      StartScale=null
 
 
     var elems = domAddPathG.childNodes
@@ -142,7 +142,6 @@ function loginToDrawing()
             var trans = XMLBounds.getAttribute("celestialTranslate")
 
 
-
                 initStarDwg(viewK, viewR, trans) //---stars.js creates star graticule and this star projection
 
 
@@ -152,11 +151,14 @@ function loginToDrawing()
             getMyStars()
             celestialContainerDiv.style.display = "none"
             starContainerDiv.style.display = "block"
-
            if(initStarView=="false")
            {
-              PlanetScale=+XMLBounds.getAttribute("planetScale")
-               setTimeout(locatePlanets,1800)
+              //StartScale=+XMLBounds.getAttribute("startScaleInit")
+              //PlanetScale=+XMLBounds.getAttribute("planetScale")
+
+              //adjustedPlantedSizeValue.value=PlanetRadius
+              setTimeout(locatePlanets,1800)
+
 
 
            }
@@ -187,16 +189,16 @@ function loginToDrawing()
             drawingNameDiv.style.visibility = "visible"
             if(Mobile==false)
              measureDiv.style.visibility = "visible"
-            
+
             navTable.style.visibility = "visible"
            zoomLevelDiv.innerHTML = ((200000*Math.log(StarView.k)/Math.log(200000))/1000).toFixed(0)
-
+            
              navButtonViz()
 
            
 
             if(FOLDER)
-            {  deleteAllCookies()
+            {  deleteAllStarCookies()
                 CookieSetDate = "@"+new Date().getTime()
                 setCookie("_SVGStars_Folder"+CookieSetDate, FOLDER, 180)
                 setCookie(FOLDER+"_SVGStars_DrawingNAME"+CookieSetDate, SelectedStarName, 180)

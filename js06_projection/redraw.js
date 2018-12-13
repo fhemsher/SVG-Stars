@@ -71,6 +71,9 @@ function celestialRedraw()
 
             CentroidCelestial.attr("transform", CelestialPoint(CentroidConLL))
             EarthPathCelestial.attr("d", CelestialMap)
+                   //---added traditional stars---
+       // HostG.selectAll(".host")
+            //.attr("transform", function(d) { return CelestialPoint([d.S_RA*15, d.S_DEC])+"scale("+(CelestialView.k/CelestialScale)+")"})
 
         }
         if(ConStars)
@@ -124,6 +127,7 @@ function starRedraw()
     {
         if(d3.event)
         {
+
             starG.style.cursor = "default"
             StarProjection.translate(d3.event.translate).rotate(StarProjection.rotate()).scale(d3.event.scale);
 
@@ -221,40 +225,38 @@ function starRedraw()
              if(MyExoplanet==true&&PrevZoomInteger>400)
             {
                 if(Visitor==false&&Mobile==false)
+                {
                     saveDrawingButtonDiv.style.visibility = "visible"
+                   
+                }
+
                     saveDefaultViewSpan.innerHTML = ""
                     ExoplanetG.style("display", "block")
                     OrbitG.style("display", "block")
 
                     OrbitG.selectAll(".orbit").attr("d", StarMap)
-                    var minZoneD = hzMinPath.getAttribute("d")
-                    var maxZoneD = hzMaxPath.getAttribute("d")
-                    var hzPathD = minZoneD+" "+maxZoneD
-                    hzZonePath.setAttribute("d", hzPathD)
+                        var minZoneD = hzMinPath.getAttribute("d")
+                        var maxZoneD = hzMaxPath.getAttribute("d")
+                        var hzPathD = minZoneD+" "+maxZoneD
+                        hzZonePath.setAttribute("d", hzPathD)
             }
 
-            if(PlanetScale&&PlanetsLoaded)
+
+             if(PlanetsLoaded)
             {
                 PlanetG.style("display", "block")
-                PlanetG.selectAll(".exoCircle")
-                .data(PlanetCoordsArray)
-                .attr("transform", function(d)
-                    {
+                if(Visitor==true||OwnerDrawing==true)
+                    PlanetG.selectAll(".exoCircle")
+                    .data(PlanetCoordsArray)
+                    .attr("transform", function(d)
+                        {
 
-                        return StarPoint(d)+"scale("+(StarView.k/StarScale)/PlanetScale+")" //+"rotate("+d[1]+" "+d[2]+" "+d[3]+")"
-                    }
-                )
+                            return StarPoint(d[3])+"scale("+(StarView.k/StarScale)/PlanetScale+")" //+"rotate("+d[1]+" "+d[2]+" "+d[3]+")"
+                        }
+                    )
             }
 
-        }
-        else
-        {
 
-            ExoplanetG.style("display", "none")
-            OrbitG.style("display", "none")
-            PlanetG.style("display", "none")
-            saveDrawingButtonDiv.style.visibility = "hidden"
-        }
         if(MyExoplanet==true&&PrevZoomInteger>500)
             CoronaBG.style("display", "block")
             else
@@ -476,7 +478,7 @@ function starRedraw()
                     PrevTransY = d3.event.translate[1]
 
                 }
-
+        }
     }
 
 }
