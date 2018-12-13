@@ -1,5 +1,5 @@
 # SVG-Stars
-Windows 10 Stand-Alone Application: Stars &amp; Their Exoplanets - Create/Publish Scalable Vector Graphics Drawings in an interactive universe
+Windows 10 Stand-Alone Application: Map Stars &amp; Their Exoplanets - Create/Publish Scalable Vector Graphics Drawings in an interactive universe
 
 **Dowload ZIP** folder, then create a new site under inetpub/wwwroot on your computer.
 
@@ -13,5 +13,5 @@ You may then create/save/edit SVG Star drawings.
 
 To preview how this application works go to: http://svg-stars.org
 
-NOTE:To store your svg drawings for the DRAWINGLIBRARY, the Windows IIS must have 
+NOTE:To store your svg drawings for the folders DRAWINGLIBRARY, the Windows IIS must have 
 ASP files activated (See Wiki for a description how to do this).
