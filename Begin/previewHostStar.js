@@ -17,7 +17,7 @@ function previewHostStar()
     showHostStarConstellation() //---see constellation.js---
 
     cw.previewHostStarButton.disabled = true
-    cw.previewHostStarButton.innerHTML = "Adjusting..."
+    cw.previewHostStarButton.innerHTML = "Adjusting Universe..."
     cw.beginMyStarButton.disabled = false
     cw.cancelMyStarButton.disabled = false
     cw.hostStarSelect.disabled = true

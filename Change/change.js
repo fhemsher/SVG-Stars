@@ -3,7 +3,7 @@ var DefaultViewChanged = false
 //---button immediately updates default view---
 function changeMyDefaultView()
 {
-
+      console.log(PlanetScale)
     //  PrimaryStarCoords=PrimaryStarLL
     var celestialTrans =[PrevTransX, PrevTransY]
     var sendXML = "<SEND folder='"+FOLDER+"' planetScale='"+PlanetScale+"'  celestialScale='"+StarView.k+"'   celestialRotate='"+StarView.r+"'   celestialTranslate='"+celestialTrans+"'    />"

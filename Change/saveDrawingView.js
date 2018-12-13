@@ -72,9 +72,9 @@ function saveDrawingView()
       saveDefaultViewSpan.innerHTML = ""
 
 
-
+      StartScaleInit=StarView.k
     var celestialTrans =[PrevTransX, PrevTransY]
-    var sendXML = "<SEND folder='"+FOLDER+"'  planetScale='"+PlanetScale+"'  celestialScale='"+StarView.k+"'   celestialRotate='"+StarView.r+"'   celestialTranslate='"+celestialTrans+"'    />"
+    var sendXML = "<SEND folder='"+FOLDER+"'  planetScale='"+PlanetScale+"' startScaleInit='"+StartScaleInit+"'  celestialScale='"+StarView.k+"'   celestialRotate='"+StarView.r+"'   celestialTranslate='"+celestialTrans+"'    />"
 
    var XMLFile = new XMLHttpRequest();
     XMLFile.open("POST", "../Change/updateDefaultView.asp", false);

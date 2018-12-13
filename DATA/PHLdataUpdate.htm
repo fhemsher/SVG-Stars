@@ -109,7 +109,45 @@ Take above and build <b>starPacket.js</b> (stars only) and <b>exoPacket.js</b> (
    <textarea id="exoPacketValue" style=width:100%;height:600px; ></textarea>
    Save below into <b>Host Star Select</b>
    <textarea id="starSelectValue" style=width:100%;height:600px; ></textarea>
-  </center>
+<p></p>
+  <center> <button onclick=habClass()>Hab Class Selects</button></center>
+   filter on only <button onclick=getMesoplanet()>Habitable Class w/ Mesoplanet</button>
+   <textarea id="filterMesoplanetValue" style=width:100%;height:600px; ></textarea>
+   filter on only <button onclick=getPsychroplanet()>Habitable Class w/ Psychroplanet</button>
+   <textarea id="filterPsychroplanetValue" style=width:100%;height:600px; ></textarea>
+   filter on only <button onclick=getHypopsychroplanet()>Habitable Class w/ Hypopsychroplanet</button>
+   <textarea id="filterHypopsychroplanetValue" style=width:100%;height:600px; ></textarea>
+   filter on only <button onclick=getThermoplanet()>Habitable Class w/ Thermoplanet</button>
+   <textarea id="filterThermoplanetValue" style=width:100%;height:600px; ></textarea>
+   filter on only <button onclick=getHypothermoplanet()>Habitable Class w/ Hypothermoplanet</button>>
+   <textarea id="filterHypothermoplanetValue" style=width:100%;height:600px; ></textarea>
+  <p></p>
+  <center> <button onclick=getAtmos()>Hab Class Selects</button></center>
+      filter on only <button onclick=getMetals()>Atmosphere Class w/ Metals</button>>
+   <textarea id="filterMetalsValue" style=width:100%;height:600px; ></textarea>
+      filter on only <button onclick=getHydrogen()>Atmosphere Class w/ Hydrogen</button>>
+   <textarea id="filterHydrogenValue" style=width:100%;height:600px; ></textarea>
+  <p></p>
+        <textarea id="filterHabitableValue" style=width:100%;height:600px; ></textarea>
+        <p>Surface Gas</p>
+        <textarea id="filterGasValue" style=width:100%;height:600px; ></textarea>
+                <p>Surface Rocky-Water</p>
+
+        <textarea id="filterRockyWaterValue" style=width:100%;height:600px; ></textarea>
+                   <p>Surface Rocky-Iron</p>
+   <textarea id="filterRockyIronValue" style=width:100%;height:600px; ></textarea>
+
+   <p>Surface Iron</p>
+   <textarea id="filterIronValue" style=width:100%;height:600px; ></textarea>
+                   <p>Surface water-gas</p>
+   <textarea id="filterWaterGasValue" style=width:100%;height:600px; ></textarea>
+
+
+
+
+
+
+ </center>
 </body>
 <script>
 function getConfirmedData()
@@ -259,7 +297,8 @@ function buildStarSelect()
         {
             var planets=HostPacket[k].S_NumPlanets
             var discYr=+HostPacket[k].P_DiscYear
-            starSelectArray.push("<option value='"+host+"'>"+host+"("+planets+") "+discYr+"</option>")
+            var con=HostPacket[k].S_Constellation
+            starSelectArray.push("<option value='"+host+"'>"+host+" ["+con+"] ("+planets+") "+discYr+"</option>")
         }
     }
 
@@ -269,6 +308,493 @@ function buildStarSelect()
 
     starSelectValue.value=starSelect+select+"</select>"
 }
+function getMesoplanet()
+{
+    var starSelect="<select  title='Exoplanets host star' id=hostStarSelect onChange=parent.hostStarSelected()><option>Hab Class Mesoplanet (30)</option>"
+    var starSelectArray=[]
+    var prevHost=","
+    var habCnt=0
+    var foundCnt=0
+   for(var k=0;k<ExoPacket.length;k++)
+   {
+       var exo=ExoPacket[k]
+        var host=exo.S_Name
+        var tst=","+host+","
+        var hab=exo.P_HabitableClass
+        if(hab=="mesoplanet")habCnt++
+        if(prevHost.indexOf(tst)==-1)
+        {
+            var hab=exo.P_HabitableClass
 
+            if(hab=="mesoplanet")
+            {
+               starSelectArray.push("<option value='"+host+"'>"+host+"</option>")
+              prevHost+=host+","
+              foundCnt++
+            }
+        }
+   }
+   starSelectArray.sort()
+   filterMesoplanetValue.value=starSelect+starSelectArray.toString()+"</select>"
+   console.log("Mesoplanet "+[habCnt,foundCnt])
+}
+function getPsychroplanet()
+{
+    var starSelect="<select  title='Exoplanets host star' id=hostStarSelect onChange=parent.hostStarSelected()><option>Hab Class Psychroplanet</option>"
+    var starSelectArray=[]
+    var prevHost=","
+    var habCnt=0
+    var foundCnt=0
+
+   for(var k=0;k<ExoPacket.length;k++)
+   {
+       var exo=ExoPacket[k]
+        var host=exo.S_Name
+        var tst=","+host+","
+        var hab=exo.P_HabitableClass
+        if(hab=="psychroplanet")habCnt++
+
+        if(prevHost.indexOf(tst)==-1)
+        {
+            var hab=exo.P_HabitableClass
+
+            if(hab=="psychroplanet")
+            {
+               starSelectArray.push("<option value='"+host+"'>"+host+"</option>")
+              prevHost+=host+","
+              foundCnt++
+
+            }
+        }
+   }
+   starSelectArray.sort()
+   filterPsychroplanetValue.value=starSelect+starSelectArray.toString()+"</select>"
+   console.log("Psychroplanet "+[habCnt,foundCnt])
+}
+function getHypopsychroplanet()
+{
+    var starSelect="<select  title='Exoplanets host star' id=hostStarSelect onChange=parent.hostStarSelected()><option>Hab Class Hypopsychroplanet</option>"
+    var starSelectArray=[]
+    var prevHost=","
+    var habCnt=0
+    var foundCnt=0
+
+   for(var k=0;k<ExoPacket.length;k++)
+   {
+       var exo=ExoPacket[k]
+        var host=exo.S_Name
+        var tst=","+host+","
+        var hab=exo.P_HabitableClass
+        if(hab=="hypopsychroplanet")habCnt++
+
+        if(prevHost.indexOf(tst)==-1)
+        {
+            var hab=exo.P_HabitableClass
+
+            if(hab=="hypopsychroplanet")
+            {
+               starSelectArray.push("<option value='"+host+"'>"+host+"</option>")
+              prevHost+=host+","
+              foundCnt++
+
+            }
+        }
+   }
+   starSelectArray.sort()
+   filterHypopsychroplanetValue.value=starSelect+starSelectArray.toString()+"</select>"
+   console.log("Hypopsychroplanet "+[habCnt,foundCnt])
+
+
+
+}
+function getThermoplanet()
+{
+    var starSelect="<select  title='Exoplanets host star' id=hostStarSelect onChange=parent.hostStarSelected()><option>Hab Class Thermoplanet</option>"
+    var starSelectArray=[]
+    var prevHost=","
+    var habCnt=0
+    var foundCnt=0
+
+   for(var k=0;k<ExoPacket.length;k++)
+   {
+       var exo=ExoPacket[k]
+        var host=exo.S_Name
+        var tst=","+host+","
+        var hab=exo.P_HabitableClass
+        if(hab=="thermoplanet")habCnt++
+
+        if(prevHost.indexOf(tst)==-1)
+        {
+            var hab=exo.P_HabitableClass
+
+            if(hab=="thermoplanet")
+            {
+               starSelectArray.push("<option value='"+host+"'>"+host+"</option>")
+              prevHost+=host+","
+              foundCnt++
+
+            }
+        }
+   }
+   starSelectArray.sort()
+   filterThermoplanetValue.value=starSelect+starSelectArray.toString()+"</select>"
+   console.log("Thermoplanet "+[habCnt,foundCnt])
+
+
+
+
+}
+function getHypothermoplanet()
+{
+    var starSelect="<select  title='Exoplanets host star' id=hostStarSelect onChange=parent.hostStarSelected()><option>Hab Class Hypothermoplanet</option>"
+    var starSelectArray=[]
+    var prevHost=","
+    var habCnt=0
+    var foundCnt=0
+
+   for(var k=0;k<ExoPacket.length;k++)
+   {
+       var exo=ExoPacket[k]
+        var host=exo.S_Name
+        var tst=","+host+","
+        var hab=exo.P_HabitableClass
+        if(hab=="hypothermoplanet")habCnt++
+
+        if(prevHost.indexOf(tst)==-1)
+        {
+            var hab=exo.P_HabitableClass
+
+            if(hab=="hypothermoplanet")
+            {
+               starSelectArray.push("<option value='"+host+"'>"+host+"</option>")
+              prevHost+=host+","
+              foundCnt++
+
+            }
+        }
+   }
+   starSelectArray.sort()
+   filterHypothermoplanetValue.value=starSelect+starSelectArray.toString()+"</select>"
+
+   console.log("Hypothermoplanet "+[habCnt,foundCnt])
+
+
+}
+function getMetals()
+{
+    var starSelect="<select  title='Exoplanets host star' id=hostStarSelect onChange=parent.hostStarSelected()><option>Atmos Class: Metals-Rich</option>"
+    var starSelectArray=[]
+    var prevHost=","
+    var atmosCnt=0
+    var foundCnt=0
+
+   for(var k=0;k<ExoPacket.length;k++)
+   {
+       var exo=ExoPacket[k]
+        var host=exo.S_Name
+        var tst=","+host+","
+        var atmos=exo.P_AtmosphereClass
+        if(atmos=="metals-rich")atmosCnt++
+
+        if(prevHost.indexOf(tst)==-1)
+        {
+            var atmos=exo.P_AtmosphereClass
+
+            if(atmos=="metals-rich")
+            {
+               starSelectArray.push("<option value='"+host+"'>"+host+"</option>")
+              prevHost+=host+","
+              foundCnt++
+
+            }
+        }
+   }
+   starSelectArray.sort()
+   filterMetalsValue.value=starSelect+starSelectArray.toString()+"</select>"
+
+   console.log("Metals "+[atmosCnt,foundCnt])
+
+
+}
+function getHydrogen()
+{
+    var starSelect="<select  title='Exoplanets host star' id=hostStarSelect onChange=parent.hostStarSelected()><option>Atmos Class Hydrogen-Rich</option>"
+    var starSelectArray=[]
+    var prevHost=","
+    var atmosCnt=0
+    var foundCnt=0
+
+   for(var k=0;k<ExoPacket.length;k++)
+   {
+       var exo=ExoPacket[k]
+        var host=exo.S_Name
+        var tst=","+host+","
+        var atmos=exo.P_AtmosphereClass
+        if(atmos=="hydrogen-rich")atmosCnt++
+
+        if(prevHost.indexOf(tst)==-1)
+        {
+            var atmos=exo.P_AtmosphereClass
+
+            if(atmos=="hydrogen-rich")
+            {
+               starSelectArray.push("<option value='"+host+"'>"+host+"</option>")
+              prevHost+=host+","
+              foundCnt++
+
+            }
+        }
+   }
+   starSelectArray.sort()
+   filterHydrogenValue.value=starSelect+starSelectArray.toString()+"</select>"
+
+   console.log("Hydrogen "+[atmosCnt,foundCnt])
+
+
+}
+function getHabitable()
+{
+    var starSelect="<select  title='Exoplanets host star' id=hostStarSelect onChange=parent.hostStarSelected()><option>Potentially Habitable</option>"
+    var starSelectArray=[]
+    var prevHost=","
+    var habCnt=0
+    var foundCnt=0
+
+   for(var k=0;k<ExoPacket.length;k++)
+   {
+       var exo=ExoPacket[k]
+        var host=exo.S_Name
+        var tst=","+host+","
+        var hab=exo.P_Habitable
+        if(hab=="1")habCnt++
+
+        if(prevHost.indexOf(tst)==-1)
+        {
+            var hab=exo.P_Habitable
+
+            if(hab=="1")
+            {
+               starSelectArray.push("<option value='"+host+"'>"+host+"</option>")
+              prevHost+=host+","
+              foundCnt++
+
+            }
+        }
+   }
+   starSelectArray.sort()
+   filterHabitableValue.value=starSelect+starSelectArray.toString()+"</select>"
+
+   console.log("Habitable "+[habCnt,foundCnt])
+
+
+}
+
+function getSurfaceGas()
+{
+    var starSelect="<select  title='Exoplanets host star' id=hostStarSelect onChange=parent.hostStarSelected()><option>Surface: Gas</option>"
+    var starSelectArray=[]
+    var prevHost=","
+    var gasCnt=0
+    var foundCnt=0
+
+   for(var k=0;k<ExoPacket.length;k++)
+   {   var exo=ExoPacket[k]
+       var comp=exo.P_CompositionClass
+        if(comp=="gas")gasCnt++
+         var host=exo.S_Name
+        var tst=","+host+","
+         if(prevHost.indexOf(tst)==-1)
+        {
+            var comp=exo.P_CompositionClass
+
+            if(comp=="gas")
+            {
+               starSelectArray.push("<option value='"+host+"'>"+host+"</option>")
+              prevHost+=host+","
+              foundCnt++
+            }
+
+        }
+   }
+   starSelectArray.sort()
+   filterGasValue.value=starSelect+starSelectArray.toString()+"</select>"
+
+   console.log("Gas "+[gasCnt,foundCnt])
+
+
+
+}
+function getSurfaceRockyIron()
+{
+    var starSelect="<select  title='Exoplanets host star' id=hostStarSelect onChange=parent.hostStarSelected()><option>Surface: Rocky-Iron</option>"
+    var starSelectArray=[]
+    var prevHost=","
+    var ironCnt=0
+    var foundCnt=0
+
+   for(var k=0;k<ExoPacket.length;k++)
+   {   var exo=ExoPacket[k]
+       var comp=exo.P_CompositionClass
+        if(comp=="rocky-iron")ironCnt++
+         var host=exo.S_Name
+        var tst=","+host+","
+         if(prevHost.indexOf(tst)==-1)
+        {
+            var comp=exo.P_CompositionClass
+
+            if(comp=="rocky-iron")
+            {
+               starSelectArray.push("<option value='"+host+"'>"+host+"</option>")
+              prevHost+=host+","
+              foundCnt++
+            }
+
+        }
+   }
+   starSelectArray.sort()
+   filterRockyIronValue.value=starSelect+starSelectArray.toString()+"</select>"
+
+   console.log("RockyIron "+[ironCnt,foundCnt])
+
+
+
+
+}
+function getSurfaceRockyWater()
+{
+    var starSelect="<select  title='Exoplanets host star' id=hostStarSelect onChange=parent.hostStarSelected()><option>Surface: Rocky-Water</option>"
+    var starSelectArray=[]
+    var prevHost=","
+    var waterCnt=0
+    var foundCnt=0
+
+   for(var k=0;k<ExoPacket.length;k++)
+   {   var exo=ExoPacket[k]
+       var comp=exo.P_CompositionClass
+        if(comp=="rocky-water")waterCnt++
+         var host=exo.S_Name
+        var tst=","+host+","
+         if(prevHost.indexOf(tst)==-1)
+        {
+            var comp=exo.P_CompositionClass
+
+            if(comp=="rocky-water")
+            {
+               starSelectArray.push("<option value='"+host+"'>"+host+"</option>")
+              prevHost+=host+","
+              foundCnt++
+            }
+
+        }
+   }
+   starSelectArray.sort()
+   filterRockyWaterValue.value=starSelect+starSelectArray.toString()+"</select>"
+
+   console.log("RockyWater "+[waterCnt,foundCnt])
+
+
+
+
+}
+
+
+function getSurfaceIron()
+{
+    var starSelect="<select  title='Exoplanets host star' id=hostStarSelect onChange=parent.hostStarSelected()><option>Surface: Iron</option>"
+    var starSelectArray=[]
+    var prevHost=","
+    var ironCnt=0
+    var foundCnt=0
+
+   for(var k=0;k<ExoPacket.length;k++)
+   {   var exo=ExoPacket[k]
+       var comp=exo.P_CompositionClass
+        if(comp=="iron")ironCnt++
+         var host=exo.S_Name
+        var tst=","+host+","
+         if(prevHost.indexOf(tst)==-1)
+        {
+            var comp=exo.P_CompositionClass
+
+            if(comp=="iron")
+            {
+               starSelectArray.push("<option value='"+host+"'>"+host+"</option>")
+              prevHost+=host+","
+              foundCnt++
+            }
+
+        }
+   }
+   starSelectArray.sort()
+   filterIronValue.value=starSelect+starSelectArray.toString()+"</select>"
+
+   console.log("Iron "+[ironCnt,foundCnt])
+
+
+
+
+}
+
+
+function getSurfaceWaterGas()
+{
+    var starSelect="<select  title='Exoplanets host star' id=hostStarSelect onChange=parent.hostStarSelected()><option>Surface: Water-Gas</option>"
+    var starSelectArray=[]
+    var prevHost=","
+    var waterCnt=0
+    var foundCnt=0
+
+   for(var k=0;k<ExoPacket.length;k++)
+   {   var exo=ExoPacket[k]
+       var comp=exo.P_CompositionClass
+        if(comp=="water-gas")waterCnt++
+         var host=exo.S_Name
+        var tst=","+host+","
+         if(prevHost.indexOf(tst)==-1)
+        {
+            var comp=exo.P_CompositionClass
+
+            if(comp=="water-gas")
+            {
+               starSelectArray.push("<option value='"+host+"'>"+host+"</option>")
+              prevHost+=host+","
+              foundCnt++
+            }
+
+        }
+   }
+   starSelectArray.sort()
+   filterWaterGasValue.value=starSelect+starSelectArray.toString()+"</select>"
+
+   console.log("WaterGas "+[waterCnt,foundCnt])
+
+
+
+
+}
+
+
+
+
+function habClass()
+{
+    getMesoplanet()
+    getPsychroplanet()
+    getHypopsychroplanet()
+    getThermoplanet()
+    getHypothermoplanet()
+
+
+        getMetals()
+        getHydrogen()
+        getHabitable()
+        getSurfaceGas()
+        getSurfaceRockyIron()
+        getSurfaceRockyWater()
+        getSurfaceIron()
+        getSurfaceWaterGas()
+
+
+}
 </script>
 </html>

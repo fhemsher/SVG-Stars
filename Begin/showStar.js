@@ -36,6 +36,8 @@ var ExoPlanetXML //---string for registration---
 
 function hostStarSelected()
 {
+
+
     ExoPlanets =[]
     ExoPlanetXML = "<EXOPLANETS>"
 
@@ -72,7 +74,7 @@ function hostStarSelected()
 
       SelectedCon = SelectedStar.S_Constellation
       placeHostStar()
-
+      previewHostStar()
       d3.json("../Begin/exoPacket.js", function(exos)
        {
         for(var j = 0; j<exos.length; j++)

@@ -249,7 +249,7 @@ function constellationSelected()
         cw.exoplanetIncludeCheck.disabled=true
         cw.exoCntSpan.innerHTML=""
 
- 
+
         // celestialSearch.conCodeDiv.style.display="none"
         CelestialPreviewLoaded = false
         ConStars = null
@@ -735,7 +735,7 @@ function starClearButtonClicked()
          cw.viewStarExoButton.disabled=true
        cw.exoCntSpan.innerHTML=""
     celestialRedraw()
-  } 
+  }
 
  /*
 
