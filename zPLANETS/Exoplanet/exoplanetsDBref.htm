@@ -1,0 +1,466 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+  <title>Exoplanet DB Ref</title>
+</head>
+
+<body style='font-family:arial;'>
+<h2>Exoplanet Data</h2>
+<TABLE style='width:100%' >
+ <TR valign=top ><TD style='width:50%' >
+<table  border="1" cellspacing="3" cellpadding="1">
+    <tr>
+      <th scope="col">Database<br />
+        Column Name</th>
+      <th>Table Label</th>
+      <th scope="col">Description</th>
+
+    </tr>
+    <tr class="column" id="pl_hostname">
+      <td class="name">pl_hostname</td>
+      <td class="label">Host Star Name</td>
+      <td class="description">
+        Stellar name most commonly used in the literature.</td>
+    </tr>
+      <tr class="column" id="pl_letter">
+      <td class="name">pl_letter</td>
+      <td class="label">Planet Letter</td>
+      <td class="description">
+        Letter assigned to the planetary component of a planetary system.</td>
+    </tr>
+      <tr class="column" id="pl_discmethod">
+      <td class="name">pl_discmethod</td>
+     <td class="label">Discovery Method</td>
+     <td class="description">
+       Method by which the planet was first identified.</td>
+    </tr>
+    <tr class="column" id="pl_pnum">
+      <td class="name">pl_pnum</td>
+      <td class="label">Number of Planets in System</td>
+      <td class="description">
+        Number of planets in the planetary system.</td>
+    </tr>
+      <tr class="column" id="pl_orbper">
+      <td class="name">pl_orbper</td>
+      <td class="label">Orbital Period (days)</td>
+      <td class="description">
+        Time the planet takes to make a complete
+        orbit around the host star or system.</td>
+    </tr>
+     <tr class="column" id="pl_orbsmax">
+      <td class="name">pl_orbsmax</td>
+      <td class="label">Orbit Semi-Major Axis (AU)</td>
+      <td class="description">
+The longest diameter of an elliptic orbit,
+or for directly imaged planets, the projected
+separation in the plane of the sky.</td>
+    </tr>
+     <tr class="column" id="pl_orbeccen">
+       <td class="name">pl_orbeccen</td>
+       <td class="label">Eccentricity</td>
+       <td class="description">
+         Amount by which the orbit of the planet
+         deviates from a perfect circle.</td>
+     </tr>
+       <tr class="column" id="pl_orbincl">
+         <td class="name">pl_orbincl</td>
+         <td class="label">Inclination (deg)</td>
+         <td class="description">
+Angular distance of the orbital
+plane from the line of sight.</td>
+
+       </tr>
+
+        <tr class="column" id="pl_bmassj">
+         <td class="name">pl_bmassj</td>
+         <td class="label">Planet Mass or M*sin(i) [Jupiter mass]</td>
+         <td class="description">
+Best planet  mass measurement in units of masses of Jupiter.
+Either Mass, M*sin(i)/sin(i), or M*sin(i). See provenance
+for source of the measurement.</td>
+       </tr>
+
+         <tr class="column" id="pl_bmassprov">
+         <td class="name">pl_bmassprov</td>
+         <td class="label">Planet Mass or M*sin(i) Provenance</td>
+         <td class="description">
+Provenance of the measurement of the best mass.
+Options are: Mass, Msin(i)/sin(i), and Msini.</td>
+       </tr>
+
+
+     <tr class="column" id="pl_radj">
+      <td class="name">pl_radj</td>
+      <td class="label">Planet Radius (Jupiter radii)</td>
+      <td class="description">
+        Length of a line segment from the center of the planet
+        to its surface, measured in units of radius of Jupiter.<br /></td>
+    </tr>
+      <tr class="column" id="pl_dens">
+      <td class="name">pl_dens</td>
+      <td class="label">Planet Density (g/cm**3)</td>
+      <td class="description">
+        Amount of mass per unit of volume of the planet.</td>
+
+    </tr>
+
+      <tr class="column" id="pl_ttvflag">
+        <td class="name">pl_ttvflag</td>
+        <td class="label">TTV Flag</td>
+        <td class="description">
+          Flag indicating if the planet orbit exhibits
+          transit timing variations from another planet
+          in the system (1=yes, 0=no).<br /><br />
+          <strong>Note:</strong> Non-transiting planets discovered via the transit timing variations of another planet in the system will not have their TTV flag set, since they do not themselves demonstrate TTVs.</td>
+      </tr>
+     <tr class="column" id="pl_kepflag">
+      <td class="name">pl_kepflag</td>
+      <td class="label">Kepler Field Flag</td>
+      <td class="description">
+        Flag indicating if the planetary system
+        signature is present in data taken with
+        the Kepler mission (1=yes, 0=no).<br /></td>
+    </tr>
+
+      <tr class="column" id="pl_k2flag">
+        <td class="name">pl_k2flag</td>
+        <td class="label">K2 Mission Flag</td>
+        <td class="description"> Flag indicating if the planetary system
+        signature is present in data taken with
+        the K2 Mission (1=yes, 0=no).<br /></td>
+      </tr>
+      <tr class="column" id="pl_nnotes">
+      <td class="name">pl_nnotes</td>
+      <td class="label">Number of Notes</td>
+      <td class="description">
+Number of Notes associated with the planet.
+View all notes in the Confirmed Planet Overview page.</td>
+    </tr>
+
+
+   <tr class="column" id="ra_str">
+    <td class="name">ra_str</td>
+    <td class="label">RA (sexagesimal)</td>
+    <td class="description">
+      Right Ascension of the planetary system in sexagesimal format. </td>
+  </tr>
+  <tr class="column" id="dec_str">
+    <td class="name">dec_str</td>
+    <td class="label">Dec (sexagesimal) </td>
+    <td class="description">
+      Declination of the planetary system in sexagesimal notation.</td>
+ </tr>
+     <tr class="column" id="ra">
+      <td class="name">ra</td>
+      <td class="label">RA (decimal degrees)</td>
+      <td class="description">
+        Right Ascension of the planetary system in decimal degrees.</td>
+    </tr>
+    <tr class="column" id="dec">
+      <td class="name">dec</td>
+      <td class="label">Dec (decimal degrees)</td>
+      <td class="description">
+        Declination of the planetary system in decimal degrees.</td>
+    </tr>
+  <tr class="column" id="st_dist">
+      <td class="name">st_dist</td>
+      <td class="label">Distance (pc)</td>
+      <td class="description">
+        Distance to the planetary system in units of parsecs.</td>
+
+    </tr>
+   <tr class="column" id="st_optmag">
+      <td class="name">st_optmag</td>
+      <td class="label">Optical Magnitude [mag]</td>
+      <td class="description">
+Brightness of the host star as measured using
+the V (Johnson) or the Kepler-band in units of
+magnitudes.</td>
+    </tr>
+
+
+
+       <tr class="column" id="st_optband">
+      <td class="name">st_optband</td>
+      <td class="label">Optical Magnitude Band</td>
+      <td class="description">
+Band corresponding to the Optical Magnitude.
+Options are: V (Johnson) or Kepler-band.</td>
+    </tr>
+
+      <tr class="column" id="st_teff">
+      <td class="name">st_teff</td>
+      <td class="label">Effective  Temperature (K)</td>
+      <td class="description">
+        Temperature of the star as modeled by a
+        black body emitting the same total amount
+        of electromagnetic radiation.<br /></td>
+    </tr>
+   <tr class="column" id="st_mass">
+      <td class="name">st_mass</td>
+      <td class="label">Stellar Mass (solar mass)</td>
+      <td class="description">
+        Amount of matter contained in the star,
+        measured in units of masses of the Sun.</td>
+    </tr>
+    <tr class="column" id="st_rad">
+      <td class="name">st_rad</td>
+      <td class="label">Stellar Radius (solar radii)</td>
+      <td class="description">
+        Length of a line segment from the center of the star
+        to its surface, measured in units of radius of the Sun. <br /></td>
+    </tr>
+
+         <tr class="column" id="rowupdate">
+       <td class="name">rowupdate</td>
+       <td class="label">Date of Last Update</td>
+       <td class="description">
+Date of last update of the planet parameters.</td>
+    </tr>
+    </table>
+</TD>
+<TD style='width:50%' >
+
+<table  border="1" cellspacing="3" cellpadding="1">
+    <tr>
+      <th  scope="col">Database<br />
+        Column Name</th>
+      <th  >Table Label</th>
+      <th  scope="col">Description</th>
+
+    </tr>
+        <tr class="column" id="hd_name">
+      <td class="name">hd_name</td>
+      <td class="label">HD Name</td>
+      <td class="description">
+        Name of the star as given by the Henry Draper Catalog.</td>
+  </tr>
+    <tr class="column" id="hip_name">
+      <td class="name">hip_name</td>
+      <td class="label">HIP Name</td>
+      <td class="description">
+        Name of the star as given by the Hipparcos Catalog.</td>
+    </tr>
+     <tr>
+      <td class="name">st_rah</td>
+      <td class="label">RA (hours)</td>
+      <td class="description">
+Right Ascension of the planetary system in decimal hours.</td>
+    </tr>
+     <tr class="column" id="st_glon">
+      <td class="name">st_glon</td>
+      <td class="label">Galactic Longitude (deg)</td>
+      <td class="description">
+Galactic longitude of the planetary
+system in units of decimal degrees.</td>
+    </tr>
+    <tr class="column" id="st_glat">
+      <td class="name">st_glat </td>
+      <td class="label">Galactic Latitude (deg)</td>
+      <td class="description">
+Galactic latitude of the planetary
+system in units of decimal degrees.</td>
+    </tr>
+    <tr class="column" id="st_elon">
+      <td class="name">st_elon </td>
+      <td class="label">Ecliptic Longitude (deg)</td>
+      <td class="description">
+Ecliptic longitude of the planetary
+system in units of decimal degrees.</td>
+    </tr>
+    <tr class="column" id="st_elat">
+      <td class="name">st_elat</td>
+      <td class="label">Ecliptic Latitude (deg)</td>
+      <td class="description">
+Ecliptic latitude of the planetary
+system in units of decimal degrees.</td>
+    </tr>
+     <tr class="column" id="st_plx">
+      <td class="name"><p>st_plx </p></td>
+      <td class="label"> Parallax (mas)</td>
+      <td class="description">
+Difference in the angular position of a star
+as measured at two opposite positions within
+the Earth's orbit.</td>
+    </tr>
+      <tr class="column" id="st_pmra">
+      <td class="name"> st_pmra </td>
+      <td class="label"> RA Proper Motion (mas/yr)</td>
+      <td class="description">
+Angular change in right ascension over time as
+seen from the center of mass of the Solar System. </td>
+    </tr>
+     <tr class="column" id="st_pmdec">
+      <td class="name"> st_pmdec </td>
+      <td class="label">Dec Proper Motion (mas/yr)</td>
+      <td class="description">
+Angular change in declination over time as seen
+from the center of mass of the Solar System.</td>
+    </tr>
+    <tr class="column" id="st_pm">
+      <td class="name">st_pm </td>
+      <td class="label">Total Proper Motion  (mas/yr)</td>
+      <td class="description">
+Angular change in position over time as seen
+from the center of mass of the Solar System.</td>
+    </tr>
+
+    <tr class="column" id="st_radv">
+      <td class="name"> st_radv </td>
+      <td class="label"> Radial Velocity (km/sec)</td>
+      <td class="description">
+Velocity of the star in the
+direction of the line of sight.</td>
+    </tr>
+
+     <tr class="column" id="st_st_spstr">
+      <td class="name"> st_spstr </td>
+      <td class="label"> Spectral Type </td>
+      <td class="description">
+Classification of the star based
+on their spectral characteristics
+following the Morgan-Keenan system.</td>
+    </tr>
+      <tr class="column" id="st_logg">
+      <td class="name">st_logg</td>
+      <td class="label">Stellar Surface Gravity</td>
+      <td class="description">
+Gravitational acceleration experienced at the stellar surface.</td>
+   </tr>
+
+   <tr class="column" id="st_lum">
+      <td class="name"> st_lum</td>
+      <td class="label">Stellar Luminosity [log(solar)]</td>
+      <td class="description">
+Amount of energy emitted by a star per unit
+time, measured in units of solar luminosities.</td>
+    </tr>
+      <tr class="column" id="st_dens">
+      <td class="name">st_dens</td>
+      <td class="label">Stellar Density [g/cm**3]</td>
+      <td class="description">
+Amount of mass per unit of volume of the star.</td>
+    </tr>
+       <tr class="column" id="st_metfe">
+      <td class="name">st_metfe </td>
+      <td class="label">Stellar Metallicity (dex)</td>
+      <td class="description">
+Measurement of the metal content
+of the photosphere of the star as
+compared to the hydrogen content.</td>
+    </tr>
+     <tr class="column" id="st_metratio">
+      <td class="name">st_metratio</td>
+      <td class="label">Metallicity Ratio</td>
+      <td class="description">
+Ratio for the Metallicity Value
+([Fe/H] denotes iron abundance,
+[M/H] refers to a general metal content)</td>
+    </tr>
+
+  <tr class="column" id="st_age">
+      <td class="name">st_age</td>
+      <td class="label">Stellar Age [Gyr]</td>
+      <td class="description">
+The age of the host star.</td>
+    </tr>
+
+    <tr class="column" id="st_vsini">
+      <td class="name"> st_vsini </td>
+      <td class="label">Rotational Velocity v*sin(i) [km/s]</td>
+      <td class="description">
+Rotational velocity at the equator
+of the star multiplied by the sine
+of the inclination.</td>
+    </tr>
+
+    <tr class="column" id="st_acts">
+      <td class="name"> st_acts </td>
+      <td class="label"> Stellar Activity Index (S-Index)</td>
+      <td class="description">
+Chromospheric activity as measured by the
+S-index (ratio of the emission of the H
+and K Ca lines to that in nearby continuum).</td>
+    </tr>
+    <tr class="column" id="st_actr">
+      <td class="name">st_actr </td>
+      <td class="label"> Stellar Activity Log (R'HK) </td>
+      <td class="description">
+Chromospheric activity as measured by
+the log(R' HK) index, with is based
+on the S-index, but excludes the
+photospheric component in the Ca lines.</td>
+    </tr>
+     <tr class="column" id="st_actlx">
+      <td class="name"> st_actlx </td>
+      <td class="label"> x-ray Activity (Lx)&quot;</td>
+      <td class="description">
+Stellar activity as measured by
+the total luminosity in X-rays.</td>
+    </tr>
+
+     <tr class="column" id="swasp_id">
+       <td class="name">swasp_id</td>
+       <td class="label">SWASP Identifier</td>
+       <td class="description">
+Name of the star as given by the SuperWASP
+(Wide Angle Search for Planets) project.</td>
+     </tr>
+     <tr class="column" id="st_nts">
+      <td class="name">st_nts </td>
+      <td class="label">Number of Time Series</td>
+      <td class="description">
+Number of literature time series available
+for this star in the NASA Exoplanet Archive</td>
+    </tr>
+    <tr class="column" id="st_nplc">
+      <td class="name"> st_nplc </td>
+      <td class="label">Number of Planet Transit Light Curves</td>
+      <td class="description">
+Number of literature transit light curves available
+for this star in the NASA Exoplanet Archive.</td>
+    </tr>
+    <tr class="column" id="st_nglc">
+      <td class="name"> st_nglc </td>
+      <td class="label">Number of General Light Curves</td>
+      <td class="description">
+Number of Hipparcos light curves available
+for this star in the NASA Exoplanet Archive.</td>
+    </tr>
+    <tr class="column" id="st_nrvc">
+      <td class="name"> st_nrvc </td>
+      <td class="label">Number of Radial Velocity Time Series</td>
+      <td class="description">
+Number of literature radial velocity curves available
+for this star in the NASA Exoplanet Archive.</td>
+    </tr>
+    <tr class="column" id="st_naxa">
+      <td class="name"> st_naxa </td>
+      <td class="label">Number of Amateur Light Curves</td>
+      <td class="description">
+Number of literature amateur light curves available
+for this star in the NASA Exoplanet Archive.</td>
+    </tr>
+    <tr class="column" id="st_nimg">
+      <td class="name"> st_nimg </td>
+      <td class="label">Number of Images</td>
+      <td class="description">
+Number of literature images available for
+this star in the NASA Exoplanet Archive.</td>
+    </tr>
+
+    <tr class="column" id="st_nspec">
+      <td class="name"> st_nspec </td>
+      <td class="label">Number of Spectra</td>
+      <td class="description">
+Number of literature of spectra available for
+this star in the NASA Exoplanet Archive.</td>
+    </tr>
+
+    </table>
+  </TD></TR></TABLE>
+</body>
+
+</html>

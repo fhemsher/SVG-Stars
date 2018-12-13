@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+  <title>Exoplanet</title>
+</head>
+
+<body onLoad=sendSize() style='font-family:arial;'>
+    <div id=containerDiv>
+<table style='background-color:gainsboro;font-size:80%'>
+<tr style='background-color:white' ><td align=center colspan=2>
+<table style='width:100%'><tr><td style='width:85%' align=center><b>This Exoplanet</b></td><td align=left><button onClick=parent.closeIframe("exoplanet")>X</button></td></tr></table>
+</td></tr>
+<tr style='background-color:white' ><td align=left>Planet name</td><td align=left><span id=nameSpan></span></td></tr>
+ <tr style='background-color:white' ><td align=left>Kepler name</td><td align=left><span id=keplerSpan></span></td></tr>
+ <tr style='background-color:white' ><td align=left>Kepler (KOI) name</td><td align=left><span id=koiSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Habitable zone classification</td><td align=left><span id=zoneSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Mass Class</td><td align=left><span id=massClassSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Composition Class</td><td align=left><span id=compositionSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Atmosphere Class</td><td align=left><span id=atmosphereSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Habitable Class</td><td align=left><span id=habitableSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Min Mass (EU)</td><td align=left><span id=minMassSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Mass	Planet (EU)</td><td align=left><span id=massSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Max Mass (EU)</td><td align=left><span id=maxMassSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Radius (EU)</td><td align=left><span id=radiusSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Density (EU)</td><td align=left><span id=densitySpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Gravity (EU)</td><td align=left><span id=gravitySpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Escape velocity (EU)</td><td align=left><span id=escapeVelSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Minimum stellar flux (EU)</td><td align=left><span id=minFluxSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Mean stellar flux (EU)</td><td align=left><span id=meanFluxSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Maximum stellar flux (EU)</td><td align=left><span id=maxFlusSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Minimum equilibrium temp. (&deg;K)</td><td align=left><span id=minEqTempSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Mean equilibrium temp. (&deg;K)</td><td align=left><span id=meanEqTempSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Maximum equilibrium temp. (&deg;K)</td><td align=left><span id=maxEqTempSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Minimum surface temp. (&deg;K)</td><td align=left><span id=minSurfaceTempSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Mean surface temp. (&deg;K)</td><td align=left><span id=meanSurfaceTempSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Maximum surface temp. (&deg;K)</td><td align=left><span id=maxSurfaceTempSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Surface pressure (EU)</td><td align=left><span id=surfacePressureSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Magnitude Moon-Earth distance</td><td align=left><span id=magSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Apparent Moon-Earth distance (degrees)</td><td align=left><span id=apparSizeSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Period (days)</td><td align=left><span id=periodSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Semi major axis (AU)</td><td align=left><span id=semMajorAxisSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Eccentricity</td><td align=left><span id=excentricitySpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Mean distance from the star (AU)</td><td align=left><span id=meanDistSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Inclination (degrees)</td><td align=left><span id=inclinationSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Omega (degrees)</td><td align=left><span id=omegaSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Star name </td><td align=left><span id=starNameSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>HD	Star name</td><td align=left><span id=hdNameSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>HIP	Star name</td><td align=left><span id=hipNameSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Constellation name (abbreviated).</td><td align=left><span id=conNameSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Star type</td><td align=left><span id=starTypeSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Star mass (solar)</td><td align=left><span id=starMassSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Star radius (solar)</td><td align=left><span id=starRadiusSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Star effective temp. (solar)</td><td align=left><span id=starEffTempSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Star luminosity (solar)</td><td align=left><span id=starLumSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Star iron/hydrogen ratio [Fe/H].</td><td align=left><span id=fehRatioSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Star age (Gyrs)</td><td align=left><span id=starAgeSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Star apparent visual magnitude from Earth.</td><td align=left><span id=starAppMagEarthSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Star distance from Earth (parsec)</td><td align=left><span id=starDistSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Star right ascension (degrees)</td><td align=left><span id=raSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Star declination (degrees)</td><td align=left><span id=decSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Star apparent visual magnitude from planet</td><td align=left><span id=magPlanetSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Star apparent size from planet (degrees)</td><td align=left><span id=sizePlanetSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Star number of planets.</td><td align=left><span id=planetNumSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Star number of habitable planets</td><td align=left><span id=planetNumHabSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Star inner edge habitable zone (AU)</td><td align=left><span id=habZoneMinSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Star outer edge habitable zone (AU)</td><td align=left><span id=habZoneMaxSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Habitable Zone Distance (HZD).</td><td align=left><span id=distHZDSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Habitable Zone Composition (HZC).</td><td align=left><span id=compHZDSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Habitable Zone Atmosphere (HZA).</td><td align=left><span id=atmosHZDSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Habitable Zone Index (HZI).</td><td align=left><span id=hziSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Standard Primary Habitability (SPH).</td><td align=left><span id=sphSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Interior Earth Similarity Index (iESI).</td><td align=left><span id=iESISpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Surface Earth Similarity Index (sESI).</td><td align=left><span id=sESISpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Earth Similarity Index (ESI).</td><td align=left><span id=ESISpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Star HabCat database</td><td align=left><span id=habCatSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Habitable</td><td align=left><span id=habPotSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Habitable exomoons</td><td align=left><span id=habMoonSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Confirmed Kepler</td><td align=left><span id=confirmedSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Discovery method</td><td align=left><span id=discMethodSpan></span></td></tr>
+<tr style='background-color:white' ><td align=left>Discovery year</td><td align=left><span id=discYearSpan></span></td></tr>
+
+</table>
+</div>
+</body>
+ <script>
+function sendSize()
+{
+    parent.fillExoplanetData()
+   var width=containerDiv.scrollWidth+30
+   var height=containerDiv.scrollHeight+30
+   parent.sizeFrame('exoplanet',width,height)
+}
+</script>
+
+</html>

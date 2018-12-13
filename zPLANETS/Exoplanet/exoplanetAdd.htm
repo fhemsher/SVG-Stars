@@ -1,0 +1,270 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+  <title>Add Exoplanet</title>
+</head>
+
+<body onload=conCodes();sendSize() style='font-family:arial;'>
+    <div style='position:absolute;top:0px;left:0px;width:440px;' id=containerDiv>
+<table style='position:absolute;top:0px;left:0px;background-color:gainsboro;font-size:80%'>
+<tr style='background-color:white' ><td style='width:100%'  align=center colspan=2>
+<table style=width:100%><tr><td style='width:85%' align=center><button title='Current list of exoplanets' onClick=parent.openIframe("Exoplanet","exoplanetCurrent",40)>list</button> <b>Add Exoplanet to Database</b></td><td align=left><button onmouseover=this.style.backgroundColor='red'  onmouseout=this.style.backgroundColor='' onClick=parent.closeAddExoplanet() >X</button></td></tr></table>
+</td></tr>
+<tr style='background-color:white' ><td align=left><sup style='color:red'>(R)</sup>Planet name</td><td align=left><input type='text' style='width:200px'  id=nameValue /></td></tr>
+ <tr style='background-color:white' ><td align=left>Kepler name</td><td align=left><input type='text' style='width:200px'  id=keplerValue /></td></tr>
+ <tr style='background-color:white' ><td align=left>Kepler (KOI) name</td><td align=left><input type='text' style='width:200px'  id=koiValue /></td></tr>
+<tr style='background-color:white' ><td align=left><sup style='color:red'>(R)</sup>Habitable zone classification</td><td align=left><select style='width:200px'  id=zoneSelect ><option>hot</option><option>warm</option><option>cold</option></select></td></tr>
+<tr style='background-color:white' ><td align=left><sup style='color:red'>(R)</sup>Mass Class</td><td align=left><select style='width:200px'  id=massClassSelect ><option>mercurian</option><option>subterran</option><option>terran</option><option>superterran</option><option>neptunian</option><option>jovian</option></select></td></tr>
+<tr style='background-color:white' ><td align=left><sup style='color:red'>(R)</sup>Composition Class</td><td align=left><select  style='width:200px'  id=compositionSelect  ><option>iron</option><option>rocky-iron</option><option>rocky-water</option><option>water-gas</option><option>gas</option></select></td></tr>
+<tr style='background-color:white' ><td align=left><sup style='color:red'>(R)</sup>Atmosphere Class</td><td align=left><select  style='width:200px'  id=atmosphereSelect  ><option>no-atmosphere</option><option>metals-rich</option><option>hydrogen-rich</option></select></td></tr>
+<tr style='background-color:white' ><td align=left><sup style='color:red'>(R)</sup>Habitable Class</td><td align=left><select  style='width:200px'  id=habitableSelect  ><option>mesoplanet</option><option>thermoplanet</option><option>psychroplanet</option><option>hypopsychroplanet</option><option>hyperthermoplanet</option><option>non-habitable</option></select></td></tr>
+<tr style='background-color:white' ><td align=left>Min Mass (EU)</td><td align=left><input type='text' style='width:200px'  id=minMassValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Mass	Planet (EU)</td><td align=left><input type='text' style='width:200px'  id=massValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Max Mass (EU)</td><td align=left><input type='text' style='width:200px'  id=maxMassValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Radius (EU)</td><td align=left><input type='text' style='width:200px'  id=radiusValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Density (EU)</td><td align=left><input type='text' style='width:200px'  id=densityValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Gravity (EU)</td><td align=left><input type='text' style='width:200px'  id=gravityValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Escape velocity (EU)</td><td align=left><input type='text' style='width:200px'  id=escapeVelValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Minimum stellar flux (EU)</td><td align=left><input type='text' style='width:200px'  id=minFluxValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Mean stellar flux (EU)</td><td align=left><input type='text' style='width:200px'  id=meanFluxValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Maximum stellar flux (EU)</td><td align=left><input type='text' style='width:200px'  id=maxFluxValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Minimum equilibrium temp. (&deg;K)</td><td align=left><input type='text' style='width:200px'  id=minEqTempValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Mean equilibrium temp. (&deg;K)</td><td align=left><input type='text' style='width:200px'  id=meanEqTempValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Maximum equilibrium temp. (&deg;K)</td><td align=left><input type='text' style='width:200px'  id=maxEqTempValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Minimum surface temp. (&deg;K)</td><td align=left><input type='text' style='width:200px'  id=minSurfaceTempValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Mean surface temp. (&deg;K)</td><td align=left><input type='text' style='width:200px'  id=meanSurfaceTempValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Maximum surface temp. (&deg;K)</td><td align=left><input type='text' style='width:200px'  id=maxSurfaceTempValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Surface pressure (EU)</td><td align=left><input type='text' style='width:200px'  id=surfacePressureValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Magnitude Moon-Earth distance</td><td align=left><input type='text' style='width:200px'  id=magValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Apparent Moon-Earth distance (degrees)</td><td align=left><input type='text' style='width:200px'  id=apparSizeValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Period (days)</td><td align=left><input type='text' style='width:200px'  id=periodValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Semi major axis (AU)</td><td align=left><input type='text' style='width:200px'  id=semMajorAxisValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Eccentricity</td><td align=left><input type='text' style='width:200px'  id=excentricityValue /></td></tr>
+<tr style='background-color:white' ><td align=left><sup style='color:red'>(R)</sup>Mean distance from the star (AU)</td><td align=left><input type='text' style='width:200px'  id=meanDistValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Inclination (degrees)</td><td align=left><input type='text' style='width:200px'  id=inclinationValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Omega (degrees)</td><td align=left><input type='text' style='width:200px'  id=omegaValue /></td></tr>
+<tr style='background-color:white' ><td align=left><sup style='color:red'>(R)</sup>*Host Star name </td><td align=left>
+<select id=starNamePrefixSelect >
+ <option>Prefix</option>
+ <option>BD</option>
+<option>CFBDS</option>
+<option>COROT</option>
+<option>DE</option>
+<option>EPIC</option>
+<option>GL</option>
+<option>GI</option>
+<option>GJ</option>
+<option>HAT</option>
+<option>HD</option>
+<option>HIP</option>
+<option>KELT</option>
+<option>Kepler</option>
+<option>KIC</option>
+<option>KOI</option>
+<option>K2</option>
+<option>LKCA</option>
+<option>MOA</option>
+<option>NGC</option>
+<option>OGLE</option>
+<option>POTS</option>
+<option>PSR</option>
+<option>Qatar</option>
+<option>ROXs</option>
+<option>SAND</option>
+<option>SWEEPS</option>
+<option>TRAPPIST</option>
+<option>TrES</option>
+<option>TWA</option>
+<option>TYC</option>
+<option>USco</option>
+<option>WASP</option>
+ <option>WD</option>
+<option>WISE</option>
+<option>WTS</option>
+<option>Wolf</option>
+<option>XO</option>
+<option>YBP</option>
+<option>1RXS</option>
+<option>1SWASP</option>
+<option>2M</option>
+</select>
+<input type="text" id=starNameValue style='width:100px;' placeholder="id format" />
+
+ <br>Or, Name:<input type="text" placeholder="e.g. beta Umi"   id=starNameLongValue  style=width:120px  />
+
+</td></tr>
+<tr style='background-color:white' ><td align=left>HD	Star name</td><td align=left><input type='text' style='width:200px'  id=starNameHDValue /></td></tr>
+<tr style='background-color:white' ><td align=left>HIP	Star name</td><td align=left><input type='text' style='width:200px'  id=starNameHIPValue /></td></tr>
+
+
+<tr style='background-color:white' ><td align=left><sup style='color:red'>(R)</sup>Constellation</td><td align=center >(abbreviated) <select  id="conCodeSelect"></select></td></tr>
+<tr style='background-color:white' ><td align=left>Star type</td><td align=left><input type='text' style='width:200px'  id=starTypeValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Star mass (solar)</td><td align=left><input type='text' style='width:200px'  id=starMassValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Star radius (solar)</td><td align=left><input type='text' style='width:200px'  id=starRadiusValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Star effective temp. (solar)</td><td align=left><input type='text' style='width:200px'  id=starEffTempValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Star luminosity (solar)</td><td align=left><input type='text' style='width:200px'  id=starLumValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Star iron/hydrogen ratio [Fe/H].</td><td align=left><input type='text' style='width:200px'  id=fehRatioValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Star age (Gyrs)</td><td align=left><input type='text' style='width:200px'  id=starAgeValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Star apparent visual magnitude from Earth.</td><td align=left><input type='text' style='width:200px'  id=starAppMagValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Star distance from Earth (parsec)</td><td align=left><input type='text' style='width:200px'  id=starDistValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Star right ascension (degrees)</td><td align=left><input type='text' style='width:200px'  id=raValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Star declination (degrees)</td><td align=left><input type='text' style='width:200px'  id=decValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Star apparent visual magnitude from planet</td><td align=left><input type='text' style='width:200px'  id=magPlanetValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Star apparent size from planet (degrees)</td><td align=left><input type='text' style='width:200px'  id=sizePlanetValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Star number of planets.</td><td align=left><input type='text' style='width:200px'  id=planetNumValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Star number of habitable planets</td><td align=left><input type='text' style='width:200px'  id=planetNumHabValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Star inner edge habitable zone (AU)</td><td align=left><input type='text' style='width:200px'  id=habZoneMinValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Star outer edge habitable zone (AU)</td><td align=left><input type='text' style='width:200px'  id=habZoneMaxValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Habitable Zone Distance (HZD).</td><td align=left><input type='text' style='width:200px'  id=distHZDValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Habitable Zone Composition (HZC).</td><td align=left><input type='text' style='width:200px'  id=compHZCValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Habitable Zone Atmosphere (HZA).</td><td align=left><input type='text' style='width:200px'  id=atmosHZAValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Habitable Zone Index (HZI).</td><td align=left><input type='text' style='width:200px'  id=hziValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Standard Primary Habitability (SPH).</td><td align=left><input type='text' style='width:200px'  id=sphValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Interior Earth Similarity Index (iESI).</td><td align=left><input type='text' style='width:200px'  id=iESIValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Surface Earth Similarity Index (sESI).</td><td align=left><input type='text' style='width:200px'  id=sESIValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Earth Similarity Index (ESI).</td><td align=left><input type='text' style='width:200px'  id=ESIValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Star HabCat database</td><td align=left><input type='text' style='width:200px'  id=habCatValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Habitable</td><td align=left><input type='text' style='width:200px'  id=habPotValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Habitable exomoons</td><td align=left><input type='text' style='width:200px'  id=habMoonValue /></td></tr>
+<tr style='background-color:white' ><td align=left>Confirmed Kepler</td><td align=left><input type='text' style='width:200px'  id=confirmedValue /></td></tr>
+<tr style='background-color:white' ><td align=left><sup style='color:red'>(R)</sup>Discovery method</td><td align=left><select style='width:200px'  id=discMethodSelect ><option>radial velocity</option><option>transiting</option><option>imaging</option><option>micro lensing</option><option>pulsar timing</option><option>astrometry</option></select></td></tr>
+<tr style='background-color:white' ><td align=left><sup style='color:red'>(R)</sup>Discovery year</td><td align=left><input type='text' style='width:200px'  id=discYearValue /></td></tr>
+<tr style='background-color:white' ><td colspan=2 align=left>
+ * The Star must currently be in the Wiki Star Database.<br>
+<sup style='color:red'>(R)</sup> - Required
+
+
+
+</td></tr>
+
+<tr style='background-color:white' ><td colspan=2 align=center>
+    <button onclick=parent.sendNewExoPlanet()>send</button>
+    <div id=responseDiv style='text-align:center;color:red'></div>
+</td></tr>
+
+</table>
+
+</div>
+
+</body>
+ <script>
+ function sendSize()
+{
+   var width=containerDiv.scrollWidth+30
+   var height=containerDiv.scrollHeight+30
+   parent.sizeFrame('exoplanetAdd',width,height)
+}
+
+
+function conCodes()
+{
+
+          for(var k=0;k<conCodeArray.length;k++)
+          {
+              var conCode=conCodeArray[k][0]
+              var option=document.createElement("option")
+              option.text=conCode
+              conCodeSelect.appendChild(option)
+          }
+
+
+}
+
+
+var conCodeArray=[]
+conCodeArray[0]=["And","Andromeda"]
+conCodeArray[1]=["Ant","Antlia"]
+conCodeArray[2]=["Aps","Apus"]
+conCodeArray[3]=["Aqr","Aquarius"]
+conCodeArray[4]=["Aql","Aquila"]
+conCodeArray[5]=["Ara","Ara"]
+conCodeArray[6]=["Ari","Aries"]
+conCodeArray[7]=["Aur","Auriga"]
+conCodeArray[8]=["Boo","Bootes"]
+conCodeArray[9]=["Cae","Caelum"]
+conCodeArray[10]=["Cam","Camelopardalis"]
+conCodeArray[11]=["Cnc","Cancer"]
+conCodeArray[12]=["CVn","Canes Venatici"]
+conCodeArray[13]=["CMa","Canis Major"]
+conCodeArray[14]=["CMi","Canis Minor"]
+conCodeArray[15]=["Cap","Capricornus"]
+conCodeArray[16]=["Car","Carina"]
+conCodeArray[17]=["Cas","Cassiopeia"]
+conCodeArray[18]=["Cen","Centaurus"]
+conCodeArray[19]=["Cep","Cepheus"]
+conCodeArray[20]=["Cet","Cetus"]
+conCodeArray[21]=["Cha","Chamaeleon"]
+conCodeArray[22]=["Cir","Circinus"]
+conCodeArray[23]=["Col","Columba"]
+conCodeArray[24]=["Com","Coma Berenices"]
+conCodeArray[25]=["CrA","Corona Austrina"]
+conCodeArray[26]=["CrB","Corona Borealis"]
+conCodeArray[27]=["Crv","Corvus"]
+conCodeArray[28]=["Crt","Crater"]
+conCodeArray[29]=["Cru","Crux"]
+conCodeArray[30]=["Cyg","Cygnus"]
+conCodeArray[31]=["Del","Delphinus"]
+conCodeArray[32]=["Dor","Dorado"]
+conCodeArray[33]=["Dra","Draco"]
+conCodeArray[34]=["Equ","Equuleus"]
+conCodeArray[35]=["Eri","Eridanus"]
+conCodeArray[36]=["For","Fornax"]
+conCodeArray[37]=["Gem","Gemini"]
+conCodeArray[38]=["Gru","Grus"]
+conCodeArray[39]=["Her","Hercules"]
+conCodeArray[40]=["Hor","Horologium"]
+conCodeArray[41]=["Hya","Hydra"]
+conCodeArray[42]=["Hyi","Hydrus"]
+conCodeArray[43]=["Ind","Indus"]
+conCodeArray[44]=["Lac","Lacerta"]
+conCodeArray[45]=["Leo","Leo"]
+conCodeArray[46]=["LMi","Leo Minor"]
+conCodeArray[47]=["Lep","Lepus"]
+conCodeArray[48]=["Lib","Libra"]
+conCodeArray[49]=["Lup","Lupus"]
+conCodeArray[50]=["Lyn","Lynx"]
+conCodeArray[51]=["Lyr","Lyra"]
+conCodeArray[52]=["Men","Mensa"]
+conCodeArray[53]=["Mic","Microscopium"]
+conCodeArray[54]=["Mon","Monoceros"]
+conCodeArray[55]=["Mus","Musca"]
+conCodeArray[56]=["Nor","Norma"]
+conCodeArray[57]=["Oct","Octans"]
+conCodeArray[58]=["Oph","Ophiuchus"]
+conCodeArray[59]=["Ori","Orion"]
+conCodeArray[60]=["Pav","Pavo"]
+conCodeArray[61]=["Peg","Pegasus"]
+conCodeArray[62]=["Per","Perseus"]
+conCodeArray[63]=["Phe","Phoenix"]
+conCodeArray[64]=["Pic","Pictor"]
+conCodeArray[65]=["Psc","Pisces"]
+conCodeArray[66]=["PsA","Piscis Austrinus"]
+conCodeArray[67]=["Pup","Puppis"]
+conCodeArray[68]=["Pyx","Pyxis"]
+conCodeArray[69]=["Ret","Reticulum"]
+conCodeArray[70]=["Sge","Sagitta"]
+conCodeArray[71]=["Sgr","Sagittarius"]
+conCodeArray[72]=["Sco","Scorpius"]
+conCodeArray[73]=["Scl","Sculptor"]
+conCodeArray[74]=["Sct","Scutum"]
+conCodeArray[75]=["Ser","Serpens"]
+conCodeArray[76]=["Sex","Sextans"]
+conCodeArray[77]=["Tau","Taurus"]
+conCodeArray[78]=["Tel","Telescopium"]
+conCodeArray[79]=["Tri","Triangulum"]
+conCodeArray[80]=["TrA","Triangulum Australe"]
+conCodeArray[81]=["Tuc","Tucana"]
+conCodeArray[82]=["UMa","Ursa Major"]
+conCodeArray[83]=["UMi","Ursa Minor"]
+conCodeArray[84]=["Vel","Vela"]
+conCodeArray[85]=["Vir","Virgo"]
+conCodeArray[86]=["Vol","Volans"]
+conCodeArray[87]=["Vul","Vulpecula"]
+
+
+
+
+ </script>
+</html>
