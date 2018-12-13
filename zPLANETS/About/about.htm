@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Draw &amp; Publish SVG Drawings for  Exoplanets</title>
+
+</head>
+<body onload=writeEM();sendSize() style='background:white;font-size:90%;font-family:verdana'>
+
+
+ <CENTER>
+<div  id=containerDiv style='border-radius:10px;padding:2px;width:960px;cursor:default;position:relative'>
+
+<table style='width:100%'>
+<tr ><td style='width:95%' valign=center align=center>
+ <b>Draw &amp; Publish SVG Drawings for  Exoplanets</b><br>
+
+<img src=Images/chromeLogo.png width="30" height="28" align=center/> To best view this application, the Google Chrome browser is preferred.
+
+</td><td align=right></td></tr>
+</table>
+<h3>The Interactive Exoplanet</h3>
+Zoom into, and draw on this scaled model of the Planet.
+ <img src=Images/interactivePlanet.png width="800" height="413" />
+<center><h3>Choose an  Exoplanet.<br>Then draw your specific features related to that planet </h3></center>
+<table>
+
+
+<tr>
+
+<td>
+
+ <img src=Images/compClass.png width="737" height="555" />
+
+
+</td>
+<td>
+
+<TABLE cellpadding=5 border=3 style=border-collapse:collapse><TR>
+
+ <TD COLSPAN=2 ALIGN=CENTER><b>EXOPLANET SYMBOLS</b></TD>
+ </TR>
+ <TR valign=top>
+ <TD align=center>
+
+
+
+ <table border=1 style=border-collapse:collapse>
+ <tr><td colspan=2><b>Habitable Class</b></td></tr>
+ <tr>
+<td>Non-Habitable </td>
+<td style=width:30px;height:30px;><img width=30 height=30  src=../Images/non-habitable.svg /></td>
+ </tr>
+ <tr>
+<td>Mesoplanet </td>
+<td style=width:30px;height:30px;><img width=30 height=30  src=../Images/Mesoplanet.svg /></td>
+ </tr>
+
+ <tr>
+<td>Psychroplanet </td>
+<td style=width:30px;height:30px;><img width=30 height=30  src=../Images/Psychroplanet.svg /></td>
+ </tr>
+
+
+ <tr>
+<td>Hypopsychroplanet </td>
+<td style=width:30px;height:30px;><img width=30 height=30  src=../Images/Hypopsychroplanet.svg /></td>
+ </tr>
+
+ <tr>
+<td>Thermoplanet </td>
+<td style=width:30px;height:30px;><img width=30 height=30  src=../Images/Thermoplanet.svg /></td>
+ </tr>
+
+ <tr>
+<td>Hypothermoplanet </td>
+<td style=width:30px;height:30px;><img width=30 height=30  src=../Images/Hypothermoplanet.svg /></td>
+ </tr>
+
+ <tr>
+<td>Unknown </td>
+<td style=width:30px;height:30px;><img width=30 height=30  src=../Images/unknown.svg /></td>
+ </tr>
+ </table>
+ </TD>
+ <TD>
+<table border=1 style=border-collapse:collapse>
+<tr><td colspan=2><b>Atmosphere Class</b></td></tr>
+ <tr>
+<td>Hydrogen-Rich</td>
+<td style=width:30px;height:30px;><svg width=30 height=30  overflow="visible"><circle transform="translate(15 15)" fill=none stroke-width=7 stroke="lime" r="12"  ></svg></td>
+ </tr>
+ <tr>
+<td>Metals-Rich</td>
+<td style=width:30px;height:30px;><svg width=30 height=30  overflow="visible"><circle transform="translate(15 15)" fill=none  stroke-width=7  stroke="red" r="12"  ></svg></td>
+ </tr>
+
+ <tr>
+<td>None</td>
+<td style=width:30px;height:30px;><svg width=30 height=30  overflow="visible"><circle transform="translate(15 15)" fill=none  stroke-width=7  stroke="grey" r="12"  ></svg></td>
+ </tr>
+
+
+ <tr>
+<td>Unknown </td>
+<td style=width:30px;height:30px;><svg width=30 height=30  overflow="visible"><circle transform="translate(15 15)"  r="12"  fill=none  stroke-width=7  stroke="gainsboro" ></svg></td>
+ </tr>
+
+ </table>
+
+
+
+
+ </TD>
+ </TR>
+</TABLE>
+
+</td>
+
+</tr>
+
+<tr>
+<td align=center colspan=2>
+ <b>Annotate the Exoplanet with SVG Elements</b><br>
+ You can draw anywhere in the zoomable   surface of the planet<p></p>
+<img src=Images/annotateDrawing.png width="514" height="272" />
+
+
+</td>
+
+
+</tr>
+<tr>
+<td colspan=2>
+ Your drawings are stored in the Library. You may edit or remove your drawings at any time. Each drawing can also be published into a web page.
+ All visitors to SVG-Stars.org can view, plus publish, your drawings.
+</td>
+
+
+</tr>
+
+</table>
+<p></p>
+<hr>
+<div style='width:100%;text-align:center' >Download SVG-Stars .zip file <a href="https://github.com/fhemsher/SVG-Stars"  target="_blank">SVG-Stars.org Files</a></div>
+<div id=emDiv style='width:100%;text-align:center' ></div><p></p>
+
+</div>
+
+
+ </CENTER>
+
+</body>
+<script>
+function sendSize()
+{
+   var width=containerDiv.scrollWidth+30
+  var height=containerDiv.scrollHeight+30
+   parent.sizeFrame('about',width,height)
+}
+function writeEM()
+{
+   var em="Contact: "
+    em+="fhem"
+    em+="sher"
+    em+="@"
+    em+="gm"
+    em+="ail."
+    em+="com"
+   emDiv.innerHTML=em +" &nbsp;&nbsp;<span style=color:maroon>Last Update: 12/09/2018</span>"
+
+}
+</script>
+</html>
