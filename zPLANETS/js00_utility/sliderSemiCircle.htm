@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Slider@Semi Circle</title>
+</head>
+<body>
+<div style='position:absolute;top:200px;left:200px;'>
+<svg overflow=visible version="1.1" id="slider" width="300px" height="150px">
+<path onmousedown=moveDotStart(evt) onmousemove=moveDot(evt) onmouseup=moveDotEnd(evt) onmouseout=moveDotEnd(evt) id="slideBar" stroke=lime opacity=.3 stroke-width=30 d="M10,100 L290,100" />
+<path id="sliderPath" stroke="red" fill="none" stroke-width="5" d="M10,100a147,147,0,1,1,280,1"/>
+<circle pointer-events="none"  id="dot" fill="blue" cx="10" cy="100" r="14" />
+</svg>
+</div>
+
+<script>
+var MoveDot=false
+function moveDotStart(evt)
+{
+   MoveDot=true
+}
+function moveDot(evt)
+{
+    if(MoveDot==true)
+    {
+        var pathLength=sliderPath.getTotalLength()
+        var barLength=slideBar.getTotalLength()
+        var xCursor=evt.clientX-10-200
+        var moveRatio=xCursor/barLength
+        var dotPathLength=moveRatio*pathLength
+        var dotPnt=sliderPath.getPointAtLength(dotPathLength)
+        dot.setAttribute("cx",dotPnt.x)
+        dot.setAttribute("cy",dotPnt.y)
+    }
+
+}
+
+function moveDotEnd(evt)
+{
+  MoveDot=false
+}
+</script>
+</body>
+</html>

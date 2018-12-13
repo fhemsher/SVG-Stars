@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Visit A Community</title>
+<meta charset=utf-8 />
+</head>
+<body  style='padding:20px;background-color:transparent;font-family:verdana'>
+<div id=containerDiv>
+<table style='background-color:#004953;font-size:200%;width:100%'>
+<tr>
+<td colspan=2>
+<div id=loginSelectDiv style="width:100%;visibility:hidden;height:1px;overflow:hidden"><select title="My Star Map Communities" style='font-size:100%;width:90%' id=loginPlacesSelect onChange=loginPlacesSelected()></select> &nbsp;&nbsp;&nbsp;<button title='close login' onclick=loginButtonClicked() style='font-size:120%'>X</button></div>
+</td></tr>
+<tr style='width:100%;background-color:white'>
+<td  align=center>
+<input autofocus placeholder="Star Map Community ID" required type=text id=loginPlaceIdValue style='font-size:100%;width:30%;background-color:linen;' /> &nbsp;<input  placeholder="Your Email Address" required  type=text id=loginEmailValue style='font-size:100%;background-color:linen;width:50%' /> <button style="background-color:gainsboro;padding:10px;border-radius:15px;font-size:130%" onClick=parent.loginToPlace()>Go</button>
+ <br><span style='color:red' id=sentLoginSpan></span>
+</td>
+</tr>
+</table>
+</div>
+</body>
+<script>
+function loginPlacesSelected()
+{
+	var index=loginPlacesSelect.selectedIndex
+    	var myId=loginPlacesSelect.options[index].value
+    	 loginPlaceIdValue.value=myId
+    	 parent.ID=myId
+
+    	 parent.FOLDER=parent.XMLActiveLoginArray[index].getAttribute("folder")
+    	 parent.oNAME=parent.XMLActiveLoginArray[index].getAttribute("ownerName")
+         parent.PlaceNAME=parent.xml2txt(parent.XMLActiveLoginArray[index].getAttribute("name"))
+    	 if(parent.XMLActiveLoginArray[index].nodeName=="owner")
+    	 {
+    	    parent.oEMAIL=parent.XMLActiveLoginArray[index].getAttribute("email")
+    	    parent.uEMAIL=null
+    	 }
+    	 else if(parent.XMLActiveLoginArray[index].nodeName=="user")
+    	 {
+    	   parent.uEMAIL=parent.XMLActiveLoginArray[index].getAttribute("email")
+    	   parent.SendOwnerEmail=parent.XMLActiveLoginArray[index].getAttribute("ownerEmail")
+           parent.oEMAIL=null
+    	 }
+
+
+}
+</script>
+</html>

@@ -1,0 +1,21 @@
+.hab-psychroplanet {
+    fill: url(#psychroplanet);
+}
+.hab-non-habitable {
+    fill: url(#non-habitable);
+}
+.hab-mesoplanet {
+    fill: url(#mesoplanet);
+}
+.hab-hypopsychroplanet {
+    fill: url(#hypopsychroplanet);
+}
+.hab-unknown {
+    fill: url(#unknown);
+}
+.hab-thermoplanet {
+    fill: url(#thermoplanet);
+}
+.hab-hypothermoplanet {
+    fill: url(#hypothermoplanet);
+}
