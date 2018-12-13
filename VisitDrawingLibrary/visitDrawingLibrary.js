@@ -160,7 +160,7 @@ function visitThisDrawing(folder, k)
         var email = myDrawing.getAttribute("email")
         FOLDER=folder
 
-   var xml2File = "../DrawingLibrary/"+folder+"/CelestialBounds.xml"
+   var xml2File = "../DrawingLibrary/"+folder+"/PlanetBounds.xml"
         var load2XML = new XMLHttpRequest;
         load2XML.onload = callback2;
         load2XML.open("GET", xml2File, true);
@@ -173,46 +173,35 @@ function visitThisDrawing(folder, k)
             //---DOMParser---
             var parser = new DOMParser();
             XMLBounds = parser.parseFromString(xmlString, "text/xml").documentElement;
-            //<celestialBounds    constellation="'+conValue+'"  celestialScale="'+View.k+'" celestialRotate="'+View.r+'"  boundries='+boundries+'"   />
+          //"<bounds planetRotation=\""+PlanetView.r+"\"  planetScale=\""+PlanetView.k+"\" />"
 
-            var centerSplit = XMLBounds.getAttribute("primaryStarCoords").split(",")
-            var crd1 = parseFloat(centerSplit[0])
-            var crd2 = parseFloat(centerSplit[1])
-            PrimaryStarCoords =[crd1, crd2]
+            var viewK = XMLBounds.getAttribute("planetScale")
+            var viewR = XMLBounds.getAttribute("planetRotation")
 
-            var con = XMLBounds.getAttribute("constellation")
+                var rSplit = viewR.split(",")
+                var r0 = parseFloat(rSplit[0])
+                var r1 = parseFloat(rSplit[1])
+                var r2 = parseFloat(rSplit[2])
+                var k = parseFloat(viewK)
+                PlanetView =
+                {
+                r: [r0, r1, r2], k: k
+                };
 
-            var initStarView = XMLBounds.getAttribute("initStarDwg")
-            var viewK = XMLBounds.getAttribute("celestialScale")
-            var viewR = XMLBounds.getAttribute("celestialRotate")
-            var trans = XMLBounds.getAttribute("celestialTranslate")
-            console.log(initStarView)
 
-            //if(initStarView=="true")
-               initStarDwg(viewK, viewR, trans) //---stars.js creates star graticule and this star projection
-           // else
-               // goToDwgView(viewK, viewR, trans)  //---owner set view----
-            getArrowDefs()//--preload for use in path end arrows---
+                getArrowDefs()//--preload for use in path end arrows---
 
-            celestialContainerDiv.style.display = "none"
-            starContainerDiv.style.display = "block"
-           getMyStars()
+
 
 
            // loadAddedPaths()
            // getAddedStarData()
             //---provides projection on all elements zoom/rotate celestial sphere---
-            MyStars = true //--redraw()---
-            StopStarZoom = false
 
-            if(initStarView=="false")
-            {
-                PlanetScale=+XMLBounds.getAttribute("planetScale")
-                setTimeout(locatePlanets,1800)
-             }
-             else
-           setTimeout(starRedraw,800)
-            zoomLevelDiv.innerHTML = "&nbsp;"
+            StopPlanetZoom = false
+
+
+           setTimeout(planetRedraw,800)
 
 
 
@@ -234,7 +223,7 @@ function visitThisDrawing(folder, k)
 
 
 
-           zoomLevelDiv.innerHTML = ((200000*Math.log(StarView.k)/Math.log(200000))/1000).toFixed(0)
+            zoomLevelDiv.innerHTML = (PlanetView.k).toFixed(0)
 
 
 
