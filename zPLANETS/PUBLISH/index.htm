@@ -1,0 +1,242 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <title>A Star &amp; it's Exoplanets - Scalable Vector Graphics Drawings in an interactive universe</title>
+    <script charset="UTF-8" type="text/javascript" src="isMobile.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="bowser.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="safeXml.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="print.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="d3.v3.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="d3.geo.zoom.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="d3.geo.projection.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="redraw.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="initPublishMap.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="placeBounds.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="stars.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="showComment.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="jquery2.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="loadAddedElems.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="cursorLoc.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="distance.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="showStar.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="exoplanet.js"></script>
+
+
+ </head>
+<body style=background:#F0F8FF;margin:0px;padding:0px;font-family:verdana oncontextmenu="return false">
+<div id=planetContainerDiv style="overflow:hidden;position:absolute;top:0px;width:100%;height:100%;left:-10px;"><div  style=width:100%;height:100%; id="planetDiv"></div></div>
+<div id=drawingNameDiv style='cursor:pointer;position:absolute;top:30px;left:0px;width:97%;cursor:default;visibility:hidden;text-align:center;padding:5px;text-shadow: 4px 5px 6px #888888;color:green;font-size:120%;font-family:Verdana'><b><center><span id=myDrawingNameSpan>SVG...<i>Stars</i> - Begin Your Star Drawing</span></center></b></div>
+<table id=drawingDescriptionTable style=position:absolute;top:60px;width:97%><tr><td align=center><div  id=drawingDescriptionDiv style='border-style:dashed;border:1px solid #004953;font-style:italic;border-radius:6px;padding:5px;visibility:hidden;width:50%;background-color:white;'>This is this planet's description</div></td></tr></table>
+
+<table id=navTable style='visibility:hidden;position:absolute;top:40px;left:85%'>
+<tr>
+<td><div id=zoomLevelDiv title="Zoom Level" style='cursor:default;border-radius:4px;background-color:yellow;padding:2px;border:solid black 1px;width:60px'></div></td>
+</tr>
+</table>
+
+<div  id=commentDiv  style='box-shadow: 4px 4px 4px #888888;-webkit-box-shadow:2px 3px 4px #888888;font-size:80%;z-index:20;padding:2px;position:absolute;top:0px;left:0px;visibility:hidden;background-color:linen;border: solid 1px black;border-radius:5px;'></div>
+
+<div id=myPlanetDataDiv  style='height:1px;overflow:auto;background:white;border-radius:8px;padding:10px;border:1px solid;black;position:absolute;top:30px;left:30px;visibility:hidden'>
+
+<table style=width:100%;background:#004953;color:white;font-weight:bold><tr><td style=width:90% align=center>Planet Data Table</td><td align=right><button onmouseover=this.style.background='red'  onmouseout=this.style.background=''  onclick=closePlanetData()>X</button></td></tr></table>
+
+<table style=background:honeydew;font-size:80%;width:100%;border-collapse:collapse border=1 >
+<tr><td>Host Star</td><td id=S_NameTDD></td></tr>
+<tr><td>Common Name</td><td style=font-weight:bold id=P_NameTDD></td></tr>
+<tr><td>NASA Kepler name</td><td id=P_NameKeplerTDD></td></tr>
+<tr><td>Object of Interest (KOI)</td><td id=P_NameKOITDD></td></tr>
+<tr><td>Habitable zone classification</td><td id=P_ZoneClassTDD></td></tr>
+<tr><td>Mass Class</td><td id=P_MassClassTDD></td></tr>
+<tr><td>Composition Class</td><td id= P_CompositionClassTDD></td></tr>
+<tr><td>Atmosphere Class</td><td id=P_AtmosphereClassTDD></td></tr>
+<tr><td>Habitable Class</td><td id=P_HabitableClassTDD></td></tr>
+<tr><td>Minimum mass (EU)</td><td id=P_MinMassTDD></td></tr>
+<tr><td>Mass (EU)</td><td id=P_MassTDD></td></tr>
+<tr><td>Maximum mass (EU)</td><td id=P_MaxMassTDD></td></tr>
+<tr><td>Radius (EU)</td><td id=P_RadiusTDD></td></tr>
+<tr><td>Density (EU)</td><td id=P_DensityTDD></td></tr>
+<tr><td>Gravity (EU)</td><td id=P_GravityTDD></td></tr>
+<tr><td>Escape velocity (EU)</td><td id=P_EscVelTDD></td></tr>
+<tr><td>Minimum stellar flux (EU)</td><td id=P_SFluxMinTDD></td></tr>
+<tr><td>Mean stellar flux EU</td><td id=P_SFluxMeanTDD></td></tr>
+<tr><td>Maximum stellar flux (EU)</td><td id=P_SFluxMaxTDD></td></tr>
+<tr><td>Minimum equilibrium temperature (K)</td><td id=P_TeqMinTDD></td></tr>
+<tr><td>Mean equilibrium temperature (K)</td><td id=P_TeqMeanTDD></td></tr>
+<tr><td>Maximum equilibrium temperature (K)</td><td id=P_TeqMaxTDD></td></tr>
+<tr><td>Minimum surface temperature (K)</td><td id=P_TsMinTDD></td></tr>
+<tr><td>Mean surface temperature (K)</td><td id=P_TsMeanTDD></td></tr>
+<tr><td>Maximum surface temperature (K)</td><td id=P_TsMaxTDD></td></tr>
+<tr><td>Surface pressure (EU)</td><td id=P_SurfPressTDD></td></tr>
+<tr><td>Magnitude</td><td id=P_MagTDD></td></tr>
+<tr><td>Apparent size (deg.)</td><td id=P_ApparSizeTDD></td></tr>
+<tr><td>Period days</td><td id=P_PeriodTDD></td></tr>
+
+<tr><td>Semi major axis  (AU)</td><td id=P_SemMajorAxisTDD></td></tr>
+<tr><td>Eccentricity</td><td id=P_EccentricityTDD></td></tr>
+<tr><td>Mean distance from the star (AU)</td><td id=P_MeanDistanceTDD></td></tr>
+<tr><td>Inclination (deg.)</td><td id=P_InclinationTDD></td></tr>
+<tr><td>Omega (deg.)</td><td id=P_OmegaTDD></td></tr>
+<tr><td>Habitable Zone Distance (HZD)</td><td id=P_HZDTDD></td></tr>
+<tr><td>Habitable Zone Composition (HZC)</td><td id=P_HZCTDD></td></tr>
+<tr><td>Habitable Zone Atmosphere (HZA)</td><td id=P_HZATDD></td></tr>
+<tr><td>Habitable Zone Index (HZI)</td><td id=P_HZITDD></td></tr>
+<tr><td>Standard Primary Habitability (SPH)</td><td id=P_SPHTDD></td></tr>
+<tr><td>Interior Earth Similarity Index (iESI)</td><td id=P_IntESITDD></td></tr>
+<tr><td>Surface Earth Similarity Index (sESI)</td><td id=P_SurfESITDD></td></tr>
+<tr><td>Earth Similarity Index (ESI)</td><td id=P_ESITDD></td></tr>
+<tr><td>Potentially habitable.</td><td id=P_HabitableTDD></td></tr>
+<tr><td>Host's Habitable category.</td><td id=S_HabCatTDD></td></tr>
+<tr><td>Candidate for potential habitable exomoons</td><td id=P_HabMoonTDD></td></tr>
+<tr><td>Confirmed (relevant to the Kepler data)</td><td id=P_ConfirmedTDD></td></tr>
+<tr><td>Discovery method</td><td id=P_Disc_MethodTDD></td></tr>
+<tr><td>Discovery year</td><td id=P_Disc_YearTDD></td></tr>
+</table>
+</div>
+<div style=visibility:hidden;width:1px;height:1px;overflow:hidden;>
+<svg>
+<defs>
+<radialGradient id="gas" cx="30%" cy="30%" r="100%" fx="30%" fy="30%">
+<stop id="stop1Radial" offset="0%" stop-color="#7DF9FF" stop-opacity="1" opacity="1">
+</stop>
+<stop id="stop2Radial" offset="40%" stop-color="#1E90FF" stop-opacity="1" opacity="1">
+</stop>
+<stop id="stop3Radial" offset="100%" stop-color="#4682B4" stop-opacity="1">
+</stop>
+</radialGradient>
+
+<radialGradient id="iron" cx="30%" cy="30%" r="100%" fx="30%" fy="30%">
+<stop id="stop1Radial" offset="0%" stop-color="#F0F8FF" stop-opacity="1" opacity="1">
+</stop>
+<stop id="stop2Radial" offset="40%" stop-color="#CC3333" stop-opacity="1" opacity="1">
+</stop>
+<stop id="stop3Radial" offset="100%" stop-color="#FF2400" stop-opacity="1">
+</stop>
+</radialGradient>
+
+
+
+<radialGradient id="rocky-water" cx="30%" cy="30%" r="100%" fx="30%" fy="30%">
+<stop id="stop1Radial" offset="0%" stop-color="#FFFFFF" stop-opacity="1" opacity="1">
+</stop>
+<stop id="stop2Radial" offset="40%" stop-color="#008000" stop-opacity="1" opacity="1">
+</stop>
+<stop id="stop3Radial" offset="100%" stop-color="#009000" stop-opacity="1">
+</stop>
+</radialGradient>
+
+
+<radialGradient id="water-gas" cx="30%" cy="30%" r="100%" fx="30%" fy="30%">
+<stop id="stop1Radial" offset="0%" stop-color="#D3D3D3" stop-opacity="1" opacity="1">
+</stop>
+<stop id="stop2Radial" offset="40%" stop-color="#9370DB" stop-opacity="1" opacity="1">
+</stop>
+<stop id="stop3Radial" offset="100%" stop-color="#C9A0DC" stop-opacity="1">
+</stop>
+</radialGradient>
+<radialGradient id="rocky-iron" cx="30%" cy="30%" r="100%" fx="30%" fy="30%">
+<stop id="stop1Radial" offset="0%" stop-color="#FFFF00" stop-opacity="1" opacity="1">
+</stop>
+<stop id="stop2Radial" offset="40%" stop-color="#B8860B" stop-opacity="1" opacity="1">
+</stop>
+<stop id="stop3Radial" offset="100%" stop-color="#50404D" stop-opacity="1">
+</stop>
+</radialGradient>
+
+
+<defs>
+</svg>
+
+
+
+</div>
+
+
+</body>
+<script>
+document.addEventListener("onload",initPublish(),false)
+function initPublish()
+{
+    FOLDER=window.location.href.split("id=")[1]
+   	initMap()
+}
+
+function showPlanetData()
+{
+
+   S_NameTDD.innerHTML = SelectedPlanetXML.getAttribute("HostName")
+   P_NameTDD.innerHTML = SelectedPlanetXML.getAttribute("Name")
+  P_NameKeplerTDD.innerHTML = SelectedPlanetXML.getAttribute("NameKepler")
+  P_NameKOITDD.innerHTML = SelectedPlanetXML.getAttribute("NameKOI")
+  P_ZoneClassTDD.innerHTML = SelectedPlanetXML.getAttribute("ZoneClass")
+  P_MassClassTDD.innerHTML = SelectedPlanetXML.getAttribute("MassClass")
+  P_CompositionClassTDD.innerHTML = SelectedPlanetXML.getAttribute("CompositionClass")
+  P_AtmosphereClassTDD.innerHTML = SelectedPlanetXML.getAttribute("AtmosphereClass")
+  P_HabitableClassTDD.innerHTML = SelectedPlanetXML.getAttribute("HabitableClass")
+  P_MinMassTDD.innerHTML = SelectedPlanetXML.getAttribute("MinMass")
+  P_MassTDD.innerHTML = SelectedPlanetXML.getAttribute("Mass")
+  P_MaxMassTDD.innerHTML = SelectedPlanetXML.getAttribute("MaxMass")
+  P_RadiusTDD.innerHTML = SelectedPlanetXML.getAttribute("Radius")
+  P_DensityTDD.innerHTML = SelectedPlanetXML.getAttribute("Density")
+  P_GravityTDD.innerHTML = SelectedPlanetXML.getAttribute("Gravity")
+  P_EscVelTDD.innerHTML = SelectedPlanetXML.getAttribute("EscVel")
+  P_SFluxMinTDD.innerHTML = SelectedPlanetXML.getAttribute("SFluxMin")
+  P_SFluxMeanTDD.innerHTML = SelectedPlanetXML.getAttribute("SFluxMean")
+  P_SFluxMaxTDD.innerHTML = SelectedPlanetXML.getAttribute("SFluxMax")
+  P_TeqMinTDD.innerHTML = SelectedPlanetXML.getAttribute("TeqMin")
+  P_TeqMeanTDD.innerHTML = SelectedPlanetXML.getAttribute("TeqMean")
+  P_TeqMaxTDD.innerHTML = SelectedPlanetXML.getAttribute("TeqMax")
+  P_TsMinTDD.innerHTML = SelectedPlanetXML.getAttribute("TsMin")
+  P_TsMeanTDD.innerHTML = SelectedPlanetXML.getAttribute("TsMean")
+  P_TsMaxTDD.innerHTML = SelectedPlanetXML.getAttribute("TsMax")
+  P_SurfPressTDD.innerHTML = SelectedPlanetXML.getAttribute("SurfPress")
+  P_MagTDD.innerHTML = SelectedPlanetXML.getAttribute("Mag")
+  P_ApparSizeTDD.innerHTML = SelectedPlanetXML.getAttribute("ApparSize")
+  P_PeriodTDD.innerHTML = SelectedPlanetXML.getAttribute("Period")
+  P_SemMajorAxisTDD.innerHTML = SelectedPlanetXML.getAttribute("SemMajorAxis")
+  P_EccentricityTDD.innerHTML = SelectedPlanetXML.getAttribute("Eccentricity")
+  P_EccentricityTDD.innerHTML = SelectedPlanetXML.getAttribute("Eccentricity")
+  P_InclinationTDD.innerHTML = SelectedPlanetXML.getAttribute("Inclination")
+  P_MeanDistanceTDD.innerHTML = SelectedPlanetXML.getAttribute("MeanDistance")
+  P_OmegaTDD.innerHTML = SelectedPlanetXML.getAttribute("Omega")
+  P_HZDTDD.innerHTML = SelectedPlanetXML.getAttribute("HZD")
+  P_HZCTDD.innerHTML = SelectedPlanetXML.getAttribute("HZC")
+  P_HZATDD.innerHTML = SelectedPlanetXML.getAttribute("HZA")
+  P_HZITDD.innerHTML = SelectedPlanetXML.getAttribute("HZI")
+  P_SPHTDD.innerHTML = SelectedPlanetXML.getAttribute("SPH")
+  P_IntESITDD.innerHTML = SelectedPlanetXML.getAttribute("IntESI")
+  P_SurfESITDD.innerHTML = SelectedPlanetXML.getAttribute("SurfESI")
+  P_ESITDD.innerHTML = SelectedPlanetXML.getAttribute("ESI")
+  S_HabCatTDD.innerHTML = SelectedPlanetXML.getAttribute("HostHabCat")
+  P_HabitableTDD.innerHTML = SelectedPlanetXML.getAttribute("Habitable")
+  P_HabMoonTDD.innerHTML = SelectedPlanetXML.getAttribute("HabMoon")
+  P_ConfirmedTDD.innerHTML = SelectedPlanetXML.getAttribute("Confirmed")
+  P_Disc_MethodTDD.innerHTML = SelectedPlanetXML.getAttribute("Disc_Method")
+  P_Disc_YearTDD.innerHTML = SelectedPlanetXML.getAttribute("Disc_Year")
+
+
+myPlanetDataDiv.style.visibility="visible"
+   var height=630
+    d3.select("#myPlanetDataDiv").transition().duration(800).style("height",height+"px")
+
+
+}
+
+function closePlanetData()
+{
+    var height=1
+
+         d3.select("#myPlanetDataDiv").transition().duration(800).style("height",height+"px")
+        setTimeout('myPlanetDataDiv.style.visibility="hidden"',1000)
+
+}
+
+</script>
+
+</html>
+
+
+

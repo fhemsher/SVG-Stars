@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel="icon" href="../favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+<meta charset=utf-8 />
+<title>Emerald Map Communities: Mobile</title>
+<script>var Mobile=true </script>
+<script charset="UTF-8" type="text/javascript" src="../js01_start/d3.min.js"></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css' rel='stylesheet' />
+	<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js'></script>
+ <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+ </head>
+<body onload="printCookies();initMap()"  style=overflow:hidden;background-color:white;padding:0;margin:0;width:100%;height:100%;font-family:arial>
+
+<div id=mapContainerDiv  style='z-index:20;overflow:hidden;visibility:hidden;border-radius:20px;width:100%;height:100%;position:absolute'>
+<div class="myMapClass" style='position:absolute;border-radius:20px;top:0px;left:0px;width:100%;height:100%' id='MyMap'></div>
+	<div  id=placeNameDiv style='cursor:default;visibility:visible;text-align:center;width:100%;position:absolute;top:10px;left:0px;text-shadow: 4px 5px 6px #888888;color:#004953;font-size:200%;font-family:Verdana'><b><span id=myPlaceNameSpan>Emerald Map Communities</span></b></div>
+   	<div  id=commentDiv style='box-shadow: 4px 4px 4px #888888;-webkit-box-shadow:4px 5px 6px #888888;font-size:150%;z-index:20;padding:2px;position:absolute;top:0px;left:0px;visibility:hidden;background-color:linen;border: solid 1px black;border-radius:5px;'></div>
+</div>
+
+	<script charset="UTF-8" type="text/javascript" src="../JoinCommunity/joinCommunity.js"></script>
+	<script charset="UTF-8" type="text/javascript" src="../js01_start/initMap.js"></script>
+	<script charset="UTF-8" type="text/javascript" src="../js01_start/zoomUpdate.js"></script>
+	<script charset="UTF-8" type="text/javascript" src="../js00_utility/safeXml.js"></script>
+	<script charset="UTF-8" type="text/javascript" src="../js00_utility/cookie.js"></script>
+	<script charset="UTF-8" type="text/javascript" src="../js02_location/placeBounds.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="../js00_utility/showComment.js"></script>
+
+	<script charset="UTF-8" type="text/javascript" src="../AddElem/loadAddedElems.js"></script>
+	<script charset="UTF-8" type="text/javascript" src="../js00_utility/mapSVGcomp.js"></script>
+
+
+<div id=loginMobileFrameDiv  style='visibility:hidden;padding:10px;position:absolute;top:20%;left:0px;height:100%;width:100%'><iframe id=loginMobileFrame style='border-width:0px;height:100%;width:100%;'  src ="../Login/loginMobile.htm" scrolling='no' frameborder='0' ></iframe></div>
+	<script charset="UTF-8" type="text/javascript" src="../Login/loginMobile.js"></script>
+<div id=symbolLegendMobileFrameDiv  style='z-index:20;visibility:hidden;position:absolute;top:15%;left:5%;width:50%;height:80%;overflow-y:auto;'><iframe id=symbolLegendMobileFrame style='border-width:0px; width:100%' src ="../SymbolLegend/symbolLegendMobile.htm" scrolling='no' frameborder='0' ></iframe></div>
+	<script charset="UTF-8" type="text/javascript" src="../SymbolLegend/symbolLegendMobile.js"></script>
+	<script charset="UTF-8" type="text/javascript" src="../Symbol/registeredSymbolMobile.js"></script>
+	<script charset="UTF-8" type="text/javascript" src="../Symbol/plantSymbolMobile.js"></script>
+
+<input type=hidden id=hiddenPlaceNameValue />
+<input type=hidden id=hiddenPlaceDescriptionValue />
+<script>
+
+function printCookies(){
+
+	cStr = "";
+	pCOOKIES = new Array();
+	pCOOKIES = document.cookie.split('; ');
+   //	alert(pCOOKIES.length)
+	for(bb = 0; bb < pCOOKIES.length; bb++){
+		NmeVal  = new Array();
+		NmeVal  = pCOOKIES[bb].split('=');
+		if(NmeVal[0]){
+			cStr += NmeVal[0] + '=' + unescape(NmeVal[1]) + '; ';
+		}
+	}
+
+
+
+
+   //cookieValue.value= cStr;
+   console.log(cStr)
+}
+
+function legendButtonClicked()
+{
+    if(legendButton.innerHTML=="Show Legend")
+    {
+        loginMobileFrameDiv.style.visibility="hidden"
+        loginMobileFrameDiv.style.zIndex=""
+
+        legendButton.innerHTML="Hide Legend"
+        loginButton.innerHTML="Your Communities"
+        myPlaceNameSpan.innerHTML=PlaceNAME
+        symbolLegendMobileFrameDiv.style.visibility="visible"
+        symbolLegendMobileFrameDiv.style.zIndex="20"
+    }
+    else
+    {
+        legendButton.innerHTML="Show Legend"
+        symbolLegendMobileFrameDiv.style.visibility="hidden"
+        symbolLegendMobileFrameDiv.style.zIndex=""
+    }
+}
+
+function loginButtonClicked()
+{
+    if(loginButton.innerHTML=="Your Communities")
+    {
+        loginMobileFrameDiv.style.visibility="visible"
+        loginMobileFrameDiv.style.zIndex="20"
+        loginButton.innerHTML="Close Login"
+        legendButton.innerHTML="Show Legend"
+        myPlaceNameSpan.innerHTML="Visit A Community"
+        symbolLegendMobileFrameDiv.style.visibility="hidden"
+    }
+    else
+    {
+        myPlaceNameSpan.innerHTML=PlaceNAME
+        loginButton.innerHTML="Your Communities"
+        loginMobileFrameDiv.style.visibility="hidden"
+
+         loginMobileFrameDiv.style.zIndex=""
+    }
+}
+
+//mobile:<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+//pc:<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+</script>
+</body>
+</html>

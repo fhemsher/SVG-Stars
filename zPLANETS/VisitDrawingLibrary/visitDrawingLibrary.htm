@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Iframe Title</title>
+<meta charset=utf-8 />
+</head>
+<body onload=sendSize() style='width:1200px;background-color:transparent;font-family:verdana'>
+<div id=containerDiv>
+ <center>
+<table style='width:97%;background-color:#004953;'>
+<tr>
+<td>
+<table style='width:97%;background-color:#004953;'>
+<tr style='color:white;font-weight:bold;'><td style='width:98%;background-color:#004953;' align=center>View Planet Drawings In Library</td><td align=left> <button onClick=deleteTableRows();parent.closeIframe("visitDrawingLibrary")  style='color:white;font-weight:bold;background-color:#004953;'>X</button></td></tr>
+</table>
+</td>
+</tr>
+<tr style='background-color:white'>
+<td  align=center style=padding:10px;>
+<table style='font-size:80%;' id=drawingTable>
+<tr align=center>
+ <td>Planet Name</td>
+ <td>Description</td>
+ <td>Created By</td>
+  <td>Last Update</td>
+ <td></td>
+ <td></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</center>
+</div>
+</body>
+<script>
+function deleteTableRows()
+{
+
+         var rows = drawingTable.rows
+          for(var k = rows.length-1; k>0; k--)
+            drawingTable.deleteRow(k)
+      parent.visitThisDrawingLibraryLoad=false
+
+
+}
+
+function sendSize()
+{
+    parent.getDrawingLibrary()
+     parent.writeDrawingLibrary()
+   var width=containerDiv.scrollWidth
+   var height=containerDiv.scrollHeight+30
+   parent.sizeFrame('visitDrawingLibrary',width,height)
+}
+</script>
+</html>
