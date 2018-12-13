@@ -1,4 +1,5 @@
 //---login---
+var StarView
 function initStarDwg(viewK, viewR, trans)
 {
     var rSplit = viewR.split(",")
@@ -44,7 +45,7 @@ function initStarDwg(viewK, viewR, trans)
         StarSVG.call(StarZoom).on("dblclick.zoom", null)
         else
             StarSVG.call(StarZoom)
-
+             
             StarZoom.translate(myTrans).scale(StarView.k)
 
             PrevScale = StarView.k
@@ -57,7 +58,15 @@ function goToDwgView(viewK, viewR, trans)
 {
     DefaultViewChanged = true
 
-    //StarView = {r:viewR, k:viewK};
+  var rSplit = viewR.split(",")
+    var r0 = parseFloat(rSplit[0])
+    var r1 = parseFloat(rSplit[1])
+    var r2 = parseFloat(rSplit[2])
+    var k = parseFloat(viewK)
+    StarView =
+    {
+    r: [r0, r1, r2], k: k
+    };
 
     transX = trans[0]
     transY = trans[1]
@@ -101,9 +110,10 @@ function goToDwgView(viewK, viewR, trans)
 var NewStarScale
 function beginStarMap()
 {
+    /*
     StopCelestialZoom = true
     //---star view ditto celestial view
-    StarView = CelestialView
+    //StarView = CelestialView
 
     if(!StarProjection)
     {
@@ -125,24 +135,8 @@ function beginStarMap()
     StarProjection.scale(StarView.k)
     StarProjection.rotate(StarView.r)
     StarZoom.scale(CelestialView.k)
+   */
 
-    ownerSelectSpan.style.visibility = "visible"
-    beginTitle.style.visibility = "hidden"
-    ownerSelectSpan.style.visibility = "visible"
-    printButton.style.visibility = "visible"
-    openChangeButton.style.visibility = "visible"
-    openTimelineButton.style.visibility = "visible"
-    openReferrerButton.style.visibility = "visible"
-
-    placeDescriptionDiv.style.visibility = "visible"
-    placeNameDiv.style.visibility = "visible"
-    navTable.style.visibility = "visible"
-    celestialContainerDiv.style.display = "none"
-    starContainerDiv.style.display = "block"
-    // zoomPresetDiv.style.visibility="visible"
-    //zoomLevelDiv.style.visibility="visible"
-    //raDecDiv.style.visibility="visible"
-    startCursorLoc()
 }
 
 //--- close constellation----
@@ -271,11 +265,12 @@ var MyStarSize
 var StarCoordsArray =[]
 var CentroidLL
 var ExoplanetRotateArray =[]
-
+var CON
 var HZone = false
 
 function getMyStars()
-{
+{   
+
     loadAddedElems()
     loadAddedPaths()
 
@@ -367,6 +362,7 @@ function getMyStars()
                 var hab = exo.getAttribute("HabitableClass") //--fill color---
                 var atmos = exo.getAttribute("AtmosphereClass") //--stroke color---
                 var name = exo.getAttribute("Name") //--stroke color---
+                var period = exo.getAttribute("Period")  //--planet animation----
                 var letterIndex = name.lastIndexOf(" ")
                 var letter = name.charAt(letterIndex+1)
                 //<EXOPLANETS><EXO id="exoplanet1538338800304" HostName="16 Cyg B" Name="16 Cyg B b" NameKepler="" NameKOI="" ZoneClass="Cold" MassClass="Jovian" CompositionClass="gas" AtmosphereClass="hydrogen-rich" HabitableClass="non-habitable" MinMass="534.14" Mass="534.14" MaxMass="" Radius="11.06" Density="0.39" Gravity="4.36" EscVel="6.95" SFluxMin=" 0.1183426" SFluxMean=" 0.4656991" SFluxMax="3.489002" TeqMin="149.4" TeqMean="187.6" TeqMax="348.2" TsMin="" TsMean="" TsMax="" SurfPress="210.6" Mag="-21.94" ApparSize="21.15" Period="799.50" SemMajorAxis="1.6800" Eccentricity="0.69" Inclination="" MeanDistance="1.22" Omega="83.4" HZD="1.15" HZC="7.17" HZA="7.16" HZI="0.09" SPH="" IntESI="0.00" SurfESI="0.00" ESI="0.39" HostHabCat="0" Habitable="0" HabMoon="0" Confirmed="1" Disc_Method="Radial Velocity" Disc_Year="1996.00"/></EXOPLANETS>
@@ -455,7 +451,7 @@ function getMyStars()
 
                 var c = StarProjection(PrimaryStarCoords)
 
-                setOrbitPlanet(ll, name, atmos,comp, hab, letter, k, exoElems.length)
+                setOrbitPlanet(ll, name, atmos,comp, hab, letter, k, exoElems.length,period)
             }
 
 
@@ -465,7 +461,7 @@ function getMyStars()
 }
 var PlanetCoordsArray =[]
 var rotatePlanet = 0
-function setOrbitPlanet(ll, name, atmos,comp, hab, letter, k, qnty)
+function setOrbitPlanet(ll, name, atmos,comp, hab, letter, k, qnty,period)
 {
 
     var id = "planet"+k
@@ -487,15 +483,16 @@ function setOrbitPlanet(ll, name, atmos,comp, hab, letter, k, qnty)
         var x = xy[0]
         var y = xy[1]
 
-        var radius = 60/qnty
-    var strokeWidth=12/qnty
+      //  var radius = 60/qnty
+   // var strokeWidth=12/qnty
         var exoCircle = PlanetG.append("circle")
         .attr("class", "exoCircle")
         .attr("id", id)
-        .attr("r", radius)
+       // .attr("r", radius)
+        .attr("period", period)
         .attr("fill", fill)
         .attr("visibility", "hidden")
-        .attr("stroke-width", strokeWidth)
+      //  .attr("stroke-width", strokeWidth)
         .attr("name", name+"<br><b>Atmoshpere:</b> "+atmos+"<br><b>Composition:</b> "+comp+"<br><b>Habitable:</b> "+hab)
         .attr("onmouseover", "showExoplanet(evt)")
         .attr("onmouseout", "hideExoplanet(evt)")
@@ -518,38 +515,101 @@ function setOrbitPlanet(ll, name, atmos,comp, hab, letter, k, qnty)
 var PlanetsLoaded = false
 function locatePlanets()
 {
-    console.log("locatePlanets")
-    var planets = domPlanetG.childNodes
-
+     var planets = domPlanetG.childNodes
+      
     var cnt = 0
     var orbitPaths = orbitG.childNodes
+          //----compute planet radius----
+    var planetRadius
+    var planetStrokeWidth
 
+     var minDistArray=[]
+         //---base---
+      var bbSurface=primaryStarSurface.getBBox()
+      if(bbSurface.width<=bbSurface.height)
+      {
+         var minBase="Width"
+         minDistArray.push(bbSurface.width)
+
+      }
+
+       else
+       {
+          var minBase="Height"
+          minDistArray.push(bbSurface.height)
+       }
+
+
+
+    for(var k = 0; k<orbitPaths.length-2; k++)
+    {
+        var path = orbitPaths.item(k)
+             //---compute planet radius---
+
+                var bb=path.getBBox()
+                 if(minBase=="Width")
+                   minDistArray.push(bb.width)
+                 else
+                   minDistArray.push(bb.height)
+     }
+
+     var distArray=[]
+     for(var k=0;k<minDistArray.length-2;k++)
+     {
+
+         var beginDist=minDistArray[k]
+         var nextDist=minDistArray[k+1]
+         var dist=nextDist-beginDist
+         if(dist>0)
+         distArray.push(dist)
+
+     }
+     if(distArray.length!=1)
+     var minDist=Math.min(...distArray)
+     else
+      var minDist=250
+    // console.log("minDist "+minDist)
+
+     planetRadius=minDist/8
+     planetStrokeWidth=planetRadius*.2
+
+
+    console.log("locatePlanets")
+
+     console.log("orbitPaths.length "+orbitPaths.length)
     for(var k = 0; k<orbitPaths.length; k++)
     {
         var path = orbitPaths.item(k)
         if(path.id.indexOf("orbit")!=-1)
         {
-            var pathLength = path.getTotalLength()
+           var pathLength = path.getTotalLength()
 
-            var lengthAtPoint = cnt*pathLength/8
+            var Pnt = path.getPointAtLength(0)
 
-            var Pnt = path.getPointAtLength(lengthAtPoint)
 
+            var planet = planets.item(cnt)
+
+            planet.removeAttribute("visibility")
             var ll = StarProjection.invert([Pnt.x, Pnt.y])
 
             var planet = planets.item(cnt)
             planet.removeAttribute("visibility")
-            planet.setAttribute("transform", StarPoint(ll)+"scale("+PlanetScale+")")
 
-            PlanetCoordsArray.push(ll)
+                planet.setAttribute("cx",Pnt.x)
+                planet.setAttribute("cy",Pnt.y)
+                planet.setAttribute("r",planetRadius)
+                planet.setAttribute("stroke-width",planetStrokeWidth)
+
+            var period=+planet.getAttribute("period")
+            PlanetCoordsArray.push([path,planet,period,ll])
             cnt++
         }
 
     }
 
     PlanetsLoaded = true
-
-    starRedraw()
+  console.log("attachPlanetAnimation")
+   attachPlanetAnimation()
 
 }
 

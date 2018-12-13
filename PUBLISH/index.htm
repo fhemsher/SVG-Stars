@@ -11,7 +11,6 @@
     <script charset="UTF-8" type="text/javascript" src="safeXml.js"></script>
     <script charset="UTF-8" type="text/javascript" src="print.js"></script>
     <script charset="UTF-8" type="text/javascript" src="d3.v3.js"></script>
-	<script charset="UTF-8" type="text/javascript" src="rotateZoomStar.js"></script>
     <script charset="UTF-8" type="text/javascript" src="d3.geo.zoom.js"></script>
     <script charset="UTF-8" type="text/javascript" src="d3.geo.projection.js"></script>
     <script charset="UTF-8" type="text/javascript" src="redraw.js"></script>
@@ -26,6 +25,7 @@
     <script charset="UTF-8" type="text/javascript" src="showStar.js"></script>
     <script charset="UTF-8" type="text/javascript" src="exoplanet.js"></script>
     <script charset="UTF-8" type="text/javascript" src="showHideHelp.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="animatePlanet.js"></script>
  <link rel="stylesheet" href="celestialStyle.css" />
  <link rel="stylesheet" href="habitable.css" />
 
@@ -41,15 +41,9 @@
 <div id=drawingNameDiv style='cursor:pointer;position:absolute;top:30px;left:0px;width:97%;cursor:default;visibility:hidden;text-align:center;padding:5px;text-shadow: 4px 5px 6px #888888;color:green;font-size:120%;font-family:Verdana'><b><center><span id=myDrawingNameSpan>SVG...<i>Stars</i> - Begin Your Star Drawing</span></center></b></div>
 <table id=drawingDescriptionTable style=position:absolute;top:60px;width:97%><tr><td align=center><div  id=drawingDescriptionDiv style='border-style:dashed;border:1px solid #004953;font-style:italic;border-radius:6px;padding:5px;visibility:hidden;width:40%;background-color:white;'></div></td></tr></table>
 
-<table id=navTable style='width:200px;position:absolute;top:40px;left:74%'>
+<table id=navTable style='width:200px;position:absolute;top:10px;left:90%'>
 <tr>
 <td><div id=zoomLevelDiv title="Zoom Level" style='border-radius:4px;background-color:yellow;padding:2px;border:solid black 1px;width:60px'></div></td>
-<td><div id=zoomPresetDiv style='cursor:default;border-radius:4px;background-color:yellow;padding:2px;border:solid black 1px;font-weight:bold;text-align:center;font-weight:bold;font-size:85%'><nobr>
-    <button style=background:#D1E231 title="Constellation View" onmouseover=this.style.backgroundColor='white' onmouseout=this.style.backgroundColor='#D1E231'  onclick='zoomConView()'>[ <b>&minus;</b> ]</button>
-    <button style=background:#D1E231  title="Default View"  onmouseover=this.style.backgroundColor='green' onmouseout=this.style.backgroundColor='#D1E231' onclick='zoomDefaultView()'>[ &empty; ]</button>
-    <button style=background:#D1E231  title="Primary Star Zone" onmouseover=this.style.backgroundColor='#9966CC' onmouseout=this.style.backgroundColor='#D1E231' onclick='zoomPrimaryStarZoneView()'>[+]</button>
-    <button  style=background:#D1E231 title="Primary Star Corona" onmouseover=this.style.backgroundColor='lime' onmouseout=this.style.backgroundColor='#D1E231' onclick='zoomPrimaryStarCoronaView()'>[++]</button>
-    <button style=background:#D1E231  title="Primary Star Surface" onmouseover=this.style.backgroundColor='orangered' onmouseout=this.style.backgroundColor='#D1E231' onclick='zoomPrimaryStarSurfaceView()'>[+++]</button> <img onclick=parent.openZoomHelp() title="Zoom Levels" src="../Images/help.png" align=center width=20 height=20 alt="" /></nobr></div></td>
 </tr>
 </table>
 
@@ -89,6 +83,9 @@
 
 
 <div  id=commentDiv  style='box-shadow: 4px 4px 4px #888888;-webkit-box-shadow:2px 3px 4px #888888;font-size:80%;z-index:20;padding:2px;position:absolute;top:0px;left:0px;visibility:hidden;background-color:linen;border: solid 1px black;border-radius:5px;'></div>
+<input type="hidden"id=hiddenConValue />
+<input type="hidden"id=hiddenDrawingNameValue />
+<input type="hidden"id=hiddenDrawingDescriptionValue />
 
 <div id=exoplanetDataTableDiv style='border-radius:8px;padding:10px;border:3px solid #004953;background:white;display:none;position:absolute;top:60px;left:50px;width:400px;height:600px;overflow:auto;'>
     <table style=width:100%;background:#004953;color:white;font-weight:bold><tr><td style=width:90% align=center>Host Star &amp; it's Exoplanets</td><td align=right><button onmouseover=this.style.background='red'  onmouseout=this.style.background='' style=position:fixed onclick=exoplanetDataTableDiv.style.display='none'>X</button></td></tr></table>
@@ -173,55 +170,7 @@
 
 </div>
 
-<div style=position:absolute;top:0px;left:20px;><b><span style=font-family:timesnewroman;font-size:130%;color:red>SVG </span><span style=font-size:120%;color:blue><i>Stars</i></span></b></div>
-<div style=visibility:hidden;overflow:hidden;width:1px;height:1px>
-<svg>
-<defs id=habDefs>
-<radialGradient id="mesoplanet" gradientUnits="objectBoundingBox"
-fx="30%" fy="30%">
-<stop offset="0%"   style="stop-color:#FFFFFF"/>
-<stop offset="40%"  style="stop-color:#0000AA"/>
-<stop offset="100%" style="stop-color:#000077"/>
-</radialGradient>
-<radialGradient id="psychroplanet" gradientUnits="objectBoundingBox"
-fx="30%" fy="30%">
-<stop offset="0%"   style="stop-color:#FFFFFF"/>
-<stop offset="40%"  style="stop-color:#37A1E7"/>
-<stop offset="100%" style="stop-color:#378BC7"/>
-</radialGradient>
-<radialGradient id="non-habitable" gradientUnits="objectBoundingBox"
-fx="30%" fy="30%">
-<stop offset="0%"   style="stop-color:#FFFFFF"/>
-<stop offset="40%"  style="stop-color:#242729"/>
-<stop offset="100%" style="stop-color:#24282A"/>
-</radialGradient>
-<radialGradient id="hypopsychroplanet" gradientUnits="objectBoundingBox"
-fx="30%" fy="30%">
-<stop offset="0%"   style="stop-color:#FFFFFF"/>
-<stop offset="40%"  style="stop-color:#AC49E3"/>
-<stop offset="100%" style="stop-color:#9D42D0"/>
-</radialGradient>
-<radialGradient id="unknown" gradientUnits="objectBoundingBox"
-fx="30%" fy="30%">
-<stop offset="0%"   style="stop-color:#FFFFFF"/>
-<stop offset="40%"  style="stop-color:#959595"/>
-<stop offset="100%" style="stop-color:#7C7C7C"/>
-</radialGradient>
-<radialGradient id="thermoplanet" gradientUnits="objectBoundingBox"
-fx="30%" fy="30%">
-<stop offset="0%"   style="stop-color:#FFFFFF"/>
-<stop offset="40%"  style="stop-color:#CA0A14"/>
-<stop offset="100%" style="stop-color:#A2030C"/>
-</radialGradient>
-<radialGradient id="hypothermoplanet" gradientUnits="objectBoundingBox"
-fx="30%" fy="30%">
-<stop offset="0%"   style="stop-color:#FFFFFF"/>
-<stop offset="40%"  style="stop-color:#F08F27"/>
-<stop offset="100%" style="stop-color:#DB8226"/>
-</radialGradient>
-</defs></svg>
 
-</div>
 
 </body>
 <script>

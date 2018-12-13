@@ -70,7 +70,7 @@ function loadAddedPaths()
 
 
         //---places circles at 'bottom', so other elements are on top---
-		for(var k=0;k<addedPaths.length;k++)
+		for(var m=0;m<addedPaths.length;m++)
 		{
             //var id=addedPaths.item(k).getAttribute("id")
              //var myScale=parseFloat(addedPaths.item(k).getAttribute("myScale"))
@@ -83,31 +83,23 @@ function loadAddedPaths()
                 j++
             }
             */
+              addedPaths.item(m).removeAttribute("onmousedown")
+                   addedPaths.item(m).removeAttribute("ondblclick")
 
-             addedPaths.item(k).removeAttribute("ondblclick")
-		    var myScale=parseFloat(addedPaths.item(k).getAttribute("myScale"))
+		    var myScale=parseFloat(addedPaths.item(m).getAttribute("myScale"))
 
 
-            var myId=addedPaths.item(k).getAttribute("id")
-            var bbCoords=parseFloat(addedPaths.item(k).getAttribute("bbCoords"))
-             var coordString=addedPaths.item(k).getAttribute("bbCoords").split(",")
+            var myId=addedPaths.item(m).getAttribute("id")
+            var bbCoords=parseFloat(addedPaths.item(m).getAttribute("bbCoords"))
+             var coordString=addedPaths.item(m).getAttribute("bbCoords").split(",")
             var coords=[parseFloat(coordString[0]),parseFloat(coordString[1])]
 
-                  //  addedPaths.item(k).setAttribute('d', d3.svg.line().interpolate("linear"));
-            var fade=addedPaths.item(k).getAttribute("fade")
-            AddPathBBCoordsArray.push([coords,myScale,myId,fade])
+
+            AddPathBBCoordsArray.push([coords,myScale,myId])
             //AddPathCoordsArray.push([coords,myScale,myId,linearD])
 
-           domAddPathG.appendChild(addedPaths.item(k).cloneNode(true))
-           /*
-                  var type=addedPaths.item(k).getAttribute("type")
-          if(type=="basis")
-          {
+           domAddPathG.appendChild(addedPaths.item(m).cloneNode(true))
 
-             d3.select("#"+myId)
-
-          }
-          */
 
             d3.select("#"+myId).attr("transform",StarPoint(coords)+"scale("+(StarView.k/StarScale)/myScale+")"  )
              /*
@@ -117,7 +109,7 @@ function loadAddedPaths()
             */
         }
 
-       //console.log(new XMLSerializer().serializeToString(domAddPathG))
+       console.log(domAddPathG)
 
 
     }
@@ -163,7 +155,7 @@ function loadAddedElems()
 
 
 		for(var k=0;k<addedElems.length;k++)
-		{    addedElems.item(k).removeAttribute("ondblclick")
+		{
 		    var ll0=parseFloat(addedElems.item(k).getAttribute("ll0"))
 		    var ll1=parseFloat(addedElems.item(k).getAttribute("ll1"))
 		    var myScale=parseFloat(addedElems.item(k).getAttribute("myScale"))
@@ -174,18 +166,14 @@ function loadAddedElems()
 
 
             var myId=addedElems.item(k).getAttribute("id")
-              var fade=addedElems.item(k).getAttribute("fade")
-            AddElemCoordsArray.push([[ll0,ll1],myScale,myId,rotateAngle,fade])
-	            var addedElem=addedElems.item(k).cloneNode(true)
 
-                if(Mobile==true)
-                {
+            AddElemCoordsArray.push([[ll0,ll1],myScale,myId,rotateAngle])
+	        var addedElem=addedElems.item(k).cloneNode(true)
+
+
                    addedElem.removeAttribute("onmousedown")
                    addedElem.removeAttribute("ondblclick")
-                        //addedElem.removeAttribute("onmouseover")
-                addedElem.setAttribute("onclick","showSymbolComment(evt)")
 
-                }
 
                 if(addedElem.nodeName=="image")
                 {
@@ -199,6 +187,8 @@ function loadAddedElems()
 
              
 		}
+       console.log(domAddElemG)
+
       if(Mobile==false)
        starRedraw()
       ///else

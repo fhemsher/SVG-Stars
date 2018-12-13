@@ -27,7 +27,7 @@ function starRedraw()
             StarZoom.translate([PrevTransX, PrevTransY])
             StarZoom.scale(PrevScale)
             //---remove display on +- 50 ZoomInteger----
-             var zoomInteger = Math.floor((200000*Math.log(StarView.k)/Math.log(200000))/1000)
+             var zoomInteger = Math.floor((200000*Math.log(PrevScale)/Math.log(200000))/1000)
                 for(var k = 0; k<domAddElemG.childNodes.length; k++)
                 {
                      var elem=domAddElemG.childNodes.item(k)
@@ -120,17 +120,10 @@ function starRedraw()
 
             }
 
-            if(PlanetScale&&PlanetsLoaded)
+            if(PlanetsLoaded)
             {
                 PlanetG.style("display", "block")
-                PlanetG.selectAll(".exoCircle")
-                .data(PlanetCoordsArray)
-                .attr("transform", function(d)
-                    {
 
-                        return StarPoint(d)+"scale("+(StarView.k/StarScale)/PlanetScale+")" //+"rotate("+d[1]+" "+d[2]+" "+d[3]+")"
-                    }
-                )
             }
 
         }
@@ -140,7 +133,7 @@ function starRedraw()
             ExoplanetG.style("display", "none")
             OrbitG.style("display", "none")
             PlanetG.style("display", "none")
-            saveDrawingButtonDiv.style.visibility = "hidden"
+            
         }
         if(PrevZoomInteger>500)
             CoronaBG.style("display", "block")

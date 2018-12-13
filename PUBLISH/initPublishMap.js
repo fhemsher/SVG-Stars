@@ -431,7 +431,88 @@ var defs = StarSVG.append("defs")
     .attr("width", "1")
     .attr("preserveAspectRatio", "none")
     .attr("xlink:href", "../About/Images/graticuleRework.svg")
-    CoronaBG=StarG.append("rect")
+
+ var defs= StarSVG.append("defs")
+    .attr("id","habDefs")
+    var mesoplanetPatt = defs.append("pattern")
+    .attr("id", "mesoplanet")
+    .attr("height", "100%")
+    .attr("width", "100%")
+    .attr("patternContentUnits", "objectBoundingBox")
+    .append("image")
+    .attr("height", "1")
+    .attr("width", "1")
+    .attr("preserveAspectRatio", "none")
+    .attr("xlink:href", "Images/mesoplanet.svg")
+
+    var psychroplanetPatt = defs.append("pattern")
+    .attr("id", "psychroplanet")
+    .attr("height", "100%")
+    .attr("width", "100%")
+    .attr("patternContentUnits", "objectBoundingBox")
+    .append("image")
+    .attr("height", "1")
+    .attr("width", "1")
+    .attr("preserveAspectRatio", "none")
+    .attr("xlink:href", "Images/psychroplanet.svg")
+
+    var nonhabitablePatt = defs.append("pattern")
+    .attr("id", "non-habitable")
+    .attr("height", "100%")
+    .attr("width", "100%")
+    .attr("patternContentUnits", "objectBoundingBox")
+    .append("image")
+    .attr("height", "1")
+    .attr("width", "1")
+    .attr("preserveAspectRatio", "none")
+    .attr("xlink:href", "Images/non-habitable.svg")
+
+    var hypopsychroplanetPatt = defs.append("pattern")
+    .attr("id", "hypopsychroplanet")
+    .attr("height", "100%")
+    .attr("width", "100%")
+    .attr("patternContentUnits", "objectBoundingBox")
+    .append("image")
+    .attr("height", "1")
+    .attr("width", "1")
+    .attr("preserveAspectRatio", "none")
+    .attr("xlink:href", "Images/hypopsychroplanet.svg")
+
+    var unknownPatt = defs.append("pattern")
+    .attr("id", "unknown")
+    .attr("height", "100%")
+    .attr("width", "100%")
+    .attr("patternContentUnits", "objectBoundingBox")
+    .append("image")
+    .attr("height", "1")
+    .attr("width", "1")
+    .attr("preserveAspectRatio", "none")
+    .attr("xlink:href", "Images/unknown.svg")
+
+    var thermoplanetPatt = defs.append("pattern")
+    .attr("id", "thermoplanet")
+    .attr("height", "100%")
+    .attr("width", "100%")
+    .attr("patternContentUnits", "objectBoundingBox")
+    .append("image")
+    .attr("height", "1")
+    .attr("width", "1")
+    .attr("preserveAspectRatio", "none")
+    .attr("xlink:href", "Images/thermoplanet.svg")
+
+    var hypothermoplanetPatt = defs.append("pattern")
+    .attr("id", "hypothermoplanet")
+    .attr("height", "100%")
+    .attr("width", "100%")
+    .attr("patternContentUnits", "objectBoundingBox")
+    .append("image")
+    .attr("height", "1")
+    .attr("width", "1")
+    .attr("preserveAspectRatio", "none")
+    .attr("xlink:href", "Images/hypothermoplanet.svg")
+
+
+ CoronaBG=StarG.append("rect")
     .attr("id","coronaBG")
     .attr("x","-40")
     .attr("y","-20")
@@ -600,6 +681,17 @@ var defs = StarSVG.append("defs")
     .style("cursor", "nw-resize")
 
 
+        StarProjection = d3.geo.mollweide().rotate([0, 0, 0]).translate([StarMapWidth/2, StarMapHeight/2])
+        StarMap = d3.geo.path().projection(StarProjection);
+        //---creates a 'shadow' grid identical to celestial---
+        //var graticule = d3.geo.graticule().minorStep([8, 4]);
+        //MyStarG.append("path").datum(graticule).attr("class", "gridline").attr("d", StarMap);
+
+        //---restructure zoom for higher scale performance, PAN in lieu of rotation---
+        StarZoom = d3.behavior.zoom().translate(StarProjection.translate()).scale(StarProjection.scale()).size([StarMapWidth, StarMapHeight]).on("zoom", starRedraw)
+        StarSVG.call(StarZoom).on("dblclick.zoom", null)
+
+
 }
 //---operating vars---
 var XMLBounds
@@ -640,7 +732,7 @@ function initMap()
     getDrawingLibrary() //---returns XMLDrawingLibraryDoc: see visitDrawingLibrary.js---
 
    getExoXml()
-
+      
 
     var drawings = XMLDrawingLibraryDoc.childNodes
     for(var k = 0; k<drawings.length; k++)
@@ -658,6 +750,7 @@ function initMap()
 
             oNAME =  drawing.getAttribute("ownerName")
             oEMAIL = drawing.getAttribute("email")
+
 
 
             loginToDrawing()
@@ -708,7 +801,7 @@ function getExoXml()
 function loginToDrawing()
 {
 
-        //----defaultBounds----
+  //----defaultBounds----
        var xml3File = "../DrawingLibrary/"+FOLDER+"/DefaultBounds.xml"
         var load3XML = new XMLHttpRequest;
         load3XML.onload = callback3;
@@ -732,7 +825,7 @@ function loginToDrawing()
         {
             //---responseText---
             var xmlString = load2XML.responseText
-            console.log(xmlString)
+
             //---DOMParser---
             var parser = new DOMParser();
             XMLBounds = parser.parseFromString(xmlString, "text/xml").documentElement;
@@ -744,14 +837,12 @@ function loginToDrawing()
             PrimaryStarCoords =[crd1, crd2]
 
             var con = XMLBounds.getAttribute("constellation")
-             SelectedCon=con
+
 
             var initStarView = XMLBounds.getAttribute("initStarDwg")
             var viewK = XMLBounds.getAttribute("celestialScale")
             var viewR = XMLBounds.getAttribute("celestialRotate")
             var trans = XMLBounds.getAttribute("celestialTranslate")
-
-
 
 
                 initStarDwg(viewK, viewR, trans) //---stars.js creates star graticule and this star projection
@@ -760,14 +851,16 @@ function loginToDrawing()
 
                // goToDwgView(viewK, viewR, trans)  //---owner set view----
             getArrowDefs()//--preload for use in path end arrows---
+            getMyStars()
 
-
-            starContainerDiv.style.display = "block"
-           getMyStars()
            if(initStarView=="false")
            {
+             StartScale=+XMLBounds.getAttribute("startScaleInit")
               PlanetScale=+XMLBounds.getAttribute("planetScale")
-               setTimeout(locatePlanets,1800)
+
+              //adjustedPlantedSizeValue.value=PlanetRadius
+              setTimeout(locatePlanets,1800)
+
 
 
            }
@@ -788,19 +881,21 @@ function loginToDrawing()
 
 
 
+            
 
-
-            drawingNameDiv.innerHTML = "<span id=myDrawingNameSpan >"+StarName+" ("+con+")</span> <span style='color:green;font-family:verdana;font-size:12px'> Contact:<a href=mailto:"+oEMAIL+"?subject=SVG-Stars%20Drawing:%20"+StarName.replace(/ /g,'%20')+" target=_blank style=color:red;text-decoration:underline title='Send email to this Star Drawing owner'  > "+oNAME +"</a></span>"
+            drawingNameDiv.innerHTML = "<span id=myDrawingNameSpan >"+StarName+" </span> <span style='color:green;font-family:verdana;font-size:12px'> Contact:<a href=mailto:"+oEMAIL+"?subject=SVG-Stars%20Drawing:%20"+StarName.replace(/ /g,'%20')+" target=_blank style=color:red;text-decoration:underline title='Send email to this Star Map owner'  > "+oNAME +"</a></span>"
             drawingDescriptionDiv.innerHTML = DrawingDescription
             drawingDescriptionDiv.style.visibility = "visible"
             drawingNameDiv.style.visibility = "visible"
-             measureDiv.style.visibility = "visible"
-
 
            zoomLevelDiv.innerHTML = ((200000*Math.log(StarView.k)/Math.log(200000))/1000).toFixed(0)
 
-        }
 
+
+
+
+
+        }
 
 }
 var ConBoundries //---used to create clone boundry for my star---
