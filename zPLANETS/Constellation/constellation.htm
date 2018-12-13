@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Constellation</title>
+<meta charset=utf-8 />
+
+</head>
+<body onload=sendSize() style='padding:20px;background-color:transparent;font-family:verdana'>
+<div id=containerDiv style='font-size:80%;position:absolute;top:30px;left:20px;'>
+<table style='width:360px;background-color:#004953;'>
+<tr>
+<td>
+    <table style='width:100%;background-color:#004953;'>
+
+    <tr style='color:white;font-weight:bold;'><td style='width:90%;background-color:#004953;' align=center>Create Your Star Map Wiki</td><td align=right> <button onClick=parent.returnMyStar();parent.closeIframe("constellation");parent.navButtonViz()  style='color:white;font-weight:bold;background-color:#004953;'>X</button></td></tr>
+    <tr style='color:white;'><td colspan=2 style='background-color:#004953;' align=center>
+     <a title='Search/Add Star to Wiki Database' style='color:lime' href="javascript:parent.openIframe('IsWikied','isWikied',40)"><i>Is Star in the Database?</i></a>
+
+
+    </td></tr>
+
+
+    </table>
+</td>
+
+</tr>
+
+<tr style='background-color:white'>
+<td  align=center>
+<select id="constellationSelect" style='font-size:130%;background-color:lime' onChange=parent.constellationSelected()>
+<option>Select Constellation</option>
+<option value=And>Andromeda (2117)</option>
+<option value=Ant>Antlia (681)</option>
+<option value=Aps>Apus (685)</option>
+<option value=Aqr>Aquarius (2148)</option>
+<option value=Aql>Aquila (1657)</option>
+<option value=Ara>Ara (957)</option>
+<option value=Ari>Aries (965)</option>
+<option value=Aur>Auriga (1947)</option>
+<option value=Boo>Bootes (2438)</option>
+<option value=Cae>Caelum (340)</option>
+<option value=Cam>Camelopardalis (2097)</option>
+<option value=Cnc>Cancer (1200)</option>
+<option value=CVn>Canes Venatici (1352)</option>
+<option value=CMa>Canis Major (1367)</option>
+<option value=CMi>Canis Minor (467)</option>
+<option value=Cap>Capricornus (973)</option>
+<option value=Car>Carina (2152)</option>
+<option value=Cas>Cassiopeia (2328)</option>
+<option value=Cen>Centaurus (4229)</option>
+<option value=Cep>Cepheus (1883)</option>
+<option value=Cet>Cetus (2962)</option>
+<option value=Cha>Chamaeleon (369)</option>
+<option value=Cir>Circinus (454)</option>
+<option value=Col>Columba (800)</option>
+<option value=Com>Coma Berenices (1075)</option>
+<option value=CrA>Corona Austrina (485)</option>
+<option value=CrB>Corona Borealis (455)</option>
+<option value=Crv>Corvus (364)</option>
+<option value=Crt>Crater (574)</option>
+<option value=Cru>Crux (381)</option>
+<option value=Cyg>Cygnus (4059)</option>
+<option value=Del>Delphinus (522)</option>
+<option value=Dor>Dorado (523)</option>
+<option value=Dra>Draco (2777)</option>
+<option value=Equ>Equuleus (168)</option>
+<option value=Eri>Eridanus (2770)</option>
+<option value=For>Fornax (1070)</option>
+<option value=Gem>Gemini (1461)</option>
+<option value=Gru>Grus (1195)</option>
+<option value=Her>Hercules (3397)</option>
+<option value=Hor>Horologium (705)</option>
+<option value=Hya>Hydra (3033)</option>
+<option value=Hyi>Hydrus (657)</option>
+<option value=Ind>Indus (942)</option>
+<option value=Lac>Lacerta (881)</option>
+<option value=Leo>Leo (2134)</option>
+<option value=LMi>Leo Minor (606)</option>
+<option value=Lep>Lepus (732)</option>
+<option value=Lib>Libra (1313)</option>
+<option value=Lup>Lupus (1279)</option>
+<option value=Lyn>Lynx (1567)</option>
+<option value=Lyr>Lyra (1541)</option>
+<option value=Men>Mensa (422)</option>
+<option value=Mic>Microscopium (653)</option>
+<option value=Mon>Monoceros (1443)</option>
+<option value=Mus>Musca (602)</option>
+<option value=Nor>Norma (679)</option>
+<option value=Oct>Octans (789)</option>
+<option value=Oph>Ophiuchus (2249)</option>
+<option value=Ori>Orion (1952)</option>
+<option value=Pav>Pavo (1236)</option>
+<option value=Peg>Pegasus (2693)</option>
+<option value=Per>Perseus (1981)</option>
+<option value=Phe>Phoenix (1303)</option>
+<option value=Pic>Pictor (747)</option>
+<option value=Psc>Pisces (1936)</option>
+<option value=PsA>Piscis Austrinus (668)</option>
+<option value=Pup>Puppis (2415)</option>
+<option value=Pyx>Pyxis (630)</option>
+<option value=Ret>Reticulum (333)</option>
+<option value=Sge>Sagitta (290)</option>
+<option value=Sgr>Sagittarius (2527)</option>
+<option value=Sco>Scorpius (1723)</option>
+<option value=Scl>Sculptor (1366)</option>
+<option value=Sct>Scutum (272)</option>
+<option value=Ser>Serpens (1546)</option>
+<option value=Sex>Sextans (636)</option>
+<option value=Tau>Taurus (2224)</option>
+<option value=Tel>Telescopium (900)</option>
+<option value=Tri>Triangulum (324)</option>
+<option value=TrA>Triangulum Australe (481)</option>
+<option value=Tuc>Tucana (928)</option>
+<option value=UMa>Ursa Major (3554)</option>
+<option value=UMi>Ursa Minor  (601)</option>
+<option value=Vel>Vela (2232)</option>
+<option value=Vir>Virgo (2877)</option>
+<option value=Vol>Volans (465)</option>
+<option value=Vul>Vulpecula (953)</option>
+
+
+</select>
+<button disabled style='visibility:hidden;border-radius:4px;border-color:maroon;width:30px;height:25px;padding:0px;border-width:2px'  title="Search Constellation Stars" id=celestialSearchButton onClick=parent.celestialSearchButtonClicked()  ><img id=goToSearchImg src="../About/Images/goToSearchDisabled.png" alt="" width="25" height="20" /></button>
+
+</td>
+</tr>
+<tr style='display:none;background-color:white;font-weight:bold;'><td align=center>
+Relative Star Size:
+<select id=constellationStarSizeSelect onChange=parent.constellationStarSizeSelected()>
+<option>None</option>
+<option selected >Magnitude</option>
+<option>Absolute Magnitude</option>
+<option>Luminosity</option>
+<option>Color Index(B-V)</option>
+<option>Distance(ps)</option>
+<option>Radius(solar)</option>
+<option>Temperature(solar)</option>
+<option>Mass(solar)</option>
+</select>
+</td></tr>
+
+<tr id=includeTr style='background-color:gainsboro'>
+<td  align=center>
+<center><b>Wiki Star: Prefix + # , or name</b>
+<table style='width:100%'>
+<tr >
+<td align=right>Wikied Star :</td><td>
+    <select id=starNamePrefixSelect>
+ <option>Prefix</option>
+ <option>BD</option>
+<option>CFBDS</option>
+<option>CoRoT</option>
+<option>DE</option>
+<option>EPIC</option>
+<option>GL</option>
+<option>GI</option>
+<option>GJ</option>
+<option>HAT</option>
+<option>HD</option>
+<option>HIP</option>
+<option>KELT</option>
+<option>Kepler</option>
+<option>KIC</option>
+<option>KOI</option>
+<option>K2</option>
+<option>LKCA</option>
+<option>MOA</option>
+<option>NGC</option>
+<option>OGLE</option>
+<option>POTS</option>
+<option>PSR</option>
+<option>Qatar</option>
+<option>ROXs</option>
+<option>SAND</option>
+<option>SAO</option>
+<option>SWEEPS</option>
+<option>TRAPPIST</option>
+<option>TrES</option>
+<option>TWA</option>
+<option>TYC</option>
+<option>USco</option>
+<option>WASP</option>
+ <option>WD</option>
+<option>WISE</option>
+<option>WTS</option>
+<option>Wolf</option>
+<option>XO</option>
+<option>YBP</option>
+<option>1RXS</option>
+<option>1SWASP</option>
+<option>2M</option>
+<option>4ME</option>
+</select>
+<input id=starNameIdFormatValue type="text" style='width:100px;' placeholder="id format" />
+<br>Or, Name:<input type="text" placeholder="e.g. beta Umi"   id=starNameLongValue  style=width:120px  />
+
+</td></tr>
+</table>
+<span style='color:red' id=notFoundStarSpan></span><br>
+<button id=addStarButton onClick=parent.addStarButtonClicked() disabled >Wikie This Star</button> <button id=starClearButton onClick=parent.starClearButtonClicked() disabled>Clear</button></center>
+</td>
+</tr>
+<tr><td>
+        <table>
+        <tr style='background-color:white'>
+        <td colspan=2  align=center>Wikied Star:<input  disabled type=text id=placeNameValue style='text-align:center;font-size:110%;font-weight:bold;width:200px' />
+         <br>4ME Name:<input   type=text id=name4MeValue style='text-align:center;font-size:110%;font-weight:bold;width:200px' />
+         </td>
+        </tr>
+        <tr style='background-color:white'>
+        <td colspan=2  align=center><b>Exoplanets</b><br>
+
+        <button disabled title="Data for this Star's Exoplanets" id=viewStarExoButton onclick=parent.viewStarExoButtonClicked()>View</button><input disabled id=exoplanetIncludeCheck onClick=parent.exoplanetIncludeChecked() type="checkbox" />:Include this star's exoplanet(s) <span id=exoCntSpan></span>
+          <br>
+          <button title="Include new exoplanets not currently listed in the database" id=updateExoplanetButton style='font-size:100%' onClick=parent.updateExoplanetButtonClicked()>Upddate Exoplanet Database</button>
+           <div style='width:100%;text-align:center' id=updatedExosDiv>&nbsp;</div>
+        </td>
+        </tr>
+
+        <tr style='background-color:white'>
+        <td colspan=2   align=center>Describe This Star Map:<br><textarea  id=placeDescriptionValue style='font-family:verdana;font-size:100%;background-color:honeydew;width:300px;height:40px;' ></textarea></td>
+        </tr>
+        <tr style='background-color:white'>
+        <td colspan=2   align=center>Your Email:<br><input   type=text id=placeEmailValue style='font-size:100%;background-color:honeydew;width:300px' /></td>
+        </tr>
+        <tr style='background-color:white'>
+        <td colspan=2  align=center>Your User Name:<br />(suggest using your real name)<input  type=text id=ownerNameValue style='font-size:100%;background-color:honeydew;width:300px' /><br /></td>
+        </tr>
+        <tr style='background-color:white'>
+        <td  colspan=2  align=center>Visitors Only:<input title="Viewers can only visit, but cannot join this star" type=checkbox id=visitOnlyCheck> &nbsp;  &nbsp; <button id=cancelMyStarButton disabled onClick=parent.cancelMyStar()>cancel</button>  &nbsp;  &nbsp; <button id=beginMyStarButton disabled onClick=parent.sendCommunityRegistration() >Begin Star Wiki</button>
+        <div id=sentRegistrationSpan style="color:red"></div>
+        </td>
+        </tr>
+        </table>
+</td>
+</tr>
+</table>
+
+</div>
+</body>
+<script>
+  //---key up / mouseout---
+function disableAddStars()
+{
+    var values=starPrimaryNumberValue.value
+    if(values!=""&& values.length>=2)
+        addStarButton.disabled=false
+    else
+        addStarButton.disabled=true
+}
+
+
+
+
+
+function sendSize()
+{
+   var width=containerDiv.scrollWidth+30
+   var height=containerDiv.scrollHeight+30
+   parent.sizeFrame('constellation',width,height)
+   parent.celestialContainerDiv.style.visibility="visible"
+   parent.getConBoundries()
+   parent.navButtonViz()
+
+}
+</script>
+</html>

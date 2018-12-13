@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Begin Your Planet Drawing</title>
+<meta charset=utf-8 />
+
+</head>
+<body onload=sendSize() style='padding:20px;background-color:transparent;font-family:verdana'>
+<div id=containerDiv style='font-size:80%;position:absolute;top:30px;left:20px;'>
+<table style='width:360px;background-color:#004953;'>
+<tr>
+<td>
+    <table style='width:100%;background-color:#004953;'>
+
+    <tr style='color:white;font-weight:bold;'><td style='width:90%;background-color:#004953;' align=center>Begin Your Planet Drawing </td><td align=right> <button id=closeBeginButton onmouseover=this.style.background='red' onmouseout=this.style.background='#004953' title="Close/Cancel begin star drawing" onclick=parent.closeBegin()   style='color:white;font-weight:bold;background-color:#004953;'>X</button></td></tr>
+
+
+    </table>
+</td>
+
+</tr>
+<tr style='color:white;background-color:#004953'>
+<td align=center>
+    <b>Sort:</b> &nbsp;
+
+    <select   id="sortSelect" onChange=parent.sortSelected()>
+    <option>Select Sort...</option>
+    <option selected>Selected Star</option>
+    <option>Alphabetical</option>
+    <option>Discovery Date</option>
+    <option>Planets Habitable Class</option>
+    <option>Planets Atmosphere Class</option>
+    <option>Planets Composition Class</option>
+     <option>Custom Sort...</option>
+    </select>
+
+    </td></tr>
+
+<tr><td align=center><select title="Begin a drawing for the selected planet" onChange=parent.planetSelected() id="planetSelect" style='background:white;font-weight:bold'><option>Select Planet</option></select>
+</td></tr>
+
+
+<tr style='color:lime'><td align=center>Planet Name: <b><span id=planetNameSpan></span></b></td></tr>
+
+
+        <tr style='background-color:white'>
+        <td   align=center>Describe This Planet's Drawing:<br><textarea  id=drawingDescriptionValue style='font-family:verdana;font-size:100%;background-color:honeydew;width:300px;height:40px;' ></textarea></td>
+        </tr>
+        <tr style='background-color:white'>
+        <td   align=center>Your Email:<br><input   type=text id=drawingEmailValue style='font-size:100%;background-color:honeydew;width:300px' /></td>
+        </tr>
+        <tr style='background-color:white'>
+        <td align=center>Your User Name:<br /><input  type=text id=ownerNameValue style='font-size:100%;background-color:honeydew;width:300px' /><br /></td>
+        </tr>
+        <tr style='background-color:white'>
+        <td   align=center>
+        <button  id=cancelMyPlanetButton  onClick=parent.cancelMyPlanet()>cancel</button>
+        &nbsp;  &nbsp; <button disabled id=beginMyPlanetButton onClick=parent.sendDrawingRegistration() >Begin Planet Drawing</button>
+
+        <div id=sentRegistrationSpan style="color:red">&nbsp;</div>
+        </td>
+        </tr>
+        </table>
+
+</div>
+</body>
+<script>
+
+
+function sendSize()
+{
+   var width=containerDiv.scrollWidth+30
+   var height=containerDiv.scrollHeight+30
+
+   parent.sizeFrame('begin',width,height)
+// planetNameSpan.innerHTML= parent.SelectedPlanetXML.getAttribute("Name")
+
+  if(parent.parent.oEMAIL)
+  {
+    drawingEmailValue.value=parent.parent.oEMAIL
+    ownerNameValue.value=parent.parent.oNAME
+  }
+
+  parent.writePlanetSelect()
+     parent.buildSortPacket()
+  //parent.navButtonViz()
+  parent.topNavDiv.style.display="none"
+
+
+}
+</script>
+</html>
