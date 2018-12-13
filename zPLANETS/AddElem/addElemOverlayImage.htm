@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title></title>
+<meta charset=utf-8 />
+</head>
+<body onload=sendSize() style='border-radius:10px;border:2px solid lightblue;background-color:transparent;padding:0;margin:0;font-family:arial'>
+
+<table id=drawEditOverlayImageObjTopTable style='background-color:linen		;padding:3px;width:100%;'><tr><td id=topEditTD style='width:90%;' align=center><span id=addEditSpan></span> Photos &nbsp; &nbsp;<i>fade:</i><input title="auto-fade above zoom level" type="checkbox" checked id=drawOverlayImageFadeCheck /></td><td align=right><button  onClick=parent.closeIframe("addElemOverlayImage");parent.closeDrawOverlayImage()>X</button></td></tr></table>
+
+<table style=border-radius:10px;width:300px;background-color:gainsboro>
+<tr style=background-color:linen		><td colspan=2 align=center>
+<iframe id="addElemOverlayImageUploadFrame"   frameborder="0" framespacing="0" style="height:155px" scrolling=no ></iframe>
+<input id=nativeWidthValue type=hidden /><input id=nativeHeightValue type=hidden />
+</td>
+</tr>
+<tr style=background-color:linen		><td valign=center>Size:</td><td align=center>
+<div id=sliderDiv title='Adjust image size'  style='overflow:hidden;visibility:visible;width:250px;height:25px;background-color:linen		;'>
+         <svg id="sliderSVG" onmousedown='startDragObj(evt)' onmousemove='dragObj(evt)' onmouseup='endDragObj(evt)' width="250" height='25' viewBox='-5 0 250 25'>
+	         <line x1='0' y1='12.5' x2='250' y2='12.5' stroke='black' stroke-width='1'/>
+	         <ellipse style="cursor:default" transform="translate(0 0)" class='targetDragObj' id='ellipseSlider' cx='20' cy='12.5' rx='20' ry='8' fill='gainsboro' stroke='black' stroke-width='2' />
+         </svg>
+</div>
+</td>
+</tr>
+ <tr style=background-color:linen>
+	<td colspan=2 valign=bottom align=center>Rotate
+		&nbsp;&nbsp;<button  onClick=parent.rotateImageAdjust(-1) style='height:25px;width:25px;padding:0px'><img width=20 height=20 src="../Images/minusRound.png" /></button>
+		<select title="rotate toggle value" id=rotateDrawImageAdjustSelect >
+		<option>.5</option>
+		<option>1</option>
+		<option>2</option>
+		<option selected>5</option>
+		<option>10</option>
+		</select>
+		<button onClick=parent.rotateImageAdjust(1)   style='height:25px;width:25px;padding:0px'><img width=20 height=20 src="../Images/plusRound.png" /></button>
+		&nbsp;<input id=adjustedRotateImageValue disabled type=text style='width:40px;' value=0 />&deg;
+	</td>
+</tr>
+<tr style=background-color:linen>
+<td colspan=2>
+<input type=text onclick=this.value="" style='width:300px;' id=drawOverlayImageCommentValue value="Photo comment goes here(optional)..." />
+
+</td>
+
+</tr>
+<tr style=background-color:linen align=center>
+	<td colspan=2 >
+		<button id=deleteDrawOverlayImageButton  title='remove this image' onClick=parent.deleteOverlayImage() style='visibility:hidden;background-color:red'>delete</button>
+		<button id=cancelDrawOverlayImageButton disabled title='cancel this image' onClick=parent.cancelDrawOverlayImage()>cancel</button>
+		<button id=finishDrawOverlayImageButton disabled onClick=parent.finishDrawOverlayImage()>finish</button>
+	</td>
+</tr>
+
+
+
+</table>
+
+</body>
+<script>
+var UploadBase64 //---string---
+var ImageNativeWidth
+var ImageNativeHeight
+var ImgTooBig=false
+
+
+function replaceActiveImg()
+{
+
+ if(parent.ActiveElem)
+ parent.activeElem.setAttributeNS('http://www.w3.org/1999/xlink', 'href', UploadBase64);
+
+}
+
+function sendSize()
+{
+   var width=document.body.scrollWidth
+   var height=document.body.scrollHeight
+   parent.sizeFrame('addElemOverlayImage',width,height)
+  	addElemOverlayImageUploadFrame.src="../ASPUpload/overlayUpload.ASP?ImgFolderName="+parent.FOLDER
+
+
+  if(parent.EditOverlayImage==true)
+  {
+   		setTimeout(parent.setEditOverlayImage,1200)
+        	parent.celestialSVG.removeAttribute("onclick")
+  }
+  else
+  	parent.startOverlayImageDraw()
+
+
+}
+//----mouse down---
+var DraggingObj=false
+
+var objDragTarget=null;
+var ObjStartX
+var ObjStartY
+var TransX=0
+var transformRequestObj
+var transformList
+var ScaleFactorX
+var ScaleFactorY
+//---mouse down over element---
+function startDragObj(evt)
+{
+	if(DraggingObj==false&& parent.ActiveElem ) //---prevents dragging conflicts on other draggable elements---
+	{
+              if(evt.target.getAttribute("class")=="targetDragObj")//---all other elems--
+            	objDragTarget = evt.target
+
+      if(objDragTarget)
+	  {
+             parent.ActiveElem.attr("opacity",.5)
+	          transformRequestObj=parent.celestialSVG.createSVGTransform()
+			   var animTransformList=parent.activeElem.transform
+			  transformList=animTransformList.baseVal
+
+
+			//---reference point to its respective viewport--
+			var pnt = sliderSVG.createSVGPoint();
+			pnt.x = evt.clientX;
+			pnt.y = evt.clientY;
+			//---elements transformed and/or in different(svg) viewports---
+			var sCTM = objDragTarget.getScreenCTM();
+			var Pnt = pnt.matrixTransform(sCTM.inverse());
+
+
+			ObjStartX = Pnt.x
+			ObjStartY =0
+
+			DraggingObj=true
+
+        if(ImageNativeWidth>=ImageNativeHeight)
+		{
+             var factorMax=ImageNativeHeight/ImageNativeWidth
+
+             ScaleFactorX=1
+			 ScaleFactorY=factorMax
+
+		}
+        else
+		{
+           var factorMax=ImageNativeWidth/ImageNativeHeight
+
+             ScaleFactorX=factorMax
+			 ScaleFactorY=1
+
+		}
+      }
+    }
+	else
+      	DraggingObj=false
+
+}
+//---mouse move---
+var PrevTransX=0
+function dragObj(evt)
+{
+	if(DraggingObj)
+	{  if(TransX>=0&& TransX<=210)
+		{
+			var pnt = sliderSVG.createSVGPoint();
+			pnt.x = evt.clientX;
+			pnt.y = evt.clientY;
+			//---elements in different(svg) viewports, and/or transformed ---
+			var sCTM = objDragTarget.getScreenCTM();
+			var Pnt = pnt.matrixTransform(sCTM.inverse());
+			Pnt.x -= ObjStartX;
+	        TransX+=Pnt.x
+
+
+
+		}
+
+		if(TransX<0)
+		{
+           TransX=0
+
+		}
+		if(TransX>210)
+		{
+          TransX=210
+
+		}
+          objDragTarget.setAttribute("transform","translate("+TransX+" 0)")
+
+
+
+                var scale=false
+                if(PrevTransX>0 && PrevTransX<TransX)
+				{     var myScale=1.05
+
+
+               // transformRequestObj.setScale(myScale,myScale)
+                     scale=true
+				}
+				else if(PrevTransX>TransX)
+				{
+
+                      var myScale=.95
+
+
+                  //transformRequestObj.setScale(myScale,myScale)
+                   scale=true
+				}
+
+
+               if(scale==true)
+			   {
+                 //transformList.appendItem(transformRequestObj)
+			   //transformList.consolidate()
+                   var width=parent.OverlayImageCurrentWidth*myScale
+                  var height=parent.OverlayImageCurrentHeight*myScale
+
+                parent.ActiveElem.attr("width",width)
+                parent.ActiveElem.attr("height",height)
+                 parent.OverlayImageCurrentWidth=width
+                 parent.OverlayImageCurrentHeight=height
+
+
+			   }
+                PrevTransX=TransX
+
+
+
+	}
+}
+//--mouse up---
+var transObjX
+var transObjY
+function endDragObj(evt)
+{
+	if(DraggingObj)
+	{
+          parent.ActiveElem.attr("opacity",null)
+		DraggingObj = false;
+		//--for zoom update---
+       var pt=parent.d3.transform(parent.activeElem.getAttribute("transform"))
+
+        parent.activeElem.setAttribute("overlayScaleX",pt.scale[0])
+        parent.activeElem.setAttribute("overlayScaleY",pt.scale[1])
+       parent.OverlayScaleX=pt.scale[0]
+	   parent.OverlayScaleY=pt.scale[1]
+
+
+
+
+
+        objDragTarget=null
+		  DraggingObj=false
+
+
+    }
+}
+
+
+
+
+
+</script>
+</html>
